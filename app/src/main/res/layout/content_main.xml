@@ -10,40 +10,47 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.diogonunes.darerer.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card1"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent" />
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/holo_purple"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <TextView
-                android:id="@+id/dare_title"
+                android:id="@+id/card_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="Kindness"
+                android:text="Title"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dare_desc"
+                android:id="@+id/card_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dare_title"
+                android:layout_below="@+id/card_title"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="Sugestions for Random Acts of Kindness."
+                android:text="Description description description description."
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
