@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String LOG_TAG = "MainActivity";
     private List<DiceBox> _diceBoxes;
-    private RecyclerView mRV;
-    private FloatingActionButton mFab;
+    private RecyclerView _RV;
+    private FloatingActionButton _btnFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +60,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        _btnFAB = (FloatingActionButton) findViewById(R.id.fab);
 
-        mRV = (RecyclerView) findViewById(R.id.rv);
+        _RV = (RecyclerView) findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this);
-        mRV.setLayoutManager(llm);
-        mRV.setHasFixedSize(true);
+        _RV.setLayoutManager(llm);
+        _RV.setHasFixedSize(true);
 
         RVAdapter adapter = new RVAdapter(_diceBoxes);
-        mRV.setAdapter(adapter);
+        _RV.setAdapter(adapter);
     }
 
     // Event Handling
