@@ -2,14 +2,21 @@ package com.diogonunes.darerer;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String LOG_TAG = DiceBox.class.getSimpleName();
+    private List<DiceBox> _diceBoxes;
+    private RecyclerView _RV;
+    private FloatingActionButton _btnFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initializeData();
+        initializeViews();
     }
 
     @Override
@@ -49,4 +50,26 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void initializeData() {
+        // Dummy test data
+        _diceBoxes = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            _diceBoxes.add(new DiceBox("Title " + i, "Description about the dice box " + i, "Kindness"));
+        }
+    }
+
+    private void initializeViews() {
+        _btnFAB = (FloatingActionButton) findViewById(R.id.fab);
+
+        _RV = (RecyclerView) findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        _RV.setLayoutManager(llm);
+        _RV.setHasFixedSize(true);
+
+        RVAdapter adapter = new RVAdapter(_diceBoxes);
+        _RV.setAdapter(adapter);
+    }
+
+    // Event Handling
 }

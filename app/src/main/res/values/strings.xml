@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">DARERER</string>
     <string name="action_settings">Settings</string>
+    <string name="action_add">Add</string>
+    <string name="title_activity_detail">Dice Detail</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_favorite">Add to favorites</string>
+    <string name="action_rolldice">Roll the dice!</string>
 </resources>
