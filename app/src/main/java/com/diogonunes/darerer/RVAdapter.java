@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DiceBoxViewHolder> {
-    private static final String LOG_TAG = "RVAdapter";
+    private static final String LOG_TAG = DiceBox.class.getSimpleName();
     List<DiceBox> _diceBoxes;
 
     public RVAdapter(List<DiceBox> diceBoxes) {

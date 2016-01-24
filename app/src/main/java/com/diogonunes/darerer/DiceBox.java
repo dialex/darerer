@@ -1,7 +1,7 @@
 package com.diogonunes.darerer;
 
 public class DiceBox {
-    private static final String LOG_TAG = "DiceBox";
+    private static final String LOG_TAG = DiceBox.class.getSimpleName();
     private String _title;
     private String _description;
     private int _score;

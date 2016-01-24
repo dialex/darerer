@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String LOG_TAG = "MainActivity";
+    private static final String LOG_TAG = DiceBox.class.getSimpleName();
     private List<DiceBox> _diceBoxes;
     private RecyclerView _RV;
     private FloatingActionButton _btnFAB;
