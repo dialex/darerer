@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="kindness_challenges">
+        <item>Do something good 1</item>
+        <item>Do something good 2</item>
+        <item>Do something good 3</item>
+        <item>Do something good 4</item>
+    </string-array>
+</resources>

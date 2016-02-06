@@ -56,10 +56,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/txtChallengeDecision"
+            android:id="@+id/challenge_decision"
             android:gravity="center"
             android:paddingTop="16dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:text="@string/challenge_considered"
+            android:textStyle="bold"
+            android:textSize="30dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -75,22 +78,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NO"
-                android:id="@+id/button"
-                android:layout_gravity="center_vertical" />
+                android:id="@+id/btn_challenge_no"
+                android:layout_gravity="center_vertical"
+                android:onClick="onClickDenyChallenge" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MAYBE"
-                android:id="@+id/button2"
-                android:layout_gravity="center_vertical" />
+                android:id="@+id/btn_challenge_maybe"
+                android:layout_gravity="center_vertical"
+                android:onClick="onClickConsiderChallenge" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="YES"
-                android:id="@+id/button3"
-                android:layout_gravity="center_vertical" />
+                android:id="@+id/btn_challenge_yes"
+                android:layout_gravity="center_vertical"
+                android:onClick="onClickAcceptChallenge" />
 
         </LinearLayout>
     </LinearLayout>
