@@ -9,12 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = DiceBox.class.getSimpleName();
-    private List<DiceBox> _diceBoxes;
     private RecyclerView _RV;
     private FloatingActionButton _btnFAB;
 
@@ -25,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initializeData();
         initializeViews();
     }
 
@@ -51,14 +46,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initializeData() {
-        // Dummy test data
-        _diceBoxes = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            _diceBoxes.add(new DiceBox("Title " + i, "Description about the dice box " + i, "Kindness"));
-        }
-    }
-
     private void initializeViews() {
         _btnFAB = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -66,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         _RV.setLayoutManager(llm);
         _RV.setHasFixedSize(true);
-
-        RVAdapter adapter = new RVAdapter(_diceBoxes);
-        _RV.setAdapter(adapter);
     }
 
     // Event Handling
