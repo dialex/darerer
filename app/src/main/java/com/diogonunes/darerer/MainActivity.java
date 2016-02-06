@@ -1,15 +1,15 @@
 package com.diogonunes.darerer;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String LOG_TAG = DiceBox.class.getSimpleName();
-    private FloatingActionButton _btnFAB;
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static KindnessChallenger _kindnessChallenger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initializeViews();
+        initializeActivity();
+    }
+
+    private void initializeActivity() {
+        String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
+        _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
     }
 
 //    @Override
@@ -43,11 +48,20 @@ public class MainActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
-    private void initializeViews() {
-        _btnFAB = (FloatingActionButton) findViewById(R.id.fab);
-    }
-
     // Event Handling
+
+    public void onClickFab(View view) {
+        // Picks a challenge
+        String challengeDesc = _kindnessChallenger.getChallenge();
+
+        // Displays it
+        TextView cardChallenge = (TextView) findViewById(R.id.card_title);
+        cardChallenge.setText(challengeDesc);
+
+        // Let's the use decide
+        LinearLayout layoutChallengeDecision = (LinearLayout) findViewById(R.id.layout_decision);
+        layoutChallengeDecision.setVisibility(View.VISIBLE);
+    }
 
     public void onClickAcceptChallenge(View view) {
         TextView txtDecision = (TextView) findViewById(R.id.challenge_decision);
