@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">DARERER</string>
     <string name="action_settings">Settings</string>
+    <string name="display_challenge_accepted">CHALLENGE ACCEPTED</string>
+    <string name="display_challenge_denied">CHALLENGE DENIED</string>
+    <string name="display_challenge_considered">considering...</string>
 </resources>
