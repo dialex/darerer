@@ -3,15 +3,12 @@ package com.diogonunes.darerer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = DiceBox.class.getSimpleName();
-    private RecyclerView _RV;
     private FloatingActionButton _btnFAB;
 
     @Override
@@ -48,11 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeViews() {
         _btnFAB = (FloatingActionButton) findViewById(R.id.fab);
-
-        _RV = (RecyclerView) findViewById(R.id.rv);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        _RV.setLayoutManager(llm);
-        _RV.setHasFixedSize(true);
     }
 
     // Event Handling
