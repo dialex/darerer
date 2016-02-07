@@ -10,4 +10,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_deny">Deny</string>
     <string name="action_accept">Accept</string>
+
+    <!-- Text displayed during conversations with the user -->
+    <string name="dialog_discouragement">Stop being such a pussy!</string>
+    <string name="dialog_sorry">I\'m sorry</string>
 </resources>

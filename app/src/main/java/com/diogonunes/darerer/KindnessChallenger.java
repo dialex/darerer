@@ -13,7 +13,7 @@ public class KindnessChallenger {
      * @return Text description of challenge.
      */
     public String getChallenge() {
-        int index = Utils.getRandomIndex(0, _challenges.length-1);
+        int index = Utils.getRandomInteger(0, _challenges.length - 1);
         return _challenges[index];
     }
 }
