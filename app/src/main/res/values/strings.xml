@@ -12,6 +12,5 @@
     <string name="action_accept">Accept</string>
 
     <!-- Text displayed during conversations with the user -->
-    <string name="dialog_discouragement">Stop being such a pussy!</string>
     <string name="dialog_sorry">I\'m sorry</string>
 </resources>

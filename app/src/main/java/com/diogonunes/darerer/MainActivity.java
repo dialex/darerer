@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static KindnessChallenger _kindnessChallenger;
+    private static EncouragementsRoulette _encourageRoulette;
 
     private TextView _txtDecision;
     private ImageView _imgDecision;
@@ -84,11 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (Utils.getRandomBool(30)) {
             Snackbar snackbar = Snackbar
-                .make(view, R.string.dialog_discouragement, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.dialog_sorry, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {}
-                });
+                    .make(view, _encourageRoulette.getEncouragement(), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.dialog_sorry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                        }
+                    });
             snackbar.show();
         }
     }
@@ -104,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
         String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
         _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
+
+        String[] encouragements = getResources().getStringArray(R.array.encouragements);
+        _encourageRoulette = new EncouragementsRoulette(encouragements);
     }
 
     private void setDecision(View view, int decision) {
