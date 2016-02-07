@@ -102,7 +102,7 @@
                 android:layout_alignParentStart="false"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingBottom="140dp">
+                android:paddingBottom="60dp">
 
                 <Button
                     android:id="@+id/btn_challenge_no"
