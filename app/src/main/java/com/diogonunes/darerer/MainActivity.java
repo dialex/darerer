@@ -1,5 +1,6 @@
 package com.diogonunes.darerer;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,17 +36,6 @@ public class MainActivity extends AppCompatActivity {
         _layoutChallenge.setVisibility(View.GONE);
     }
 
-    private void initializeActivity() {
-        // Instance variables
-        _layoutDefault = (LinearLayout) findViewById(R.id.layout_challenge_off);
-        _layoutChallenge = (LinearLayout) findViewById(R.id.layout_challenge_on);
-        _txtDecision = (TextView) findViewById(R.id.txt_challenge_decision);
-        _imgDecision = (ImageView) findViewById(R.id.img_meme_decision);
-
-        String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
-        _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
-    }
-
     // Event Handling
 
     //    @Override
@@ -79,18 +69,17 @@ public class MainActivity extends AppCompatActivity {
         cardChallenge.setText(challengeDesc);
 
         // Allows the user to decide
+        setDecision(view, 0);
         _layoutDefault.setVisibility(View.GONE);
         _layoutChallenge.setVisibility(View.VISIBLE);
     }
 
     public void onClickAcceptChallenge(View view) {
-        _txtDecision.setText(R.string.challenge_accepted);
-        _imgDecision.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes));
+        setDecision(view, R.id.btn_challenge_yes);
     }
 
     public void onClickDenyChallenge(View view) {
-        _txtDecision.setText(R.string.challenge_denied);
-        _imgDecision.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no));
+        setDecision(view, R.id.btn_challenge_no);
     }
 
     public void onClickConsiderChallenge(View view) {
@@ -98,4 +87,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Auxiliary
+
+    private void initializeActivity() {
+        // Instance variables
+        _layoutDefault = (LinearLayout) findViewById(R.id.layout_challenge_off);
+        _layoutChallenge = (LinearLayout) findViewById(R.id.layout_challenge_on);
+        _txtDecision = (TextView) findViewById(R.id.txt_challenge_decision);
+        _imgDecision = (ImageView) findViewById(R.id.img_meme_decision);
+
+        String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
+        _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
+    }
+
+    private void setDecision(View view, int decision) {
+        int decisionText;
+        Drawable decisionImage;
+
+        switch (decision) {
+            case R.id.btn_challenge_yes:
+                decisionText = R.string.challenge_accepted;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
+                break;
+            case R.id.btn_challenge_no:
+                decisionText = R.string.challenge_denied;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
+                break;
+            default:
+                decisionText = R.string.challenge_considered;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
+                break;
+        }
+
+        _txtDecision.setText(decisionText);
+        _imgDecision.setImageDrawable(decisionImage);
+    }
 }
