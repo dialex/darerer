@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static KindnessChallenger _kindnessChallenger;
-    private static EncouragementsRoulette _encourageRoulette;
+    private static StringRoulette _kindnessActsRoulette, _encourageRoulette;
 
     private TextView _txtDecision;
     private ImageView _imgDecision;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickFab(View view) {
         // Picks a challenge
-        String challengeDesc = _kindnessChallenger.getChallenge();
+        String challengeDesc = _kindnessActsRoulette.roll();
 
         // Displays it
         TextView cardChallenge = (TextView) findViewById(R.id.card_title);
@@ -85,10 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (Utils.getRandomBool(30)) {
             Snackbar snackbar = Snackbar
-                    .make(view, _encourageRoulette.getEncouragement(), Snackbar.LENGTH_INDEFINITE)
+                    .make(view, _encourageRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.dialog_sorry, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            // close self
                         }
                     });
             snackbar.show();
@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
         _imgDecision = (ImageView) findViewById(R.id.img_meme_decision);
 
         String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
-        _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
+        _kindnessActsRoulette = new StringRoulette(kindnessChallenges);
 
         String[] encouragements = getResources().getStringArray(R.array.encouragements);
-        _encourageRoulette = new EncouragementsRoulette(encouragements);
+        _encourageRoulette = new StringRoulette(encouragements);
     }
 
     private void setDecision(View view, int decision) {
