@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="Title"
+                android:text="Do you accept the challenge?"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -46,7 +46,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:weightSum="1"
         android:id="@+id/layout_decision">
 
