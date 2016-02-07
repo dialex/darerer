@@ -71,6 +71,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_meme_decision"
+                android:layout_above="@+id/txt_challenge_decision"
+                android:src="@drawable/img_meme_maybe"
+                android:paddingTop="42dp" />
+
             <TextView
                 android:id="@+id/txt_challenge_decision"
                 android:layout_width="match_parent"
@@ -102,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:onClick="onClickDenyChallenge"
-                    android:text="@string/action_no" />
+                    android:text="@string/action_deny" />
 
                 <Button
                     android:id="@+id/btn_challenge_yes"
@@ -110,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:onClick="onClickAcceptChallenge"
-                    android:text="@string/action_yes" />
+                    android:text="@string/action_accept" />
 
             </LinearLayout>
 
