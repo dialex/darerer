@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static KindnessChallenger _kindnessChallenger;
 
+    private LinearLayout _layoutDefault, _layoutChallenge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,19 @@ public class MainActivity extends AppCompatActivity {
         initializeActivity();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        _layoutDefault.setVisibility(View.VISIBLE);
+        _layoutChallenge.setVisibility(View.GONE);
+    }
+
     private void initializeActivity() {
+        // Instance variables
+        _layoutDefault = (LinearLayout) findViewById(R.id.layout_challenge_off);
+        _layoutChallenge = (LinearLayout) findViewById(R.id.layout_challenge_on);
+
         String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
         _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
     }
@@ -58,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         TextView cardChallenge = (TextView) findViewById(R.id.card_title);
         cardChallenge.setText(challengeDesc);
 
-        // Let's the use decide
-        LinearLayout layoutChallengeDecision = (LinearLayout) findViewById(R.id.layout_decision);
-        layoutChallengeDecision.setVisibility(View.VISIBLE);
+        // Allows the user to decide
+        _layoutDefault.setVisibility(View.GONE);
+        _layoutChallenge.setVisibility(View.VISIBLE);
     }
 
     public void onClickAcceptChallenge(View view) {
