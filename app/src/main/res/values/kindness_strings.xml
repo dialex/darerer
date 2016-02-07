@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="kindness_challenges">
-        <item>Do something good 1</item>
-        <item>Do something good 2</item>
-        <item>Do something good 3</item>
-        <item>Do something good 4</item>
+        <item>Say \"Good morning\" to the person standing next to you.</item>
+        <item>Pay the toll for the driver behind you.</item>
+        <item>Offer to pick up groceries for an elderly neighbor.</item>
+        <item>Say "I love you" to someone you love.</item>
+        <item>Help a mother carry her baby stroller or hold a door open for her.</item>
+        <item>When you get a new item of clothing, give away one you had.</item>
+        <item>Bring coffee to your colleague.</item>
+        <item>Send flowers to a friend. You may tell her it was you a week after.</item>
+        <item>On public transportation, offer your seat to another person.</item>
+        <item>Call or write to a teacher who changed your life.</item>
+        <item>Bring a box of doughnuts to share at the office.</item>
+        <item>Forgive someone a debt.</item>
+        <item>Listen with all your senses.</item>
+        <item>Volunteer to take care of a friend\'s dog while he is vacationing.</item>
+        <item>Help a friend pack for a move.</item>
+        <item>Before a friend moves away, offer a photo of the two of you together.</item>
+        <item>Leave a generous tip for a pleasant waiter.</item>
+        <item>Compliment a stranger sincerely.</item>
+        <item>Write a thank you note to someone.</item>
+        <item>Send handmade cards or a letter to someone you care for.</item>
+        <item>Leave \"have a nice day\" stickers at someone\'s desk.</item>
+        <item>Start a conversation with a co-worker that you don\'t know.</item>
+        <item>Drop off a toy or game at a hospital.</item>
+        <item>Drop off an item of clothing at a homeless shelter.</item>
+        <item>Send someone you know a small gift anonymously.</item>
+        <item>Donate one hour of your time.</item>
+        <item>Invite someone who is alone over for dinner.</item>
+        <item>Leave a chocolate for a co-worker.</item>
+        <item>Send someone an animated greeting card on the internet.</item>
+        <item>Write a praising note to the boss of a helpful employee.</item>
+        <item>Donate clothes you no longer use.</item>
+        <item>Put change in a charity change bottle.</item>
+        <item>Bring cookies or some snack to your co-workers.</item>
+        <item>Donate blood.</item>
+        <item>Help a neighbor, family member weed or plant a garden.</item>
+        <item>Leave a book at airport for someone waiting to read.</item>
+        <item>Cook a dish for a mom/father so she/he can take a break.</item>
+        <item>Volunteer time at a charitable organization.</item>
+        <item>If someone behind you in line has fewer items let them go ahead.</item>
+        <item>Volunteer to read to children at the library.</item>
+        <item>Walk around a park or public area picking up trash.</item>
+        <item>Get some groceries for a financially struggling family.</item>
     </string-array>
 </resources>
