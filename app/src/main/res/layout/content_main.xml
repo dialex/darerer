@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -13,32 +14,31 @@
     android:weightSum="1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.diogonunes.darerer.MainActivity"
-    tools:showIn="@layout/activity_main"
-    android:id="@+id/layout_main">
+    tools:showIn="@layout/activity_main">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/layout_challenge_off"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/layout_challenge_off"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Ready to be challenged?"
-            android:id="@+id/textView"
             android:gravity="center"
+            android:text="Ready to be challenged?"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/colorSecondaryTextInactiveColor"
             android:textStyle="italic" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/layout_challenge_on"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layout_challenge_on"
+        android:orientation="vertical"
         android:visibility="visible">
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -61,58 +61,60 @@
                     android:padding="8dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@android:color/white"
+                    android:textSize="26sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/challenge_decision"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:text="@string/challenge_considered"
-            android:textStyle="bold"
-            android:textSize="30dp" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/card"
-            android:layout_alignParentTop="false"
-            android:gravity="center">
-
-            <Button
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/txt_challenge_decision"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NO"
-                android:id="@+id/btn_challenge_no"
-                android:layout_gravity="center_vertical"
-                android:onClick="onClickDenyChallenge" />
+                android:layout_above="@+id/linearLayout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/challenge_considered"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MAYBE"
-                android:id="@+id/btn_challenge_maybe"
-                android:layout_gravity="center_vertical"
-                android:onClick="onClickConsiderChallenge" />
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="140dp">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="YES"
-                android:id="@+id/btn_challenge_yes"
-                android:layout_gravity="center_vertical"
-                android:onClick="onClickAcceptChallenge" />
+                <Button
+                    android:id="@+id/btn_challenge_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="onClickDenyChallenge"
+                    android:text="@string/action_no" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_challenge_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="onClickAcceptChallenge"
+                    android:text="@string/action_yes" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

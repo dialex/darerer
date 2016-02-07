@@ -4,8 +4,10 @@
     <!-- Text displayed on multiple contexts -->
     <string name="challenge_accepted">CHALLENGE ACCEPTED</string>
     <string name="challenge_denied">CHALLENGE DENIED</string>
-    <string name="challenge_considered">considering...</string>
+    <string name="challenge_considered">CHALLENGE CONSIDERED</string>
 
     <!-- Text related to actions (nouns and verbs) -->
     <string name="action_settings">Settings</string>
+    <string name="action_no">NO</string>
+    <string name="action_yes">YES</string>
 </resources>

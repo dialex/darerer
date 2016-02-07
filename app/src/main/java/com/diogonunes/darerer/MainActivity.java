@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static KindnessChallenger _kindnessChallenger;
 
+    private TextView _txtDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
     @Override
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Instance variables
         _layoutDefault = (LinearLayout) findViewById(R.id.layout_challenge_off);
         _layoutChallenge = (LinearLayout) findViewById(R.id.layout_challenge_on);
+        _txtDecision = (TextView) findViewById(R.id.txt_challenge_decision);
 
         String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
         _kindnessChallenger = new KindnessChallenger(kindnessChallenges);
@@ -78,17 +80,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickAcceptChallenge(View view) {
-        TextView txtDecision = (TextView) findViewById(R.id.challenge_decision);
-        txtDecision.setText(R.string.challenge_accepted);
+        _txtDecision.setText(R.string.challenge_accepted);
     }
 
     public void onClickDenyChallenge(View view) {
-        TextView txtDecision = (TextView) findViewById(R.id.challenge_decision);
-        txtDecision.setText(R.string.challenge_denied);
+        _txtDecision.setText(R.string.challenge_denied);
     }
 
     public void onClickConsiderChallenge(View view) {
-        TextView txtDecision = (TextView) findViewById(R.id.challenge_decision);
-        txtDecision.setText(R.string.challenge_considered);
+        _txtDecision.setText(R.string.challenge_considered);
     }
 }
