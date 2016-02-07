@@ -1,9 +1,16 @@
 <resources>
     <string name="app_name">DARERER</string>
+
+    <!-- Text displayed on multiple contexts -->
+    <string name="challenge_accepted">CHALLENGE ACCEPTED</string>
+    <string name="challenge_denied">CHALLENGE DENIED</string>
+    <string name="challenge_considered">considering...</string>
+
+    <!-- Text related to actions (nouns and verbs) -->
     <string name="action_settings">Settings</string>
-    <string name="action_add">Add</string>
-    <string name="title_activity_detail">Dice Detail</string>
-    <string name="action_delete">Delete</string>
-    <string name="action_favorite">Add to favorites</string>
-    <string name="action_rolldice">Roll the dice!</string>
+    <string name="action_deny">Deny</string>
+    <string name="action_accept">Accept</string>
+
+    <!-- Text displayed during conversations with the user -->
+    <string name="dialog_sorry">I\'m sorry</string>
 </resources>
