@@ -3,7 +3,10 @@ package com.diogonunes.darerer;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,15 +21,23 @@ public class MainActivity extends AppCompatActivity {
     private TextView _txtDecision;
     private ImageView _imgDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
+    private Toolbar _toolbar;
+    private TabLayout _tabLayout;
+    private ViewPager _viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        initializeActivity();
+        initActivity();
+
+        setSupportActionBar(_toolbar);
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) supportActionBar.setDisplayHomeAsUpEnabled(true);
+
+        initViewPager(_viewPager);
+        _tabLayout.setupWithViewPager(_viewPager);
     }
 
     @Override
@@ -97,18 +108,29 @@ public class MainActivity extends AppCompatActivity {
 
     // Auxiliary
 
-    private void initializeActivity() {
+    private void initActivity() {
         // Instance variables
         _layoutDefault = (LinearLayout) findViewById(R.id.layout_challenge_off);
         _layoutChallenge = (LinearLayout) findViewById(R.id.layout_challenge_on);
         _txtDecision = (TextView) findViewById(R.id.txt_challenge_decision);
         _imgDecision = (ImageView) findViewById(R.id.img_meme_decision);
+        _toolbar = (Toolbar) findViewById(R.id.toolbar);
+        _viewPager = (ViewPager) findViewById(R.id.viewpager);
+        _tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
         _kindnessActsRoulette = new StringRoulette(kindnessChallenges);
 
         String[] encouragements = getResources().getStringArray(R.array.encouragements);
         _encourageRoulette = new StringRoulette(encouragements);
+    }
+
+    private void initViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new OneFragment(), "Kindness");
+        adapter.addFragment(new TwoFragment(), "NICE");
+        adapter.addFragment(new ThreeFragment(), "Naughty");
+        viewPager.setAdapter(adapter);
     }
 
     private void setDecision(View view, int decision) {
