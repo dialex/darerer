@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         initViewPager(_viewPager);
         _tabLayout.setupWithViewPager(_viewPager);
+        initTabIcons();
     }
 
     @Override
@@ -125,10 +126,23 @@ public class MainActivity extends AppCompatActivity {
         _encourageRoulette = new StringRoulette(encouragements);
     }
 
+    private void initTabIcons() {
+        TabLayout.Tab tab;
+
+        tab = _tabLayout.getTabAt(0);
+        if (tab != null) tab.setIcon(R.drawable.ic_heart_white);
+
+        tab = _tabLayout.getTabAt(1);
+        if (tab != null) tab.setIcon(R.drawable.ic_star_white);
+
+        tab = _tabLayout.getTabAt(2);
+        if (tab != null) tab.setIcon(R.drawable.ic_face_white);
+    }
+
     private void initViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "Kindness");
-        adapter.addFragment(new TwoFragment(), "NICE");
+        adapter.addFragment(new OneFragment(), "Kind");
+        adapter.addFragment(new TwoFragment(), "Nice");
         adapter.addFragment(new ThreeFragment(), "Naughty");
         viewPager.setAdapter(adapter);
     }
