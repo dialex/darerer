@@ -5,8 +5,9 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorBackgroundPrimary</item>
         <item name="colorPrimaryDark">@color/colorBackgroundPrimaryDark</item>
-        <item name="colorAccent">@color/colorBackgroundAccent</item>
-        <item name="android:windowBackground">@color/colorBackgroundColor</item>
+        <item name="colorAccent">@color/colorKindnessPrimary</item>
+        <item name="android:navigationBarColor">@color/colorBackgroundPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
