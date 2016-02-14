@@ -73,7 +73,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/img_meme_decision"
                 android:layout_above="@+id/txt_challenge_decision"
                 android:src="@drawable/img_meme_maybe"
@@ -102,7 +102,7 @@
                 android:layout_alignParentStart="false"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingBottom="60dp">
+                android:paddingBottom="10dp">
 
                 <Button
                     android:id="@+id/btn_challenge_no"
