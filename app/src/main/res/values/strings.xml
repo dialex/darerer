@@ -13,4 +13,13 @@
 
     <!-- Text displayed during conversations with the user -->
     <string name="dialog_sorry">I\'m sorry</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment1">Hello blank fragment 1</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment2">Hello blank fragment 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment3">Hello blank fragment 3</string>
 </resources>
