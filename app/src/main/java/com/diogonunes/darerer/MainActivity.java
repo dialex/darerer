@@ -4,26 +4,25 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static StringRoulette _kindnessActsRoulette, _encourageRoulette;
 
-    private TextView _txtDecision;
-    private ImageView _imgDecision;
-    private LinearLayout _layoutDefault, _layoutChallenge;
     private Toolbar _toolbar;
-    private TabLayout _tabLayout;
     private ViewPager _viewPager;
+    private TabLayout _tabLayout;
+    private Map<Integer, Fragment> _tabFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +38,8 @@ public class MainActivity extends AppCompatActivity {
         initViewPager(_viewPager);
         _tabLayout.setupWithViewPager(_viewPager);
         initTabIcons();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        _layoutDefault.setVisibility(View.VISIBLE);
-        _layoutChallenge.setVisibility(View.GONE);
+        _tabLayout.getTabAt(1).select(); //default tab
     }
 
     // Event Handling
@@ -74,17 +67,20 @@ public class MainActivity extends AppCompatActivity {
     //    }
 
     public void onClickFab(View view) {
-        // Picks a challenge
-        String challengeDesc = _kindnessActsRoulette.roll();
+        Fragment currentTabFragment = _tabFragments.get(_viewPager.getCurrentItem());
 
-        // Displays it
-        TextView cardChallenge = (TextView) findViewById(R.id.card_title);
-        cardChallenge.setText(challengeDesc);
-
-        // Allows the user to decide
-        setDecision(view, 0);
-        _layoutDefault.setVisibility(View.GONE);
-        _layoutChallenge.setVisibility(View.VISIBLE);
+        if (currentTabFragment == null) {
+            return;
+        }
+        else if (currentTabFragment instanceof FragmentKind) {
+            ((FragmentKind)currentTabFragment).fabOnClick();
+        }
+        else if (currentTabFragment instanceof FragmentNice) {
+            ((FragmentNice)currentTabFragment).fabOnClick();
+        }
+        else if (currentTabFragment instanceof FragmentNaughty) {
+            ((FragmentNaughty)currentTabFragment).fabOnClick();
+        }
     }
 
     public void onClickAcceptChallenge(View view) {
@@ -110,20 +106,10 @@ public class MainActivity extends AppCompatActivity {
     // Auxiliary
 
     private void initActivity() {
-        // Instance variables
-        _layoutDefault = (LinearLayout) findViewById(R.id.layout_challenge_off);
-        _layoutChallenge = (LinearLayout) findViewById(R.id.layout_challenge_on);
-        _txtDecision = (TextView) findViewById(R.id.txt_challenge_decision);
-        _imgDecision = (ImageView) findViewById(R.id.img_meme_decision);
         _toolbar = (Toolbar) findViewById(R.id.toolbar);
         _viewPager = (ViewPager) findViewById(R.id.viewpager);
         _tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        String[] kindnessChallenges = getResources().getStringArray(R.array.kindness_challenges);
-        _kindnessActsRoulette = new StringRoulette(kindnessChallenges);
-
-        String[] encouragements = getResources().getStringArray(R.array.encouragements);
-        _encourageRoulette = new StringRoulette(encouragements);
+        _tabFragments = new HashMap<Integer, Fragment>();
     }
 
     private void initTabIcons() {
@@ -141,9 +127,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "Kind");
-        adapter.addFragment(new TwoFragment(), "Nice");
-        adapter.addFragment(new ThreeFragment(), "Naughty");
+        Fragment tabFragment;
+
+        tabFragment = new FragmentNice();
+        adapter.addFragment(tabFragment, "Kind");
+        _tabFragments.put(0, tabFragment);
+
+        tabFragment = new FragmentNice();
+        adapter.addFragment(tabFragment, "Nice");
+        _tabFragments.put(1, tabFragment);
+
+        tabFragment = new FragmentNice();
+        adapter.addFragment(tabFragment, "Naughty");
+        _tabFragments.put(2, tabFragment);
+
         viewPager.setAdapter(adapter);
     }
 
@@ -166,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        _txtDecision.setText(decisionText);
-        _imgDecision.setImageDrawable(decisionImage);
+        //TODO
+//        _txtDecision.setText(decisionText);
+//        _imgDecision.setImageDrawable(decisionImage);
     }
 }

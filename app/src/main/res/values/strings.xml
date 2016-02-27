@@ -15,11 +15,8 @@
     <string name="dialog_sorry">I\'m sorry</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment1">Hello blank fragment 1</string>
+    <string name="hello_blank_fragment1">Hello blank fragment Kind</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment2">Hello blank fragment 2</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment3">Hello blank fragment 3</string>
+    <string name="hello_blank_fragment3">Hello blank fragment Naughty</string>
 </resources>

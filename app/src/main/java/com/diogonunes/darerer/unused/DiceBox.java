@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.unused;
 
 public class DiceBox {
     private static final String LOG_TAG = DiceBox.class.getSimpleName();

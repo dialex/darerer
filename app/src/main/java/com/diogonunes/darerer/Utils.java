@@ -1,5 +1,8 @@
 package com.diogonunes.darerer;
 
+import android.support.design.widget.Snackbar;
+import android.view.View;
+
 import java.util.Random;
 
 public class Utils {
@@ -36,4 +39,13 @@ public class Utils {
         int number = getRandomInteger(1,100);
         return (number <= truePercentage);
     }
+
+    // Display Messages
+
+    public static void ShowSnackBar(View view, String message) {
+        Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+    }
 }
+
+

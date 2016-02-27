@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nice_challenges">
+        <item>This is a nice challenge 1.</item>
+        <item>This is a nice challenge 2.</item>
+    </string-array>
+</resources>
