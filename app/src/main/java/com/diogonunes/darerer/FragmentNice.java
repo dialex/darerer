@@ -1,10 +1,8 @@
 package com.diogonunes.darerer;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +40,14 @@ public class FragmentNice extends Fragment {
         initActivity();
         setTheme();
 
-        _layoutDefault.setVisibility(View.VISIBLE);
-        _layoutChallenge.setVisibility(View.GONE);
+//        _layoutDefault.setVisibility(View.VISIBLE);
+//        _layoutChallenge.setVisibility(View.GONE);
     }
 
     // Event Handling
 
     public void fabOnClick() {
-        Utils.ShowSnackBar(getView(), "Nice button");
+        Utils.ShowSnackBar(getView(), "TODO nice");
     }
 
 //    public void onClickAcceptChallenge(View view) {
@@ -72,38 +70,38 @@ public class FragmentNice extends Fragment {
 //        }
 //    }
 
-    private void setDecision(View view, int decision) {
-        int decisionText;
-        Drawable decisionImage;
-
-        switch (decision) {
-            case R.id.btn_challenge_yes:
-                decisionText = R.string.challenge_accepted;
-                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
-                break;
-            case R.id.btn_challenge_no:
-                decisionText = R.string.challenge_denied;
-                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
-                break;
-            default:
-                decisionText = R.string.challenge_considered;
-                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
-                break;
-        }
-
-        //TODO
-//        _txtDecision.setText(decisionText);
-//        _imgDecision.setImageDrawable(decisionImage);
-    }
+//    private void setDecision(View view, int decision) {
+//        int decisionText;
+//        Drawable decisionImage;
+//
+//        switch (decision) {
+//            case R.id.btn_challenge_yes:
+//                decisionText = R.string.challenge_accepted;
+//                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
+//                break;
+//            case R.id.btn_challenge_no:
+//                decisionText = R.string.challenge_denied;
+//                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
+//                break;
+//            default:
+//                decisionText = R.string.challenge_considered;
+//                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
+//                break;
+//        }
+//
+//        //TODO
+////        _txtDecision.setText(decisionText);
+////        _imgDecision.setImageDrawable(decisionImage);
+//    }
 
     // Auxiliary
 
     private void initActivity() {
         // Instance variables
-        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
-        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
-        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
-        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
+//        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
+//        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
+//        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
+//        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
         _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
         String[] niceChallenges = getResources().getStringArray(R.array.nice_challenges);

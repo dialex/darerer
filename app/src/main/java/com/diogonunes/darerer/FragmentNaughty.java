@@ -1,12 +1,23 @@
 package com.diogonunes.darerer;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class FragmentNaughty extends Fragment {
+    private static final String LOG_TAG = FragmentNaughty.class.getSimpleName();
+    private static StringRoulette _naughtyActsRoulette, _encouragementsRoulette;
+
+    private FloatingActionButton _fab;
+    private TextView _txtDecision;
+    private ImageView _imgDecision;
+    private LinearLayout _layoutDefault, _layoutChallenge;
 
     public FragmentNaughty() {
         // Required empty public constructor
@@ -23,7 +34,38 @@ public class FragmentNaughty extends Fragment {
         return inflater.inflate(R.layout.fragment_naughty, container, false);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        initActivity();
+        setTheme();
+    }
+
+    // Event Handling
+
     public void fabOnClick() {
-        Utils.ShowSnackBar(getView(), "Naughty button");
+        Utils.ShowSnackBar(getView(), "TODO Naughty");
+    }
+
+    // Auxiliary
+
+    private void initActivity() {
+        // Instance variables
+//        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
+//        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
+//        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
+//        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
+        _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+        String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
+        _naughtyActsRoulette = new StringRoulette(naughtyChallenges);
+
+        String[] encouragements = getResources().getStringArray(R.array.encouragements);
+        _encouragementsRoulette = new StringRoulette(encouragements);
+    }
+
+    private void setTheme() {
+        _fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_heart_white));
     }
 }

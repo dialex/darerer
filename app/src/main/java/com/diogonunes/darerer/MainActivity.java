@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         initViewPager(_viewPager);
         _tabLayout.setupWithViewPager(_viewPager);
-        initTabCaption();
 
+        //displayTabIcons();
         _tabLayout.getTabAt(1).select(); //default tab
     }
 
@@ -54,31 +54,24 @@ public class MainActivity extends AppCompatActivity {
 
     // Auxiliary
 
+    private void displayTabIcons() {
+        TabLayout.Tab tab;
+
+        tab = _tabLayout.getTabAt(0);
+        if (tab != null) tab.setIcon(R.drawable.ic_star_white);
+
+        tab = _tabLayout.getTabAt(1);
+        if (tab != null) tab.setIcon(R.drawable.ic_face_white);
+
+        tab = _tabLayout.getTabAt(2);
+        if (tab != null) tab.setIcon(R.drawable.ic_heart_white);
+    }
+
     private void initActivity() {
         _toolbar = (Toolbar) findViewById(R.id.toolbar);
         _viewPager = (ViewPager) findViewById(R.id.viewpager);
         _tabLayout = (TabLayout) findViewById(R.id.tabs);
         _tabFragments = new SparseArray<>();
-    }
-
-    private void initTabCaption() {
-        TabLayout.Tab tab;
-
-        tab = _tabLayout.getTabAt(0);
-        if (tab != null) {
-            //tab.setIcon(R.drawable.ic_star_white);
-            tab.setText(R.string.tab_title_kind);
-        }
-        tab = _tabLayout.getTabAt(1);
-        if (tab != null) {
-            //tab.setIcon(R.drawable.ic_face_white);
-            tab.setText(R.string.tab_title_Nice);
-        }
-        tab = _tabLayout.getTabAt(2);
-        if (tab != null) {
-            //tab.setIcon(R.drawable.ic_heart_white);
-            tab.setText(R.string.tab_title_Naughty);
-        }
     }
 
     private void initViewPager(ViewPager viewPager) {
