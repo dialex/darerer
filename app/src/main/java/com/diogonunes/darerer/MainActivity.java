@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     // Event Handling
 
     public void onClickFab(View view) {
+
         Fragment currentTabFragment = _tabFragments.get(_viewPager.getCurrentItem());
 
         if (currentTabFragment == null) {
@@ -91,5 +92,6 @@ public class MainActivity extends AppCompatActivity {
         _tabFragments.put(2, tabFragment);
 
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(2); //disables viewpager cache, see http://goo.gl/NuQK2M
     }
 }

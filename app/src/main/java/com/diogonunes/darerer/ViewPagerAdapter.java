@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> _fragmentList = new ArrayList<>();
-    private final List<String> _fragmentTitleList = new ArrayList<>();
+    private final List<Fragment> _fragmentList;
+    private final List<String> _fragmentTitleList;
 
     public ViewPagerAdapter(FragmentManager manager) {
         super(manager);
+
+        _fragmentList = new ArrayList<>();
+        _fragmentTitleList = new ArrayList<>();
     }
 
     @Override
@@ -25,13 +28,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return _fragmentList.size();
     }
 
-    public void addFragment(Fragment fragment, String title) {
-        _fragmentList.add(fragment);
-        _fragmentTitleList.add(title);
-    }
-
     @Override
     public CharSequence getPageTitle(int position) {
         return _fragmentTitleList.get(position);  // display icon and text, or return null to display only icon
+    }
+
+    public void addFragment(Fragment fragment, String title) {
+        _fragmentList.add(fragment);
+        _fragmentTitleList.add(title);
     }
 }

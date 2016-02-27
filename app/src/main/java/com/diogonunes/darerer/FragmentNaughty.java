@@ -26,20 +26,26 @@ public class FragmentNaughty extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_naughty, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        initFragment();
+    }
 
-        initActivity();
-        setTheme();
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            setTheme();
+        }
     }
 
     // Event Handling
@@ -51,12 +57,15 @@ public class FragmentNaughty extends Fragment {
     // Auxiliary
 
     private void initActivity() {
+        _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+    }
+
+    private void initFragment() {
         // Instance variables
 //        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
 //        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
 //        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
 //        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
-        _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
         _naughtyActsRoulette = new StringRoulette(naughtyChallenges);

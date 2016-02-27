@@ -26,6 +26,7 @@ public class FragmentNice extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initActivity();
     }
 
     @Override
@@ -36,12 +37,18 @@ public class FragmentNice extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        initActivity();
-        setTheme();
+        initFragment();
 
 //        _layoutDefault.setVisibility(View.VISIBLE);
 //        _layoutChallenge.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            setTheme();
+        }
     }
 
     // Event Handling
@@ -97,12 +104,15 @@ public class FragmentNice extends Fragment {
     // Auxiliary
 
     private void initActivity() {
+        _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+    }
+
+    private void initFragment() {
         // Instance variables
 //        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
 //        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
 //        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
 //        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
-        _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
         String[] niceChallenges = getResources().getStringArray(R.array.nice_challenges);
         _niceActsRoulette = new StringRoulette(niceChallenges);
