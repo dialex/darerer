@@ -7,10 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseArray;
 import android.view.View;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -18,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar _toolbar;
     private ViewPager _viewPager;
     private TabLayout _tabLayout;
-    private Map<Integer, Fragment> _tabFragments;
+    private SparseArray<Fragment> _tabFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         _tabLayout.setupWithViewPager(_viewPager);
         initTabCaption();
 
-        if (_tabLayout != null) _tabLayout.getTabAt(1).select(); //default tab
+        _tabLayout.getTabAt(1).select(); //default tab
     }
 
     // Event Handling
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment currentTabFragment = _tabFragments.get(_viewPager.getCurrentItem());
 
         if (currentTabFragment == null) {
-            return;
+            //do nothing
         } else if (currentTabFragment instanceof FragmentKind) {
             ((FragmentKind) currentTabFragment).fabOnClick();
         } else if (currentTabFragment instanceof FragmentNice) {
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         _toolbar = (Toolbar) findViewById(R.id.toolbar);
         _viewPager = (ViewPager) findViewById(R.id.viewpager);
         _tabLayout = (TabLayout) findViewById(R.id.tabs);
-        _tabFragments = new HashMap<Integer, Fragment>();
+        _tabFragments = new SparseArray<>();
     }
 
     private void initTabCaption() {
