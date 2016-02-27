@@ -1,11 +1,8 @@
 package com.diogonunes.darerer;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +14,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static StringRoulette _kindnessActsRoulette, _encourageRoulette;
 
     private Toolbar _toolbar;
     private ViewPager _viewPager;
@@ -37,69 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
         initViewPager(_viewPager);
         _tabLayout.setupWithViewPager(_viewPager);
-        initTabIcons();
+        initTabCaption();
 
-        _tabLayout.getTabAt(1).select(); //default tab
+        if (_tabLayout != null) _tabLayout.getTabAt(1).select(); //default tab
     }
 
     // Event Handling
-
-    //    @Override
-    //    public boolean onCreateOptionsMenu(Menu menu) {
-    //        // Inflate the menu; this adds items to the action bar if it is present.
-    //        getMenuInflater().inflate(R.menu.menu_main, menu);
-    //        return true;
-    //    }
-
-    //    @Override
-    //    public boolean onOptionsItemSelected(MenuItem item) {
-    //        // Handle action bar item clicks here. The action bar will
-    //        // automatically handle clicks on the Home/Up button, so long
-    //        // as you specify a parent activity in AndroidManifest.xml.
-    //        int id = item.getItemId();
-    //
-    //        //noinspection SimplifiableIfStatement
-    //        if (id == R.id.action_settings) {
-    //            return true;
-    //        }
-    //
-    //        return super.onOptionsItemSelected(item);
-    //    }
 
     public void onClickFab(View view) {
         Fragment currentTabFragment = _tabFragments.get(_viewPager.getCurrentItem());
 
         if (currentTabFragment == null) {
             return;
-        }
-        else if (currentTabFragment instanceof FragmentKind) {
-            ((FragmentKind)currentTabFragment).fabOnClick();
-        }
-        else if (currentTabFragment instanceof FragmentNice) {
-            ((FragmentNice)currentTabFragment).fabOnClick();
-        }
-        else if (currentTabFragment instanceof FragmentNaughty) {
-            ((FragmentNaughty)currentTabFragment).fabOnClick();
-        }
-    }
-
-    public void onClickAcceptChallenge(View view) {
-        setDecision(view, R.id.btn_challenge_yes);
-    }
-
-    public void onClickDenyChallenge(View view) {
-        setDecision(view, R.id.btn_challenge_no);
-
-        if (Utils.getRandomBool(30)) {
-            Snackbar snackbar = Snackbar
-                    .make(view, _encourageRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.dialog_sorry, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // close self
-                        }
-                    });
-            snackbar.show();
+        } else if (currentTabFragment instanceof FragmentKind) {
+            ((FragmentKind) currentTabFragment).fabOnClick();
+        } else if (currentTabFragment instanceof FragmentNice) {
+            ((FragmentNice) currentTabFragment).fabOnClick();
+        } else if (currentTabFragment instanceof FragmentNaughty) {
+            ((FragmentNaughty) currentTabFragment).fabOnClick();
         }
     }
 
@@ -112,17 +63,24 @@ public class MainActivity extends AppCompatActivity {
         _tabFragments = new HashMap<Integer, Fragment>();
     }
 
-    private void initTabIcons() {
+    private void initTabCaption() {
         TabLayout.Tab tab;
 
         tab = _tabLayout.getTabAt(0);
-        if (tab != null) tab.setIcon(R.drawable.ic_heart_white);
-
+        if (tab != null) {
+            //tab.setIcon(R.drawable.ic_star_white);
+            tab.setText(R.string.tab_title_kind);
+        }
         tab = _tabLayout.getTabAt(1);
-        if (tab != null) tab.setIcon(R.drawable.ic_star_white);
-
+        if (tab != null) {
+            //tab.setIcon(R.drawable.ic_face_white);
+            tab.setText(R.string.tab_title_Nice);
+        }
         tab = _tabLayout.getTabAt(2);
-        if (tab != null) tab.setIcon(R.drawable.ic_face_white);
+        if (tab != null) {
+            //tab.setIcon(R.drawable.ic_heart_white);
+            tab.setText(R.string.tab_title_Naughty);
+        }
     }
 
     private void initViewPager(ViewPager viewPager) {
@@ -130,41 +88,17 @@ public class MainActivity extends AppCompatActivity {
         Fragment tabFragment;
 
         tabFragment = new FragmentKind();
-        adapter.addFragment(tabFragment, "Kind");
+        adapter.addFragment(tabFragment, getResources().getString(R.string.tab_title_kind));
         _tabFragments.put(0, tabFragment);
 
         tabFragment = new FragmentNice();
-        adapter.addFragment(tabFragment, "Nice");
+        adapter.addFragment(tabFragment, getResources().getString(R.string.tab_title_Nice));
         _tabFragments.put(1, tabFragment);
 
         tabFragment = new FragmentNaughty();
-        adapter.addFragment(tabFragment, "Naughty");
+        adapter.addFragment(tabFragment, getResources().getString(R.string.tab_title_Naughty));
         _tabFragments.put(2, tabFragment);
 
         viewPager.setAdapter(adapter);
-    }
-
-    private void setDecision(View view, int decision) {
-        int decisionText;
-        Drawable decisionImage;
-
-        switch (decision) {
-            case R.id.btn_challenge_yes:
-                decisionText = R.string.challenge_accepted;
-                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
-                break;
-            case R.id.btn_challenge_no:
-                decisionText = R.string.challenge_denied;
-                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
-                break;
-            default:
-                decisionText = R.string.challenge_considered;
-                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
-                break;
-        }
-
-        //TODO
-//        _txtDecision.setText(decisionText);
-//        _imgDecision.setImageDrawable(decisionImage);
     }
 }

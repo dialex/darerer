@@ -12,11 +12,15 @@
     <string name="action_accept">Accept</string>
 
     <!-- Text displayed during conversations with the user -->
-    <string name="dialog_sorry">I\'m sorry</string>
+    <string name="dialog_action_sorry">I\'m sorry</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment1">Hello blank fragment Kind</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment3">Hello blank fragment Naughty</string>
+
+    <string name="tab_title_kind">Kind</string>
+    <string name="tab_title_Nice">Nice</string>
+    <string name="tab_title_Naughty">Naughty</string>
 </resources>

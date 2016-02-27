@@ -1,8 +1,10 @@
 package com.diogonunes.darerer;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +46,54 @@ public class FragmentNice extends Fragment {
         _layoutChallenge.setVisibility(View.GONE);
     }
 
-    // Events
+    // Event Handling
 
     public void fabOnClick() {
         Utils.ShowSnackBar(getView(), "Nice button");
+    }
+
+//    public void onClickAcceptChallenge(View view) {
+//        setDecision(view, R.id.btn_challenge_yes);
+//    }
+//
+//    public void onClickDenyChallenge(View view) {
+//        setDecision(view, R.id.btn_challenge_no);
+//
+//        if (Utils.getRandomBool(30)) {
+//            Snackbar snackbar = Snackbar
+//                    .make(view, _encourageRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
+//                    .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            // close self
+//                        }
+//                    });
+//            snackbar.show();
+//        }
+//    }
+
+    private void setDecision(View view, int decision) {
+        int decisionText;
+        Drawable decisionImage;
+
+        switch (decision) {
+            case R.id.btn_challenge_yes:
+                decisionText = R.string.challenge_accepted;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
+                break;
+            case R.id.btn_challenge_no:
+                decisionText = R.string.challenge_denied;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
+                break;
+            default:
+                decisionText = R.string.challenge_considered;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
+                break;
+        }
+
+        //TODO
+//        _txtDecision.setText(decisionText);
+//        _imgDecision.setImageDrawable(decisionImage);
     }
 
     // Auxiliary
@@ -68,6 +114,6 @@ public class FragmentNice extends Fragment {
     }
 
     private void setTheme() {
-        _fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_white));
+        _fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_face_white));
     }
 }
