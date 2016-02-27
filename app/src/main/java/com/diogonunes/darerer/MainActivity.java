@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         Fragment tabFragment;
 
-        tabFragment = new FragmentNice();
+        tabFragment = new FragmentKind();
         adapter.addFragment(tabFragment, "Kind");
         _tabFragments.put(0, tabFragment);
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(tabFragment, "Nice");
         _tabFragments.put(1, tabFragment);
 
-        tabFragment = new FragmentNice();
+        tabFragment = new FragmentNaughty();
         adapter.addFragment(tabFragment, "Naughty");
         _tabFragments.put(2, tabFragment);
 
