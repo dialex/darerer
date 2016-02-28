@@ -3,9 +3,9 @@
     <color name="colorBackground">@color/md_white_1000</color>
     <color name="colorBackgroundPrimary">@color/md_indigo_500</color>
     <color name="colorBackgroundPrimaryDark">@color/md_indigo_700</color>
-    <color name="colorDarePrimary">@color/md_light_green_500</color>
-    <color name="colorNicePrimary">@color/md_amber_500</color>
-    <color name="colorKindPrimary">@color/md_red_500</color>
+    <color name="colorNicePrimary">@color/md_light_green_500</color>
+    <color name="colorNaughtyPrimary">@color/md_red_500</color>
+    <color name="colorKindPrimary">@color/md_amber_500</color>
     <color name="colorPrimaryText">@color/md_white_1000</color>
     <color name="colorSecondaryTextActive">@color/md_black_1000</color>
     <color name="colorSecondaryTextInactive">@color/md_grey_400</color>
