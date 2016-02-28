@@ -6,6 +6,7 @@ import android.view.View;
 import java.util.Random;
 
 public class Utils {
+    private static Random _randGenerator = new Random();
 
     /**
      * Returns a random number between two numbers.
@@ -15,7 +16,7 @@ public class Utils {
      */
     public static int getRandomInteger(int min, int max) {
         int range = (max - min) + 1;
-        return new Random().nextInt(range) + min;
+        return _randGenerator.nextInt(range) + min;
     }
 
     /**
