@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:darerer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.diogonunes.darerer.MainActivity">
+    tools:context=".activities.MainActivity">
 
     <item
         android:id="@+id/action_settings"

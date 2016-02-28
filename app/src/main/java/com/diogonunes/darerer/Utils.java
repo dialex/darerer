@@ -1,8 +1,12 @@
 package com.diogonunes.darerer;
 
+import android.support.design.widget.Snackbar;
+import android.view.View;
+
 import java.util.Random;
 
 public class Utils {
+    private static Random _randGenerator = new Random();
 
     /**
      * Returns a random number between two numbers.
@@ -12,7 +16,7 @@ public class Utils {
      */
     public static int getRandomInteger(int min, int max) {
         int range = (max - min) + 1;
-        return new Random().nextInt(range) + min;
+        return _randGenerator.nextInt(range) + min;
     }
 
     /**
@@ -36,4 +40,13 @@ public class Utils {
         int number = getRandomInteger(1,100);
         return (number <= truePercentage);
     }
+
+    // Display Messages
+
+    public static void ShowSnackBar(View view, String message) {
+        Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+    }
 }
+
+

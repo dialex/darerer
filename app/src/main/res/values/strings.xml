@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">DARERER</string>
 
+    <string name="tab_title_kind">Kind</string>
+    <string name="tab_title_Nice">Nice</string>
+    <string name="tab_title_Naughty">Naughty</string>
+
     <!-- Text displayed on multiple contexts -->
     <string name="challenge_accepted">CHALLENGE ACCEPTED</string>
     <string name="challenge_denied">CHALLENGE DENIED</string>
@@ -12,5 +16,6 @@
     <string name="action_accept">Accept</string>
 
     <!-- Text displayed during conversations with the user -->
-    <string name="dialog_sorry">I\'m sorry</string>
+    <string name="dialog_challenge">Ready to be challenged?</string>
+    <string name="dialog_action_sorry">I\'m sorry</string>
 </resources>
