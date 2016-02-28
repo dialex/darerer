@@ -1,8 +1,10 @@
 package com.diogonunes.darerer.fragments;
 
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -18,7 +20,7 @@ import com.diogonunes.darerer.Utils;
 
 public class FragmentKind extends Fragment {
     private static final String LOG_TAG = FragmentKind.class.getSimpleName();
-    private static StringRoulette _kindActsRoulette, _encouragementsRoulette;
+    private static StringRoulette _kindChallengesRoulette, _encouragementsRoulette;
 
     private FloatingActionButton _fab;
     private TextView _txtDecision;
@@ -44,6 +46,7 @@ public class FragmentKind extends Fragment {
     public void onStart() {
         super.onStart();
         initFragment();
+        showWelcomeText();
     }
 
     @Override
@@ -57,7 +60,36 @@ public class FragmentKind extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
-        Utils.ShowSnackBar(getView(), "TODO Kind button");
+        // Picks a challenge
+        String challengeDesc = _kindChallengesRoulette.roll();
+
+        // Displays it
+        TextView cardChallenge = (TextView) getView().findViewById(R.id.card_kind_challenge_title);
+        cardChallenge.setText(challengeDesc);
+
+        // Allows the user to decide
+        setDecision(getView(), 0);
+        showChallengeText();
+    }
+
+    public void onClickAcceptChallenge(View view) {
+        setDecision(view, R.id.btn_kind_challenge_yes);
+    }
+
+    public void onClickDenyChallenge(View view) {
+        setDecision(view, R.id.btn_kind_challenge_no);
+
+        if (Utils.getRandomBool(30)) {
+            Snackbar snackbar = Snackbar
+                    .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // close self
+                        }
+                    });
+            snackbar.show();
+        }
     }
 
     // Auxiliary
@@ -70,14 +102,47 @@ public class FragmentKind extends Fragment {
         // Instance variables
         _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
         _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
-//        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
-//        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
+        _txtDecision = (TextView) getView().findViewById(R.id.txt_kind_challenge_decision);
+        _imgDecision = (ImageView) getView().findViewById(R.id.img_kind_meme_decision);
 
         String[] kindChallenges = getResources().getStringArray(R.array.kindness_challenges);
-        _kindActsRoulette = new StringRoulette(kindChallenges);
+        _kindChallengesRoulette = new StringRoulette(kindChallenges);
 
         String[] encouragements = getResources().getStringArray(R.array.encouragements);
         _encouragementsRoulette = new StringRoulette(encouragements);
+    }
+
+    private void showWelcomeText() {
+        _layoutDefault.setVisibility(View.VISIBLE);
+        _layoutChallenge.setVisibility(View.GONE);
+    }
+
+    private void showChallengeText() {
+        _layoutDefault.setVisibility(View.GONE);
+        _layoutChallenge.setVisibility(View.VISIBLE);
+    }
+
+    private void setDecision(View view, int decision) {
+        int decisionText;
+        Drawable decisionImage;
+
+        switch (decision) {
+            case R.id.btn_kind_challenge_yes:
+                decisionText = R.string.challenge_accepted;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
+                break;
+            case R.id.btn_kind_challenge_no:
+                decisionText = R.string.challenge_denied;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
+                break;
+            default:
+                decisionText = R.string.challenge_considered;
+                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
+                break;
+        }
+
+        _txtDecision.setText(decisionText);
+        _imgDecision.setImageDrawable(decisionImage);
     }
 
     private void setTheme() {

@@ -63,50 +63,6 @@ public class FragmentNice extends Fragment {
         Utils.ShowSnackBar(getView(), "TODO nice");
     }
 
-//    public void onClickAcceptChallenge(View view) {
-//        setDecision(view, R.id.btn_challenge_yes);
-//    }
-//
-//    public void onClickDenyChallenge(View view) {
-//        setDecision(view, R.id.btn_challenge_no);
-//
-//        if (Utils.getRandomBool(30)) {
-//            Snackbar snackbar = Snackbar
-//                    .make(view, _encourageRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
-//                    .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            // close self
-//                        }
-//                    });
-//            snackbar.show();
-//        }
-//    }
-
-//    private void setDecision(View view, int decision) {
-//        int decisionText;
-//        Drawable decisionImage;
-//
-//        switch (decision) {
-//            case R.id.btn_challenge_yes:
-//                decisionText = R.string.challenge_accepted;
-//                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_yes);
-//                break;
-//            case R.id.btn_challenge_no:
-//                decisionText = R.string.challenge_denied;
-//                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_no);
-//                break;
-//            default:
-//                decisionText = R.string.challenge_considered;
-//                decisionImage = ContextCompat.getDrawable(view.getContext(), R.drawable.img_meme_maybe);
-//                break;
-//        }
-//
-//        //TODO
-////        _txtDecision.setText(decisionText);
-////        _imgDecision.setImageDrawable(decisionImage);
-//    }
-
     // Auxiliary
 
     private void initActivity() {
