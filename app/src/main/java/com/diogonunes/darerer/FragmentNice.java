@@ -109,8 +109,8 @@ public class FragmentNice extends Fragment {
 
     private void initFragment() {
         // Instance variables
-//        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
-//        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
+        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
+        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
 //        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
 //        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
 
