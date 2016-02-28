@@ -1,8 +1,10 @@
 package com.diogonunes.darerer.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +81,7 @@ public class FragmentKind extends Fragment {
     }
 
     private void setTheme() {
-        _fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_white));
+        _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_white));
+        _fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.colorKindPrimary)));
     }
 }
