@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.View;
+
+import com.diogonunes.darerer.R;
+import com.diogonunes.darerer.ViewPagerAdapter;
+import com.diogonunes.darerer.fragments.FragmentKind;
+import com.diogonunes.darerer.fragments.FragmentNaughty;
+import com.diogonunes.darerer.fragments.FragmentNice;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();

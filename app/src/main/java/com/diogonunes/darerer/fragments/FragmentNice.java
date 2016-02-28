@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.diogonunes.darerer.R;
+import com.diogonunes.darerer.StringRoulette;
+import com.diogonunes.darerer.Utils;
 
 public class FragmentNice extends Fragment {
     private static final String LOG_TAG = FragmentNice.class.getSimpleName();
