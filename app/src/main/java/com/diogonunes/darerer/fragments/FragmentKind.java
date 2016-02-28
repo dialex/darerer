@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -99,6 +100,8 @@ public class FragmentKind extends Fragment {
     }
 
     private void initFragment() {
+        initButtonHandlers();
+
         // Instance variables
         _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
         _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
@@ -110,6 +113,24 @@ public class FragmentKind extends Fragment {
 
         String[] encouragements = getResources().getStringArray(R.array.encouragements);
         _encouragementsRoulette = new StringRoulette(encouragements);
+    }
+
+    private void initButtonHandlers() {
+        Button btnYes = (Button) getView().findViewById(R.id.btn_kind_challenge_yes);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                onClickAcceptChallenge(v);
+            }
+        });
+
+        Button btnNo = (Button) getView().findViewById(R.id.btn_kind_challenge_no);
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                onClickDenyChallenge(v);
+            }
+        });
     }
 
     private void showWelcomeText() {
