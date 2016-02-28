@@ -36,16 +36,17 @@
         android:visibility="visible">
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_kind_challenge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:foreground="@color/colorBackgroundPrimary">
+            card_view:cardCornerRadius="2dp"
+            card_view:cardBackgroundColor="@color/colorBackgroundPrimary">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:padding="8dp">
 
                 <TextView
@@ -71,9 +72,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/txt_kind_challenge_decision"
+                android:contentDescription="Meme"
                 android:paddingTop="42dp"
-                android:src="@drawable/img_meme_maybe"
-                android:contentDescription="Meme" />
+                android:src="@drawable/img_meme_maybe" />
 
             <TextView
                 android:id="@+id/txt_kind_challenge_decision"

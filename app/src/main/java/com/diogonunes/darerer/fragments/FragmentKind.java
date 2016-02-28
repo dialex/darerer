@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class FragmentKind extends Fragment {
     private static StringRoulette _kindChallengesRoulette, _encouragementsRoulette;
 
     private FloatingActionButton _fab;
+    private CardView _cardChallenge;
     private TextView _txtDecision;
     private ImageView _imgDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
@@ -105,6 +107,7 @@ public class FragmentKind extends Fragment {
         // Instance variables
         _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
         _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
+        _cardChallenge = (CardView) getView().findViewById(R.id.card_kind_challenge);
         _txtDecision = (TextView) getView().findViewById(R.id.txt_kind_challenge_decision);
         _imgDecision = (ImageView) getView().findViewById(R.id.img_kind_meme_decision);
 
@@ -167,7 +170,10 @@ public class FragmentKind extends Fragment {
     }
 
     private void setTheme() {
+        int themeColor = ContextCompat.getColor(getContext(), R.color.colorKindPrimary);
+
         _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_white));
-        _fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.colorKindPrimary)));
+        _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+        _cardChallenge.setBackgroundColor(themeColor);
     }
 }
