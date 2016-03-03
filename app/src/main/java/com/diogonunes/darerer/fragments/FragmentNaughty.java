@@ -17,7 +17,7 @@ import com.diogonunes.darerer.StringRoulette;
 
 public class FragmentNaughty extends Fragment {
     private static final String LOG_TAG = FragmentNaughty.class.getSimpleName();
-    private static StringRoulette _naughtyActsRoulette, _encouragementsRoulette;
+    private static StringRoulette _naughtyActsRoulette;
 
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
@@ -65,8 +65,8 @@ public class FragmentNaughty extends Fragment {
         String challengeDesc = _naughtyActsRoulette.roll();
 
         // Displays it
-        TextView cardChallenge = (TextView) getView().findViewById(R.id.card_naughty_challenge_title);
-        cardChallenge.setText(challengeDesc);
+        TextView cardChallengeText = (TextView) getView().findViewById(R.id.card_naughty_challenge_title);
+        cardChallengeText.setText(challengeDesc);
 
         // Allows the user to decide
         showChallengeText();
@@ -87,9 +87,6 @@ public class FragmentNaughty extends Fragment {
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
         _naughtyActsRoulette = new StringRoulette(naughtyChallenges);
-
-        String[] encouragements = getResources().getStringArray(R.array.encouragements);
-        _encouragementsRoulette = new StringRoulette(encouragements);
     }
 
     private void showWelcomeText() {
