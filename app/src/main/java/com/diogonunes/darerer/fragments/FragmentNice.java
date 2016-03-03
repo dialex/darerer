@@ -184,8 +184,10 @@ public class FragmentNice extends Fragment {
     private void setTheme() {
         int themeColor = ContextCompat.getColor(getContext(), R.color.colorNicePrimary);
 
-        _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_face_white));
-        _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+        if (_fab != null) {
+            _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_face_white));
+            _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+        }
         if (_cardChallengeAction != null)
             _cardChallengeAction.setCardBackgroundColor(themeColor);
         if (_cardChallengeModifier != null)
