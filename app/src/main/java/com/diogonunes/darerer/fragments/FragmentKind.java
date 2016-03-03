@@ -1,6 +1,7 @@
 package com.diogonunes.darerer.fragments;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,7 @@ public class FragmentKind extends Fragment {
     private static final String LOG_TAG = FragmentKind.class.getSimpleName();
     private static StringRoulette _kindChallengesRoulette, _encouragementsRoulette;
 
+    private View _rootView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
     private TextView _txtDecision;
@@ -42,13 +44,14 @@ public class FragmentKind extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_kind, container, false);
+        _rootView = inflater.inflate(R.layout.fragment_kind, container, false);
+        initFragment();
+        return _rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        initFragment();
         showWelcomeText();
     }
 
@@ -67,7 +70,7 @@ public class FragmentKind extends Fragment {
         String challengeDesc = _kindChallengesRoulette.roll();
 
         // Displays it
-        TextView cardChallenge = (TextView) getView().findViewById(R.id.card_kind_challenge_title);
+        TextView cardChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
         cardChallenge.setText(challengeDesc);
 
         // Allows the user to decide
@@ -102,25 +105,25 @@ public class FragmentKind extends Fragment {
     }
 
     private void initFragment() {
-        initButtonHandlers();
+        Resources resourcesRoot = getResources();
 
-        // Instance variables
-        View rootView = getView();
-        _layoutDefault = (LinearLayout) rootView.findViewById(R.id.layout_kind_challenge_off);
-        _layoutChallenge = (LinearLayout) rootView.findViewById(R.id.layout_kind_challenge_on);
-        _cardChallenge = (CardView) rootView.findViewById(R.id.card_kind_challenge);
-        _txtDecision = (TextView) rootView.findViewById(R.id.txt_kind_challenge_decision);
-        _imgDecision = (ImageView) rootView.findViewById(R.id.img_kind_meme_decision);
+        _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_off);
+        _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_on);
+        _cardChallenge = (CardView) _rootView.findViewById(R.id.card_kind_challenge);
+        _txtDecision = (TextView) _rootView.findViewById(R.id.txt_kind_challenge_decision);
+        _imgDecision = (ImageView) _rootView.findViewById(R.id.img_kind_meme_decision);
 
-        String[] kindChallenges = getResources().getStringArray(R.array.kindness_challenges);
+        String[] kindChallenges = resourcesRoot.getStringArray(R.array.kindness_challenges);
         _kindChallengesRoulette = new StringRoulette(kindChallenges);
 
-        String[] encouragements = getResources().getStringArray(R.array.encouragements);
+        String[] encouragements = resourcesRoot.getStringArray(R.array.encouragements);
         _encouragementsRoulette = new StringRoulette(encouragements);
+
+        initButtonHandlers();
     }
 
     private void initButtonHandlers() {
-        Button btnYes = (Button) getView().findViewById(R.id.btn_kind_challenge_yes);
+        Button btnYes = (Button) _rootView.findViewById(R.id.btn_kind_challenge_yes);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -128,7 +131,7 @@ public class FragmentKind extends Fragment {
             }
         });
 
-        Button btnNo = (Button) getView().findViewById(R.id.btn_kind_challenge_no);
+        Button btnNo = (Button) _rootView.findViewById(R.id.btn_kind_challenge_no);
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -173,8 +176,11 @@ public class FragmentKind extends Fragment {
     private void setTheme() {
         int themeColor = ContextCompat.getColor(getContext(), R.color.colorKindPrimary);
 
-        _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_white));
-        _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
-        _cardChallenge.setBackgroundColor(themeColor);
+        if (_fab != null) {
+            _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_star_white));
+            _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+        }
+        if (_cardChallenge != null)
+            _cardChallenge.setBackgroundColor(themeColor);
     }
 }
