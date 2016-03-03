@@ -74,8 +74,8 @@ public class FragmentNice extends Fragment {
         // Displays it
         TextView cardActionText = (TextView) _rootView.findViewById(R.id.card_nice_challenge_action_title);
         TextView cardModifierText = (TextView) _rootView.findViewById(R.id.card_nice_challenge_modifier_title);
-        cardActionText.setText(actionText);
-        cardModifierText.setText(modifierText);
+        cardActionText.setText(actionText.toUpperCase());
+        cardModifierText.setText(modifierText.toUpperCase());
 
         // Allows the user to decide
         setDecision(_rootView, 0);
