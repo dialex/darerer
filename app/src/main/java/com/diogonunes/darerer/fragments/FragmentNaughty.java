@@ -9,7 +9,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,8 +21,6 @@ public class FragmentNaughty extends Fragment {
 
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
-    private TextView _txtDecision;
-    private ImageView _imgDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
     public FragmentNaughty() {
@@ -38,7 +35,12 @@ public class FragmentNaughty extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_kind, container, false);
+        return inflater.inflate(R.layout.fragment_naughty, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -63,7 +65,7 @@ public class FragmentNaughty extends Fragment {
         String challengeDesc = _naughtyActsRoulette.roll();
 
         // Displays it
-        TextView cardChallenge = (TextView) getView().findViewById(R.id.card_kind_challenge_title);
+        TextView cardChallenge = (TextView) getView().findViewById(R.id.card_naughty_challenge_title);
         cardChallenge.setText(challengeDesc);
 
         // Allows the user to decide
@@ -77,12 +79,11 @@ public class FragmentNaughty extends Fragment {
     }
 
     private void initFragment() {
-        // Instance variables
-        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
-        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
-        _cardChallenge = (CardView) getView().findViewById(R.id.card_kind_challenge);
-        _txtDecision = (TextView) getView().findViewById(R.id.txt_kind_challenge_decision);
-        _imgDecision = (ImageView) getView().findViewById(R.id.img_kind_meme_decision);
+        View rootView = getView();
+        // Instance variable
+        _layoutDefault = (LinearLayout) rootView.findViewById(R.id.layout_naughty_challenge_off);
+        _layoutChallenge = (LinearLayout) rootView.findViewById(R.id.layout_naughty_challenge_on);
+        _cardChallenge = (CardView) rootView.findViewById(R.id.card_naughty_challenge);
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
         _naughtyActsRoulette = new StringRoulette(naughtyChallenges);
