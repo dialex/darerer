@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="nice_challenges">
-        <item>This is a nice challenge 1.</item>
-        <item>This is a nice challenge 2.</item>
+    <string-array name="nice_challenges_actions">
+        <item>Help someone</item>
+        <item>Show your affection</item>
+        <item>Meditate</item>
+        <item>Be sincere</item>
+        <item>Be tolerant</item>
+        <item>Set a goal</item>
+    </string-array>
+    <string-array name="nice_challenges_modifiers">
+        <item>Now</item>
+        <item>Today</item>
+        <item>Twice</item>
+        <item>Without fear</item>
+        <item>With passion</item>
+        <item>Genuinely</item>
     </string-array>
 </resources>
