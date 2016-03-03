@@ -11,7 +11,7 @@
     tools:context=".fragments.FragmentKind">
 
     <LinearLayout
-        android:id="@+id/layout_challenge_off"
+        android:id="@+id/layout_kind_challenge_off"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
@@ -29,7 +29,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_challenge_on"
+        android:id="@+id/layout_kind_challenge_on"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
