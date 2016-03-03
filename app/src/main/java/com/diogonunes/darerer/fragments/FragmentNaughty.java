@@ -5,24 +5,22 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
-import com.diogonunes.darerer.Utils;
 
 public class FragmentNaughty extends Fragment {
     private static final String LOG_TAG = FragmentNaughty.class.getSimpleName();
-    private static StringRoulette _naughtyActsRoulette, _encouragementsRoulette;
+    private static StringRoulette _naughtyActsRoulette;
 
     private FloatingActionButton _fab;
-    private TextView _txtDecision;
-    private ImageView _imgDecision;
+    private CardView _cardChallenge;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
     public FragmentNaughty() {
@@ -41,9 +39,15 @@ public class FragmentNaughty extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         initFragment();
+        showWelcomeText();
     }
 
     @Override
@@ -57,7 +61,15 @@ public class FragmentNaughty extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
-        Utils.ShowSnackBar(getView(), "TODO Naughty");
+        // Picks a challenge
+        String challengeDesc = _naughtyActsRoulette.roll();
+
+        // Displays it
+        TextView cardChallengeText = (TextView) getView().findViewById(R.id.card_naughty_challenge_title);
+        cardChallengeText.setText(challengeDesc);
+
+        // Allows the user to decide
+        showChallengeText();
     }
 
     // Auxiliary
@@ -67,21 +79,31 @@ public class FragmentNaughty extends Fragment {
     }
 
     private void initFragment() {
-        // Instance variables
-//        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
-//        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
-//        _txtDecision = (TextView) getView().findViewById(R.id.txt_challenge_decision);
-//        _imgDecision = (ImageView) getView().findViewById(R.id.img_meme_decision);
+        View rootView = getView();
+        // Instance variable
+        _layoutDefault = (LinearLayout) rootView.findViewById(R.id.layout_naughty_challenge_off);
+        _layoutChallenge = (LinearLayout) rootView.findViewById(R.id.layout_naughty_challenge_on);
+        _cardChallenge = (CardView) rootView.findViewById(R.id.card_naughty_challenge);
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
         _naughtyActsRoulette = new StringRoulette(naughtyChallenges);
+    }
 
-        String[] encouragements = getResources().getStringArray(R.array.encouragements);
-        _encouragementsRoulette = new StringRoulette(encouragements);
+    private void showWelcomeText() {
+        _layoutDefault.setVisibility(View.VISIBLE);
+        _layoutChallenge.setVisibility(View.GONE);
+    }
+
+    private void showChallengeText() {
+        _layoutDefault.setVisibility(View.GONE);
+        _layoutChallenge.setVisibility(View.VISIBLE);
     }
 
     private void setTheme() {
+        int themeColor = ContextCompat.getColor(getContext(), R.color.colorNaughtyPrimary);
+
         _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_heart_white));
-        _fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.colorNaughtyPrimary)));
+        _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+        _cardChallenge.setBackgroundColor(themeColor);
     }
 }

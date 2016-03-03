@@ -11,7 +11,7 @@
     tools:context=".fragments.FragmentKind">
 
     <LinearLayout
-        android:id="@+id/layout_challenge_off"
+        android:id="@+id/layout_kind_challenge_off"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
@@ -29,7 +29,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_challenge_on"
+        android:id="@+id/layout_kind_challenge_on"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -97,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="false"
+                android:layout_alignParentLeft="false"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="6dp">
@@ -106,7 +107,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:onClick="onClickDenyChallenge"
                     android:text="@string/action_deny"
                     android:textColor="@color/colorSecondaryTextActive" />
 
@@ -115,7 +115,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:onClick="onClickAcceptChallenge"
                     android:text="@string/action_accept"
                     android:textColor="@color/colorSecondaryTextActive" />
 

@@ -3,7 +3,7 @@
     <color name="colorBackground">@color/md_white_1000</color>
     <color name="colorBackgroundPrimary">@color/md_indigo_500</color>
     <color name="colorBackgroundPrimaryDark">@color/md_indigo_700</color>
-    <color name="colorAccent">@color/md_white_1000</color>
+    <color name="colorAccent">@color/md_blue_400</color>
     <color name="colorNicePrimary">@color/md_light_green_500</color>
     <color name="colorNaughtyPrimary">@color/md_red_500</color>
     <color name="colorKindPrimary">@color/md_amber_500</color>

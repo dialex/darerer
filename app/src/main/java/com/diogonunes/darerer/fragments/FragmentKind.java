@@ -105,11 +105,12 @@ public class FragmentKind extends Fragment {
         initButtonHandlers();
 
         // Instance variables
-        _layoutDefault = (LinearLayout) getView().findViewById(R.id.layout_challenge_off);
-        _layoutChallenge = (LinearLayout) getView().findViewById(R.id.layout_challenge_on);
-        _cardChallenge = (CardView) getView().findViewById(R.id.card_kind_challenge);
-        _txtDecision = (TextView) getView().findViewById(R.id.txt_kind_challenge_decision);
-        _imgDecision = (ImageView) getView().findViewById(R.id.img_kind_meme_decision);
+        View rootView = getView();
+        _layoutDefault = (LinearLayout) rootView.findViewById(R.id.layout_kind_challenge_off);
+        _layoutChallenge = (LinearLayout) rootView.findViewById(R.id.layout_kind_challenge_on);
+        _cardChallenge = (CardView) rootView.findViewById(R.id.card_kind_challenge);
+        _txtDecision = (TextView) rootView.findViewById(R.id.txt_kind_challenge_decision);
+        _imgDecision = (ImageView) rootView.findViewById(R.id.img_kind_meme_decision);
 
         String[] kindChallenges = getResources().getStringArray(R.array.kindness_challenges);
         _kindChallengesRoulette = new StringRoulette(kindChallenges);
