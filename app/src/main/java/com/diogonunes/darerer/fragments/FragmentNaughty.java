@@ -19,6 +19,7 @@ public class FragmentNaughty extends Fragment {
     private static final String LOG_TAG = FragmentNaughty.class.getSimpleName();
     private static StringRoulette _naughtyActsRoulette;
 
+    private View _rootView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
     private LinearLayout _layoutDefault, _layoutChallenge;
@@ -35,7 +36,9 @@ public class FragmentNaughty extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_naughty, container, false);
+        _rootView = inflater.inflate(R.layout.fragment_naughty, container, false);
+        initFragment();
+        return _rootView;
     }
 
     @Override
@@ -46,7 +49,6 @@ public class FragmentNaughty extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        initFragment();
         showWelcomeText();
     }
 
@@ -65,7 +67,7 @@ public class FragmentNaughty extends Fragment {
         String challengeDesc = _naughtyActsRoulette.roll();
 
         // Displays it
-        TextView cardChallengeText = (TextView) getView().findViewById(R.id.card_naughty_challenge_title);
+        TextView cardChallengeText = (TextView) _rootView.findViewById(R.id.card_naughty_challenge_title);
         cardChallengeText.setText(challengeDesc);
 
         // Allows the user to decide
@@ -79,11 +81,9 @@ public class FragmentNaughty extends Fragment {
     }
 
     private void initFragment() {
-        View rootView = getView();
-        // Instance variable
-        _layoutDefault = (LinearLayout) rootView.findViewById(R.id.layout_naughty_challenge_off);
-        _layoutChallenge = (LinearLayout) rootView.findViewById(R.id.layout_naughty_challenge_on);
-        _cardChallenge = (CardView) rootView.findViewById(R.id.card_naughty_challenge);
+        _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_naughty_challenge_off);
+        _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_naughty_challenge_on);
+        _cardChallenge = (CardView) _rootView.findViewById(R.id.card_naughty_challenge);
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
         _naughtyActsRoulette = new StringRoulette(naughtyChallenges);
@@ -102,8 +102,11 @@ public class FragmentNaughty extends Fragment {
     private void setTheme() {
         int themeColor = ContextCompat.getColor(getContext(), R.color.colorNaughtyPrimary);
 
-        _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_heart_white));
-        _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
-        _cardChallenge.setBackgroundColor(themeColor);
+        if (_fab != null) {
+            _fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_heart_white));
+            _fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+        }
+        if (_cardChallenge != null)
+            _cardChallenge.setBackgroundColor(themeColor);
     }
 }

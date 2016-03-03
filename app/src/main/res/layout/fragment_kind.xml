@@ -41,8 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardBackgroundColor="@color/colorBackgroundPrimary">
+            card_view:cardBackgroundColor="@color/colorBackgroundPrimary"
+            card_view:cardCornerRadius="2dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -96,8 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="false"
                 android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="6dp">
