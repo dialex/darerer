@@ -105,7 +105,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/txt_nice_challenge_decision"
                 android:contentDescription="Meme"
-                android:paddingTop="42dp"
+                android:paddingTop="22dp"
                 android:src="@drawable/img_meme_maybe" />
 
             <TextView
