@@ -3,16 +3,22 @@ package com.diogonunes.darerer.settings;
 import android.view.MenuItem;
 
 public class Setting {
+    private String _sharedPreferenceKey;
     private MenuItem _menuItem;
     private Object _value;
-    private String _sharedPreferenceKey;
+    private Object _defaultValue;
 
     public Setting() {
     }
 
-    public Setting(String sharedPreferenceKey) {
+    public Setting(String sharedPreferenceKey, Object defaultValue) {
         this();
+        this._defaultValue = defaultValue;
         setSharedPrefKey(sharedPreferenceKey);
+    }
+
+    public Object getDefaultValue() {
+        return _defaultValue;
     }
 
     public Object getValue() {

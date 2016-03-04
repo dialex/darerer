@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         Object lastSavedValue;
 
         currentSetting = _settings.getSetting(R.id.settings_notification_daily);
-        lastSavedValue = sharedPrefs.getBoolean(currentSetting.getSharedPrefKey(), false);
-        _settings.setSettingValue(R.id.settings_notification_daily, lastSavedValue);
+        lastSavedValue = sharedPrefs.getBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getDefaultValue());
+        _settings.setSettingValue(R.id.settings_notification_daily, lastSavedValue);//currentSetting.setValue(lastSavedValue);
     }
 
     private void savePreferences() {
