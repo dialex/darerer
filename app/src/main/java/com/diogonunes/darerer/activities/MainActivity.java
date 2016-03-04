@@ -117,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = _settings.getSharedPreferences(this).edit();
         Setting currentSetting;
 
-        currentSetting = _settings.getSetting(R.id.settings_notification_daily);
-        editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
-
 //TODO: throws exception, saying it cannot find the file or folder to save to?!
+//        currentSetting = _settings.getSetting(R.id.settings_notification_daily);
+//        editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
+
 //        editor.commit();
     }
 
