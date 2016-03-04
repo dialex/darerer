@@ -11,10 +11,25 @@ import java.util.HashMap;
 public class SettingsManager {
     private static final String SETTINGS_NAME = "PreferredSettings";
     private HashMap<Integer, Setting> _managedSettings;
+    private HashMap<Integer, String> _mapIdToPreferenceName;
 
     public SettingsManager() {
+        initMapIdToPreferenceName();
+        initManagedSettings();
+    }
+
+    private void initManagedSettings() {
         _managedSettings = new HashMap<>();
-        setSetting(R.id.settings_notification_daily, new Setting("dailyNotifications"));
+
+        for (int settingId : _mapIdToPreferenceName.keySet()) {
+            String sharedPrefName = _mapIdToPreferenceName.get(settingId);
+            setSetting(settingId, new Setting(sharedPrefName));
+        }
+    }
+
+    private void initMapIdToPreferenceName() {
+        _mapIdToPreferenceName = new HashMap<>();
+        _mapIdToPreferenceName.put(R.id.settings_notification_daily, "dailyNotifications");
     }
 
     public SharedPreferences getSharedPreferences(Activity activity) {
@@ -37,6 +52,16 @@ public class SettingsManager {
         getSetting(settingId).setMenuItem(menuItem);
     }
 
+//    public Object getDefaultValue(Setting setting) {
+//        setting.
+//        switch (settingId) {
+//            case R.id.settings_notification_daily:
+//                return true;
+//            default:
+//                return null;
+//        }
+//    }
+
     public Object getSettingValue(int settingId) {
         return getSetting(settingId).getValue();
     }
@@ -44,4 +69,5 @@ public class SettingsManager {
     public void setSettingValue(int settingId, Object value) {
         getSetting(settingId).setValue(value);
     }
+
 }
