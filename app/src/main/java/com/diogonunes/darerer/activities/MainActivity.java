@@ -1,5 +1,6 @@
 package com.diogonunes.darerer.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,9 +17,12 @@ import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
+import com.diogonunes.darerer.settings.Setting;
+import com.diogonunes.darerer.settings.SettingsManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private SettingsManager _settings = new SettingsManager();
 
     private Toolbar _toolbar;
     private ViewPager _viewPager;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        restorePreferences();
 
         initActivity();
 
@@ -45,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        _settings.setSettingMenuItem(SettingsManager.Id.DAILY_NOTIFICATIONS, menu.findItem(R.id.settings_notification_daily));
+
         return true;
     }
 
@@ -55,12 +63,19 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.settings_notification_daily:
+                onClickSettingsDailyNotifications(item);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        savePrefereces();
     }
 
     // Event Handling
@@ -69,8 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment currentTabFragment = _tabFragments.get(_viewPager.getCurrentItem());
 
+        // dispatch event to respective fragment
         if (currentTabFragment == null) {
-            //do nothing
+            // do nothing
         } else if (currentTabFragment instanceof FragmentKind) {
             ((FragmentKind) currentTabFragment).fabOnClick();
         } else if (currentTabFragment instanceof FragmentNice) {
@@ -78,6 +94,41 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentTabFragment instanceof FragmentNaughty) {
             ((FragmentNaughty) currentTabFragment).fabOnClick();
         }
+    }
+
+    private void onClickSettingsDailyNotifications(MenuItem item) {
+        //TODO: Toggle state
+        _settings.setSettingValue(SettingsManager.Id.DAILY_NOTIFICATIONS, item.isChecked());
+    }
+
+    // Settings
+
+    private void restorePreferences() {
+        SharedPreferences sharedPrefs = _settings.getSharedPreferences(this);
+        Setting currentSetting;
+        Object lastSavedValue;
+
+        currentSetting = _settings.getSetting(SettingsManager.Id.DAILY_NOTIFICATIONS);
+        lastSavedValue = sharedPrefs.getBoolean(currentSetting.getSharedPrefKey(), false);
+        _settings.setSettingValue(SettingsManager.Id.DAILY_NOTIFICATIONS, lastSavedValue);
+
+        refreshSettings();
+    }
+
+    private void savePrefereces() {
+        SharedPreferences.Editor editor = _settings.getSharedPreferences(this).edit();
+        Setting currentSetting;
+
+        // Read values from settings
+        currentSetting = _settings.getSetting(SettingsManager.Id.DAILY_NOTIFICATIONS);
+        editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
+
+        // Save them persistently
+        editor.commit();
+    }
+
+    private void refreshSettings() {
+        //TODO: read from _settings and display
     }
 
     // Auxiliary
