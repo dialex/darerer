@@ -4,46 +4,44 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.MenuItem;
 
+import com.diogonunes.darerer.R;
+
 import java.util.HashMap;
 
 public class SettingsManager {
     private static final String SETTINGS_NAME = "PreferredSettings";
-    private HashMap<Id, Setting> _managedSettings;
+    private HashMap<Integer, Setting> _managedSettings;
 
     public SettingsManager() {
         _managedSettings = new HashMap<>();
-        setSetting(Id.DAILY_NOTIFICATIONS, new Setting("dailyNotifications"));
+        setSetting(R.id.settings_notification_daily, new Setting("dailyNotifications"));
     }
 
     public SharedPreferences getSharedPreferences(Activity activity) {
         return activity.getSharedPreferences(SETTINGS_NAME, 0);
     }
 
-    public Setting getSetting(Id settingId) {
+    public Setting getSetting(int settingId) {
         return _managedSettings.get(settingId);
     }
 
-    private Setting setSetting(Id settingId, Setting setting) {
+    private Setting setSetting(int settingId, Setting setting) {
         return _managedSettings.put(settingId, setting);
     }
 
-    public MenuItem getSettingMenuItem(Id settingId) {
+    public MenuItem getSettingMenuItem(int settingId) {
         return getSetting(settingId).getMenuItem();
     }
 
-    public void setSettingMenuItem(Id settingId, MenuItem menuItem) {
+    public void setSettingMenuItem(int settingId, MenuItem menuItem) {
         getSetting(settingId).setMenuItem(menuItem);
     }
 
-    public Object getSettingValue(Id settingId) {
+    public Object getSettingValue(int settingId) {
         return getSetting(settingId).getValue();
     }
 
-    public void setSettingValue(Id settingId, Object value) {
+    public void setSettingValue(int settingId, Object value) {
         getSetting(settingId).setValue(value);
-    }
-
-    public enum Id {
-        DAILY_NOTIFICATIONS
     }
 }

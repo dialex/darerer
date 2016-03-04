@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        _settings.setSettingMenuItem(SettingsManager.Id.DAILY_NOTIFICATIONS, menu.findItem(R.id.settings_notification_daily));
+        _settings.setSettingMenuItem(R.id.settings_notification_daily, menu.findItem(R.id.settings_notification_daily));
 
         return true;
     }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
         //TODO: Toggle state
-        _settings.setSettingValue(SettingsManager.Id.DAILY_NOTIFICATIONS, item.isChecked());
+        _settings.setSettingValue(R.id.settings_notification_daily, item.isChecked());
     }
 
     // Settings
@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
         Setting currentSetting;
         Object lastSavedValue;
 
-        currentSetting = _settings.getSetting(SettingsManager.Id.DAILY_NOTIFICATIONS);
+        currentSetting = _settings.getSetting(R.id.settings_notification_daily);
         lastSavedValue = sharedPrefs.getBoolean(currentSetting.getSharedPrefKey(), false);
-        _settings.setSettingValue(SettingsManager.Id.DAILY_NOTIFICATIONS, lastSavedValue);
+        _settings.setSettingValue(R.id.settings_notification_daily, lastSavedValue);
 
         refreshSettings();
     }
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         Setting currentSetting;
 
         // Read values from settings
-        currentSetting = _settings.getSetting(SettingsManager.Id.DAILY_NOTIFICATIONS);
+        currentSetting = _settings.getSetting(R.id.settings_notification_daily);
         editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
         // Save them persistently
