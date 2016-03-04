@@ -118,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         Setting currentSetting;
 
         currentSetting = _settings.getSetting(R.id.settings_notification_daily);
-        editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
+        if (currentSetting.getValue() != null)
+            editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
         editor.commit();
     }
