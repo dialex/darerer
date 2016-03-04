@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        restorePreferences();
 
         initActivity();
 
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         _settings.setSettingMenuItem(R.id.settings_notification_daily, menu.findItem(R.id.settings_notification_daily));
 
+        restorePreferences();
         return true;
     }
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        savePrefereces();
+        savePreferences();
     }
 
     // Event Handling
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
-        //TODO: Toggle state
+        item.setChecked(!item.isChecked());
         _settings.setSettingValue(R.id.settings_notification_daily, item.isChecked());
     }
 
@@ -111,24 +111,17 @@ public class MainActivity extends AppCompatActivity {
         currentSetting = _settings.getSetting(R.id.settings_notification_daily);
         lastSavedValue = sharedPrefs.getBoolean(currentSetting.getSharedPrefKey(), false);
         _settings.setSettingValue(R.id.settings_notification_daily, lastSavedValue);
-
-        refreshSettings();
     }
 
-    private void savePrefereces() {
+    private void savePreferences() {
         SharedPreferences.Editor editor = _settings.getSharedPreferences(this).edit();
         Setting currentSetting;
 
-        // Read values from settings
         currentSetting = _settings.getSetting(R.id.settings_notification_daily);
         editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
-        // Save them persistently
-        editor.commit();
-    }
-
-    private void refreshSettings() {
-        //TODO: read from _settings and display
+//TODO: throws exception, saying it cannot find the file or folder to save to?!
+//        editor.commit();
     }
 
     // Auxiliary

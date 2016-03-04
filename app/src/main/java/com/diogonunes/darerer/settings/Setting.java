@@ -21,6 +21,9 @@ public class Setting {
 
     public void setValue(Object value) {
         this._value = value;
+
+        if (getMenuItem().isCheckable() && (value instanceof Boolean))
+            getMenuItem().setChecked((Boolean) value);
     }
 
     public MenuItem getMenuItem() {
