@@ -116,9 +116,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentTabFragment instanceof FragmentNaughty) {
             ((FragmentNaughty) currentTabFragment).fabOnClick();
         }
-
-        //debug //TODO: set alarm
-        scheduleAlarm();
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
@@ -151,39 +148,37 @@ public class MainActivity extends AppCompatActivity {
 
     // Notifications
 
-    private void scheduleAlarm() {
+    private void scheduleAlarmCallback() {
         // Set the alarm
 //        Calendar calendar = Calendar.getInstance();
 //        calendar.set(Calendar.HOUR_OF_DAY, 7);
 //        calendar.set(Calendar.MINUTE, 0);
 //        calendar.set(Calendar.SECOND, 0);
 //        calendar.add(Calendar.DAY_OF_YEAR, 1);  // tomorrow
+        _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.diogonunes.darerer"), 0);
         _alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, _pendingIntent);
 
-//        AlarmManager alarmMan = (AlarmManager) getSystemService(ALARM_SERVICE);
 //        PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, NotifyService.class), 0);
 //        alarmMan.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
     }
 
     private void registerAlarmCallback() {
-        if (!(Boolean) _settings.getSettingValue(R.id.settings_notification_daily)) return;
+        if (!(Boolean) _settings.getSettingValue(R.id.settings_notification_daily))
+            return;
+        else
+            scheduleAlarmCallback();
 
-        Log.i("registerAlarmCallback", "Registering BroadcastReceiver.");
+        Log.d("registerAlarmCallback", "Registering BroadcastReceiver.");
         _alarmCallback = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.i("Alarm Callback", "The BroadcastReceived was called.");
-                Notification challenge = getDailyNotification();
+                Log.d("Alarm Callback", "Broadcast received, now handling callback.");
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(0, challenge);
-                Log.i("Alarm Callback", "The daily notification was sent to the user.");
+                notificationManager.notify(0, getDailyNotification());
+                Log.d("Alarm Callback", "A notification was sent to the user.");
             }
         };
-
-        // register the receiver
         registerReceiver(_alarmCallback, new IntentFilter("com.diogonunes.darerer"));
-        _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.diogonunes.darerer"), 0);
-        _alarmManager = (AlarmManager) (this.getSystemService(Context.ALARM_SERVICE));
     }
 
     private void unregisterAlarmCallback() {
@@ -223,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initActivity() {
+        _alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         _toolbar = (Toolbar) findViewById(R.id.toolbar);
         _viewPager = (ViewPager) findViewById(R.id.viewpager);
         _tabLayout = (TabLayout) findViewById(R.id.tabs);
