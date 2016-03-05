@@ -1,6 +1,8 @@
 package com.diogonunes.darerer.activities;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,15 +12,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
@@ -171,7 +174,11 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 Log.i("Alarm Callback", "The BroadcastReceived was called.");
                 String challengeText = getNiceChallengeText();
-                Toast.makeText(context, challengeText, Toast.LENGTH_LONG).show();
+                Notification challengeNotif = createNotification(challengeText);
+
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(0, challengeNotif);
+                //Toast.makeText(context, challengeText, Toast.LENGTH_LONG).show();
             }
         };
 
@@ -186,12 +193,23 @@ public class MainActivity extends AppCompatActivity {
         getBaseContext().unregisterReceiver(_alarmCallback);
     }
 
+    private Notification createNotification(String text) {
+        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(this);
+
+        notifBuilder.setColor(ContextCompat.getColor(this, R.color.colorNicePrimary));
+        notifBuilder.setSmallIcon(R.drawable.ic_face_white);
+        notifBuilder.setContentTitle(getString(R.string.dialog_notification_title));
+        notifBuilder.setContentText(text);
+
+        return notifBuilder.build();
+    }
+
     //TODO: This should be a static method of FragmentNice
     private String getNiceChallengeText() {
         StringRoulette _niceActions = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_actions));
         StringRoulette _niceModifiers = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_modifiers));
 
-        String challengeText = _niceActions.roll() + " + " + _niceModifiers.roll();
+        String challengeText = _niceActions.roll() + " » " + _niceModifiers.roll();
 
         return challengeText;
     }
