@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentSetting.getValue() != null)
             editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
-        editor.commit();
+        editor.apply();
     }
 
     // Notifications
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registerAlarmCallback() {
-        if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily) == false) return;
+        if (!(Boolean) _settings.getSettingValue(R.id.settings_notification_daily)) return;
 
         Log.i("registerAlarmCallback", "Registering BroadcastReceiver.");
         _alarmCallback = new BroadcastReceiver() {
