@@ -1,36 +1,32 @@
 package com.diogonunes.darerer.activities;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.diogonunes.darerer.AlarmReceiver;
 import com.diogonunes.darerer.R;
-import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
 import com.diogonunes.darerer.settings.Setting;
 import com.diogonunes.darerer.settings.SettingsManager;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -149,17 +145,14 @@ public class MainActivity extends AppCompatActivity {
     // Notifications
 
     private void scheduleAlarmCallback() {
-        // Set the alarm
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 7);
-//        calendar.set(Calendar.MINUTE, 0);
-//        calendar.set(Calendar.SECOND, 0);
-//        calendar.add(Calendar.DAY_OF_YEAR, 1);  // tomorrow
-        _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.diogonunes.darerer"), 0);
-        _alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, _pendingIntent);
+        // Pick time for alarm
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
 
-//        PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, NotifyService.class), 0);
-//        alarmMan.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+        _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        _alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, _pendingIntent);
     }
 
     private void registerAlarmCallback() {
@@ -167,39 +160,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         else
             scheduleAlarmCallback();
-
-        Log.d("registerAlarmCallback", "Registering BroadcastReceiver.");
-        _alarmCallback = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("Alarm Callback", "Broadcast received, now handling callback.");
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(0, getDailyNotification());
-                Log.d("Alarm Callback", "A notification was sent to the user.");
-            }
-        };
-        registerReceiver(_alarmCallback, new IntentFilter("com.diogonunes.darerer"));
     }
 
     private void unregisterAlarmCallback() {
         _alarmManager.cancel(_pendingIntent);
         getBaseContext().unregisterReceiver(_alarmCallback);
-    }
-
-    private Notification getDailyNotification() {
-        // Get text
-        StringRoulette niceActions = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_actions));
-        StringRoulette niceModifiers = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_modifiers));
-        String challengeText = niceActions.roll() + " » " + niceModifiers.roll();
-
-        // Get notification
-        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(this);
-        notifBuilder.setColor(ContextCompat.getColor(this, R.color.colorNicePrimary));
-        notifBuilder.setSmallIcon(R.drawable.ic_face_white);
-        notifBuilder.setContentTitle(getString(R.string.dialog_notification_title));
-        notifBuilder.setContentText(challengeText);
-
-        return notifBuilder.build();
     }
 
     // Auxiliary

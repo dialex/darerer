@@ -9,6 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <uses-permission android:name="android.alarm.permission.SET_ALARM" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
         <activity
@@ -22,5 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".DailyNotificationService"
+            android:enabled="true" />
+        <receiver android:name="com.diogonunes.darerer.AlarmReceiver" />
+
     </application>
 </manifest>
