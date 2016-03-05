@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(_alarmCallback);
+        unregisterAlarmCallback();
         super.onDestroy();
     }
 
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.i("Alarm Callback", "The BroadcastReceived was called.");
-                String challengeText = getNiceChallenge();
+                String challengeText = getNiceChallengeText();
                 Toast.makeText(context, challengeText, Toast.LENGTH_LONG).show();
             }
         };
@@ -181,15 +181,13 @@ public class MainActivity extends AppCompatActivity {
         _alarmManager = (AlarmManager) (this.getSystemService(Context.ALARM_SERVICE));
     }
 
-    private void UnregisterAlarmBroadcast() {
+    private void unregisterAlarmCallback() {
         _alarmManager.cancel(_pendingIntent);
         getBaseContext().unregisterReceiver(_alarmCallback);
     }
 
-    // Notifications
-
     //TODO: This should be a static method of FragmentNice
-    private String getNiceChallenge() {
+    private String getNiceChallengeText() {
         StringRoulette _niceActions = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_actions));
         StringRoulette _niceModifiers = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_modifiers));
 
