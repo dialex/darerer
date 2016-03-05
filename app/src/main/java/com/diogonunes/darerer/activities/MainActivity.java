@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
+import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PendingIntent _pendingIntent;   // Used to register alarm manager
     private AlarmManager _alarmManager;     // Running AlarmManager instance
-    private BroadcastReceiver _receiver;    // Callback method for AlarmManager event
+    private BroadcastReceiver _alarmCallback;
 
     private Toolbar _toolbar;
     private ViewPager _viewPager;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         _settings.setSettingMenuItem(R.id.settings_notification_daily, menu.findItem(R.id.settings_notification_daily));
 
         restorePreferences();
-        registerAlarmBroadcast();
+        registerAlarmCallback();
         return true;
     }
 
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(_receiver);
+        unregisterReceiver(_alarmCallback);
         super.onDestroy();
     }
 
@@ -161,31 +162,40 @@ public class MainActivity extends AppCompatActivity {
 //        alarmMan.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
     }
 
-    private void registerAlarmBroadcast() {
+    private void registerAlarmCallback() {
         if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily) == false) return;
 
-        Log.i("registerAlarmBroadcast", "Registering Intent.registerAlarmBroadcast");
-
-        // This is the callback which will be called when the alarm fires
-        _receiver = new BroadcastReceiver() {
-            private static final String TAG = "Alarm Example Receiver";
-
+        Log.i("registerAlarmCallback", "Registering BroadcastReceiver.");
+        _alarmCallback = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.i(TAG, "BroadcastReceiver::OnReceive() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Toast.makeText(context, "Congrats! Your Alarm time has been reached", Toast.LENGTH_LONG).show();
+                Log.i("Alarm Callback", "The BroadcastReceived was called.");
+                String challengeText = getNiceChallenge();
+                Toast.makeText(context, challengeText, Toast.LENGTH_LONG).show();
             }
         };
 
-        // register the alarm broadcast here
-        registerReceiver(_receiver, new IntentFilter("com.diogonunes.darerer"));
+        // register the receiver
+        registerReceiver(_alarmCallback, new IntentFilter("com.diogonunes.darerer"));
         _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.diogonunes.darerer"), 0);
         _alarmManager = (AlarmManager) (this.getSystemService(Context.ALARM_SERVICE));
     }
 
     private void UnregisterAlarmBroadcast() {
         _alarmManager.cancel(_pendingIntent);
-        getBaseContext().unregisterReceiver(_receiver);
+        getBaseContext().unregisterReceiver(_alarmCallback);
+    }
+
+    // Notifications
+
+    //TODO: This should be a static method of FragmentNice
+    private String getNiceChallenge() {
+        StringRoulette _niceActions = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_actions));
+        StringRoulette _niceModifiers = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_modifiers));
+
+        String challengeText = _niceActions.roll() + " + " + _niceModifiers.roll();
+
+        return challengeText;
     }
 
     // Auxiliary
