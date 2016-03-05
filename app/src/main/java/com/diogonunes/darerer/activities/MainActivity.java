@@ -173,12 +173,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.i("Alarm Callback", "The BroadcastReceived was called.");
-                String challengeText = getNiceChallengeText();
-                Notification challengeNotif = createNotification(challengeText);
-
+                Notification challenge = getDailyNotification();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(0, challengeNotif);
-                //Toast.makeText(context, challengeText, Toast.LENGTH_LONG).show();
+                notificationManager.notify(0, challenge);
+                Log.i("Alarm Callback", "The daily notification was sent to the user.");
             }
         };
 
@@ -193,25 +191,20 @@ public class MainActivity extends AppCompatActivity {
         getBaseContext().unregisterReceiver(_alarmCallback);
     }
 
-    private Notification createNotification(String text) {
-        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(this);
+    private Notification getDailyNotification() {
+        // Get text
+        StringRoulette niceActions = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_actions));
+        StringRoulette niceModifiers = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_modifiers));
+        String challengeText = niceActions.roll() + " » " + niceModifiers.roll();
 
+        // Get notification
+        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(this);
         notifBuilder.setColor(ContextCompat.getColor(this, R.color.colorNicePrimary));
         notifBuilder.setSmallIcon(R.drawable.ic_face_white);
         notifBuilder.setContentTitle(getString(R.string.dialog_notification_title));
-        notifBuilder.setContentText(text);
+        notifBuilder.setContentText(challengeText);
 
         return notifBuilder.build();
-    }
-
-    //TODO: This should be a static method of FragmentNice
-    private String getNiceChallengeText() {
-        StringRoulette _niceActions = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_actions));
-        StringRoulette _niceModifiers = new StringRoulette(getResources().getStringArray(R.array.nice_challenges_modifiers));
-
-        String challengeText = _niceActions.roll() + " » " + _niceModifiers.roll();
-
-        return challengeText;
     }
 
     // Auxiliary
