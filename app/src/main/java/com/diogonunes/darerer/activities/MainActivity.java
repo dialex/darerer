@@ -1,5 +1,11 @@
 package com.diogonunes.darerer.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,10 +13,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
@@ -23,6 +31,10 @@ import com.diogonunes.darerer.settings.SettingsManager;
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private SettingsManager _settings = new SettingsManager();
+
+    private PendingIntent _pendingIntent;   // Used to register alarm manager
+    private AlarmManager _alarmManager;     // Running AlarmManager instance
+    private BroadcastReceiver _receiver;    // Callback method for AlarmManager event
 
     private Toolbar _toolbar;
     private ViewPager _viewPager;
@@ -53,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         _settings.setSettingMenuItem(R.id.settings_notification_daily, menu.findItem(R.id.settings_notification_daily));
 
         restorePreferences();
+        registerAlarmBroadcast();
         return true;
     }
 
@@ -78,10 +91,15 @@ public class MainActivity extends AppCompatActivity {
         savePreferences();
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(_receiver);
+        super.onDestroy();
+    }
+
     // Event Handling
 
     public void onClickFab(View view) {
-
         Fragment currentTabFragment = _tabFragments.get(_viewPager.getCurrentItem());
 
         // dispatch event to respective fragment
@@ -94,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentTabFragment instanceof FragmentNaughty) {
             ((FragmentNaughty) currentTabFragment).fabOnClick();
         }
+
+        //debug //TODO: set alarm
+        scheduleAlarm();
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
@@ -122,6 +143,49 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
         editor.commit();
+    }
+
+    // Notifications
+
+    private void scheduleAlarm() {
+        // Set the alarm
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 7);
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+//        calendar.add(Calendar.DAY_OF_YEAR, 1);  // tomorrow
+        _alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, _pendingIntent);
+
+//        AlarmManager alarmMan = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, NotifyService.class), 0);
+//        alarmMan.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+    }
+
+    private void registerAlarmBroadcast() {
+        if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily) == false) return;
+
+        Log.i("registerAlarmBroadcast", "Registering Intent.registerAlarmBroadcast");
+
+        // This is the callback which will be called when the alarm fires
+        _receiver = new BroadcastReceiver() {
+            private static final String TAG = "Alarm Example Receiver";
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.i(TAG, "BroadcastReceiver::OnReceive() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                Toast.makeText(context, "Congrats! Your Alarm time has been reached", Toast.LENGTH_LONG).show();
+            }
+        };
+
+        // register the alarm broadcast here
+        registerReceiver(_receiver, new IntentFilter("com.diogonunes.darerer"));
+        _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.diogonunes.darerer"), 0);
+        _alarmManager = (AlarmManager) (this.getSystemService(Context.ALARM_SERVICE));
+    }
+
+    private void UnregisterAlarmBroadcast() {
+        _alarmManager.cancel(_pendingIntent);
+        getBaseContext().unregisterReceiver(_receiver);
     }
 
     // Auxiliary
