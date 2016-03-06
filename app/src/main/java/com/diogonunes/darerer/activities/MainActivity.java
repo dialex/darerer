@@ -1,8 +1,6 @@
 package com.diogonunes.darerer.activities;
 
-import android.content.ComponentName;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,7 +16,6 @@ import android.view.View;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.events.AlarmReceiver;
-import com.diogonunes.darerer.events.BootCompletedReceiver;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
@@ -151,10 +148,11 @@ public class MainActivity extends AppCompatActivity {
     private void createAlarms() {
         AlarmReceiver.registerAlarmCallback(this);
 
-        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
-        getPackageManager().setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
+        //TODO: implement BootCompletedReceiver
+//        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
+//        getPackageManager().setComponentEnabledSetting(receiver,
+//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+//                PackageManager.DONT_KILL_APP);
 
         Log.d(LOG_TAG, "Alarms created.");
     }
@@ -162,10 +160,11 @@ public class MainActivity extends AppCompatActivity {
     private void destroyAlarms() {
         AlarmReceiver.unregisterAlarmReceiver(this);
 
-        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
-        getPackageManager().setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+        //TODO: implement BootCompletedReceiver
+//        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
+//        getPackageManager().setComponentEnabledSetting(receiver,
+//                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+//                PackageManager.DONT_KILL_APP);
 
         Log.d(LOG_TAG, "Alarms destroyed.");
     }
