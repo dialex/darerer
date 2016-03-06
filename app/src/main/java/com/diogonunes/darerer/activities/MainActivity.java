@@ -1,11 +1,8 @@
 package com.diogonunes.darerer.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+import android.content.ComponentName;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.diogonunes.darerer.AlarmReceiver;
+import com.diogonunes.darerer.BootCompletedReceiver;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.fragments.FragmentKind;
@@ -26,15 +24,9 @@ import com.diogonunes.darerer.fragments.FragmentNice;
 import com.diogonunes.darerer.settings.Setting;
 import com.diogonunes.darerer.settings.SettingsManager;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private SettingsManager _settings = new SettingsManager();
-
-    private PendingIntent _pendingIntent;   // Used to register alarm manager
-    private AlarmManager _alarmManager;     // Running AlarmManager instance
-    private BroadcastReceiver _alarmCallback;
 
     private Toolbar _toolbar;
     private ViewPager _viewPager;
@@ -59,13 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         _settings.setSettingMenuItem(R.id.settings_notification_daily, menu.findItem(R.id.settings_notification_daily));
 
         restorePreferences();
-        registerAlarmCallback();
+        initAccordingToPreferences(true);
         return true;
     }
 
@@ -93,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterAlarmCallback();
+        initAccordingToPreferences(false);
+
         super.onDestroy();
     }
 
@@ -121,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
 
     // Settings
 
+    private void initAccordingToPreferences(boolean isStart) {
+        // Daily Notifications
+        if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily))
+            if (isStart) createAlarms();
+            else
+                destroyAlarms();
+    }
+
     private void restorePreferences() {
         SharedPreferences sharedPrefs = _settings.getSharedPreferences(this);
         Setting currentSetting;
@@ -144,27 +143,22 @@ public class MainActivity extends AppCompatActivity {
 
     // Notifications
 
-    private void scheduleAlarmCallback() {
-        // Pick time for alarm
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        // Repeat every day
-        _pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        _alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, _pendingIntent);
+    private void createAlarms() {
+        AlarmReceiver.registerAlarmCallback(this);
+
+        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
+        getPackageManager().setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
     }
 
-    private void registerAlarmCallback() {
-        if (!(Boolean) _settings.getSettingValue(R.id.settings_notification_daily))
-            return;
-        else
-            scheduleAlarmCallback();
-    }
+    private void destroyAlarms() {
+        AlarmReceiver.unregisterAlarmReceiver(this);
 
-    private void unregisterAlarmCallback() {
-        _alarmManager.cancel(_pendingIntent);
-        getBaseContext().unregisterReceiver(_alarmCallback);
+        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
+        getPackageManager().setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
     }
 
     // Auxiliary
@@ -183,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initActivity() {
-        _alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         _toolbar = (Toolbar) findViewById(R.id.toolbar);
         _viewPager = (ViewPager) findViewById(R.id.viewpager);
         _tabLayout = (TabLayout) findViewById(R.id.tabs);
