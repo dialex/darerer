@@ -17,6 +17,12 @@ import com.diogonunes.darerer.StringRoulette;
 public class DailyNotificationService extends Service {
     private static final String LOG_TAG = DailyNotificationService.class.getSimpleName();
 
+    private static DailyNotificationService _instance = null;
+
+    public static boolean isActive() {
+        return (_instance != null);
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -36,6 +42,18 @@ public class DailyNotificationService extends Service {
         notificationManager.notify(0, dailyNotif);
 
         return i;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        _instance = this;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        _instance = null;
     }
 
     private Notification getDailyNotification(Context context) {
