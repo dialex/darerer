@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.events;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

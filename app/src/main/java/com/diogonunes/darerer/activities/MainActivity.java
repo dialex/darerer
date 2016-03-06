@@ -14,10 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.diogonunes.darerer.AlarmReceiver;
-import com.diogonunes.darerer.BootCompletedReceiver;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
+import com.diogonunes.darerer.events.AlarmReceiver;
+import com.diogonunes.darerer.events.BootCompletedReceiver;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;

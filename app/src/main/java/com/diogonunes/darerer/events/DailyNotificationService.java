@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.events;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -10,6 +10,9 @@ import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+
+import com.diogonunes.darerer.R;
+import com.diogonunes.darerer.StringRoulette;
 
 public class DailyNotificationService extends Service {
     private static final String LOG_TAG = DailyNotificationService.class.getSimpleName();

@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.events;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

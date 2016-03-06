@@ -27,14 +27,14 @@
         </activity>
 
         <service
-            android:name=".DailyNotificationService"
+            android:name=".events.DailyNotificationService"
             android:enabled="true" />
 
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".events.AlarmReceiver"
             android:enabled="true" />
         <receiver
-            android:name=".BootCompletedReceiver"
+            android:name=".events.BootCompletedReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
