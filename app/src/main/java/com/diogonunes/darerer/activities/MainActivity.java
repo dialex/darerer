@@ -114,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initAccordingToPreferences(boolean isStart) {
         // Daily Notifications
-        if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily))
+        if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily)) {
             if (isStart) createAlarms();
-            else
-                destroyAlarms();
+        } else
+            destroyAlarms();
     }
 
     private void restorePreferences() {
