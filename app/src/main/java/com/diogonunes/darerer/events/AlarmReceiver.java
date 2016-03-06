@@ -33,13 +33,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         alarmManager.cancel(_pendingIntent);
 
         //TODO: disable service
+        Log.d(LOG_TAG, "TODO: disable service");
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(LOG_TAG, "Broadcast received, now handling callback.");
+        Log.d(LOG_TAG, "Broadcast received will be handled by service.");
         Intent dailyNotifService = new Intent(context, DailyNotificationService.class);
         context.startService(dailyNotifService);
-        Log.d(LOG_TAG, "Daily notification service started.");
+        Log.d(LOG_TAG, "DailyNotificationService started.");
     }
 }

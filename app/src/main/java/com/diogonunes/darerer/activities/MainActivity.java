@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         initAccordingToPreferences(false);
-
         super.onDestroy();
     }
 
@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
     // Settings
 
     private void initAccordingToPreferences(boolean isStart) {
+        Log.d(LOG_TAG, "Initializing app according to preferences.");
+
         // Daily Notifications
         if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily)) {
             if (isStart) createAlarms();
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         currentSetting = _settings.getSetting(R.id.settings_notification_daily);
         lastSavedValue = sharedPrefs.getBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getDefaultValue());
         currentSetting.setValue(lastSavedValue);
+
+        Log.d(LOG_TAG, "Preferences restored.");
     }
 
     private void savePreferences() {
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
         editor.apply();
+        Log.d(LOG_TAG, "Preferences saved.");
     }
 
     // Notifications
@@ -150,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
         getPackageManager().setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
+
+        Log.d(LOG_TAG, "Alarms created.");
     }
 
     private void destroyAlarms() {
@@ -159,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
         getPackageManager().setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
+
+        Log.d(LOG_TAG, "Alarms destroyed.");
     }
 
     // Auxiliary

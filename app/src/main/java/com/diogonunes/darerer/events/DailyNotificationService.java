@@ -24,7 +24,7 @@ public class DailyNotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(LOG_TAG, "Started command.");
+        Log.d(LOG_TAG, "OnStartCommand.");
         int i = super.onStartCommand(intent, flags, startId);
 
         Log.d(LOG_TAG, "Creating daily notification.");

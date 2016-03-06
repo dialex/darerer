@@ -9,7 +9,9 @@ import com.diogonunes.darerer.R;
 import java.util.HashMap;
 
 public class SettingsManager {
+    private static final String LOG_TAG = SettingsManager.class.getSimpleName();
     private static final String SETTINGS_NAME = "PreferredSettings";
+
     private HashMap<Integer, Setting> _managedSettings;
 
     public SettingsManager() {
