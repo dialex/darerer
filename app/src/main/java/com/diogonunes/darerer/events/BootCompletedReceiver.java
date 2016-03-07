@@ -10,7 +10,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(LOG_TAG, "Broadcast received will be handled by AlarmReceiver.");
+        Log.d(LOG_TAG, "Broadcast received, time to...");
         //TODO: implement BootCompletedReceiver
 //        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
 //            AlarmReceiver.registerAlarmCallback(context);
