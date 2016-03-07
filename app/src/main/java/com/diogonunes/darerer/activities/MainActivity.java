@@ -1,7 +1,5 @@
 package com.diogonunes.darerer.activities;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -187,17 +185,6 @@ public class MainActivity extends AppCompatActivity {
 
         tab = _tabLayout.getTabAt(2);
         if (tab != null) tab.setIcon(R.drawable.ic_heart_white);
-    }
-
-    //TODO delete?
-    private boolean isServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void initActivity() {
