@@ -1,5 +1,7 @@
 package com.diogonunes.darerer.activities;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -16,6 +18,7 @@ import android.view.View;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.events.AlarmReceiver;
+import com.diogonunes.darerer.events.DailyNotificationService;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
@@ -53,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         _settings.setSettingMenuItem(R.id.settings_notification_daily, menu.findItem(R.id.settings_notification_daily));
 
         restorePreferences();
-        initAccordingToPreferences(true);
         return true;
     }
 
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        initAccordingToPreferences(false);
         super.onDestroy();
     }
 
@@ -109,14 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
     // Settings
 
-    private void initAccordingToPreferences(boolean isStart) {
+    private void initAccordingToPreferences() {
         Log.d(LOG_TAG, "Initializing app according to preferences.");
 
-        // Daily Notifications
-        if ((Boolean) _settings.getSettingValue(R.id.settings_notification_daily)) {
-            if (isStart) createAlarms();
-        } else
-            destroyAlarms();
+        Boolean areDailyNotificationsActive = (Boolean) _settings.getSettingValue(R.id.settings_notification_daily);
+        if (areDailyNotificationsActive) enableDailyNotifications();
+        else disableDailyNotifications();
     }
 
     private void restorePreferences() {
@@ -129,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         currentSetting.setValue(lastSavedValue);
 
         Log.d(LOG_TAG, "Preferences restored.");
+        //initAccordingToPreferences(); // currently, the preferences are only relevant for the next app run
     }
 
     private void savePreferences() {
@@ -140,12 +140,15 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean(currentSetting.getSharedPrefKey(), (Boolean) currentSetting.getValue());
 
         editor.apply();
+
         Log.d(LOG_TAG, "Preferences saved.");
+        initAccordingToPreferences(); // app needs to work according to the latest settings
     }
 
     // Notifications
 
-    private void createAlarms() {
+    private void enableDailyNotifications() {
+        DailyNotificationService.start(this);
         AlarmReceiver.registerAlarmCallback(this);
 
         //TODO: implement BootCompletedReceiver
@@ -154,11 +157,12 @@ public class MainActivity extends AppCompatActivity {
 //                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
 //                PackageManager.DONT_KILL_APP);
 
-        Log.d(LOG_TAG, "Alarms created.");
+        Log.d(LOG_TAG, "Daily notifications enabled.");
     }
 
-    private void destroyAlarms() {
-        AlarmReceiver.unregisterAlarmReceiver(this);
+    private void disableDailyNotifications() {
+        DailyNotificationService.stop(this);
+        AlarmReceiver.unregisterAlarmCallback(this);
 
         //TODO: implement BootCompletedReceiver
 //        ComponentName receiver = new ComponentName(this, BootCompletedReceiver.class);
@@ -166,11 +170,12 @@ public class MainActivity extends AppCompatActivity {
 //                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
 //                PackageManager.DONT_KILL_APP);
 
-        Log.d(LOG_TAG, "Alarms destroyed.");
+        Log.d(LOG_TAG, "Daily notifications disabled.");
     }
 
     // Auxiliary
 
+    //TODO: display icons instead of text
     private void displayTabIcons() {
         TabLayout.Tab tab;
 
@@ -182,6 +187,17 @@ public class MainActivity extends AppCompatActivity {
 
         tab = _tabLayout.getTabAt(2);
         if (tab != null) tab.setIcon(R.drawable.ic_heart_white);
+    }
+
+    //TODO delete?
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void initActivity() {

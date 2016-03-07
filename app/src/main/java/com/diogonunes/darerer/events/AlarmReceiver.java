@@ -14,33 +14,30 @@ public class AlarmReceiver extends BroadcastReceiver {
     private static PendingIntent _pendingIntent;
 
     public static void registerAlarmCallback(Context context) {
-        Log.d(LOG_TAG, "Picking a time for the alarm.");
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.add(Calendar.DATE, 1);
+        if (_pendingIntent == null) {
+            Log.d(LOG_TAG, "Start receiving alarms, every day.");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 9);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.add(Calendar.DATE, 1);
 
-        Log.d(LOG_TAG, "Registering alarm for every day.");
-        _pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, _pendingIntent);
+            _pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, _pendingIntent);
+        } else
+            Log.d(LOG_TAG, "Was already receiving alarms.");
     }
 
-    public static void unregisterAlarmReceiver(Context context) {
-        Log.d(LOG_TAG, "Unregistering alarm receiver.");
+    public static void unregisterAlarmCallback(Context context) {
+        Log.d(LOG_TAG, "Stop receiving alarms.");
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(_pendingIntent);
-
-        //TODO: disable service
-        Log.d(LOG_TAG, "TODO: disable service");
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(LOG_TAG, "Broadcast received will be handled by service.");
-        Intent dailyNotifService = new Intent(context, DailyNotificationService.class);
-        context.startService(dailyNotifService);
-        Log.d(LOG_TAG, "DailyNotificationService started.");
+        Log.d(LOG_TAG, "Broadcast received, time to trigger the service.");
+        DailyNotificationService.getInstance().showNotification();
     }
 }

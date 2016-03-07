@@ -16,11 +16,25 @@ import com.diogonunes.darerer.StringRoulette;
 
 public class DailyNotificationService extends Service {
     private static final String LOG_TAG = DailyNotificationService.class.getSimpleName();
+    private static DailyNotificationService _instance;
 
-    private static DailyNotificationService _instance = null;
+    public static void start(Context context) {
+        if (getInstance() == null) {
+            Log.d(LOG_TAG, "Starting...");
+            Intent intent = new Intent(context, DailyNotificationService.class);
+            context.startService(intent);
+        } else
+            Log.d(LOG_TAG, "Was already started.");
+    }
 
-    public static boolean isActive() {
-        return (_instance != null);
+    public static void stop(Context context) {
+        Log.d(LOG_TAG, "Stopping...");
+        Intent intent = new Intent(context, DailyNotificationService.class);
+        context.stopService(intent);
+    }
+
+    public static DailyNotificationService getInstance() {
+        return _instance;
     }
 
     @Override
@@ -29,34 +43,35 @@ public class DailyNotificationService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(LOG_TAG, "OnStartCommand.");
-        int i = super.onStartCommand(intent, flags, startId);
-
-        Log.d(LOG_TAG, "Creating daily notification.");
-        Notification dailyNotif = getDailyNotification(getApplicationContext());
-        dailyNotif.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        Log.d(LOG_TAG, "Displaying notification to the user.");
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, dailyNotif);
-
-        return i;
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
         _instance = this;
+        Log.v(LOG_TAG, "Created.");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         _instance = null;
+        Log.v(LOG_TAG, "Destroyed/Stopped.");
     }
 
-    private Notification getDailyNotification(Context context) {
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        int i = super.onStartCommand(intent, flags, startId);
+        Log.v(LOG_TAG, "Started.");
+
+        return i;
+    }
+
+    public void showNotification() {
+        Log.d(LOG_TAG, "Create notification and display it to the user.");
+        Notification dailyNotif = createNotification(getApplicationContext());
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, dailyNotif);
+    }
+
+    private Notification createNotification(Context context) {
         Resources rootResources = context.getResources();
 
         // Get text
