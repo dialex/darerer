@@ -40,11 +40,8 @@ public class MainActivity extends AppCompatActivity {
         initActivity();
 
         setSupportActionBar(_toolbar);
-
         initViewPager(_viewPager);
-        _tabLayout.setupWithViewPager(_viewPager);
 
-        //displayTabIcons();
         _tabLayout.getTabAt(1).select(); //default tab
     }
 
@@ -173,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Auxiliary
 
-    //TODO: display icons instead of text
     private void displayTabIcons() {
         TabLayout.Tab tab;
 
@@ -198,19 +194,24 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         Fragment tabFragment;
 
+        boolean showIconsOnly = true;
+
         tabFragment = new FragmentKind();
-        adapter.addFragment(tabFragment, getResources().getString(R.string.tab_title_kind));
+        adapter.addFragment(tabFragment, (showIconsOnly ? "" : getResources().getString(R.string.tab_title_kind)));
         _tabFragments.put(0, tabFragment);
 
         tabFragment = new FragmentNice();
-        adapter.addFragment(tabFragment, getResources().getString(R.string.tab_title_Nice));
+        adapter.addFragment(tabFragment, (showIconsOnly ? "" : getResources().getString(R.string.tab_title_nice)));
         _tabFragments.put(1, tabFragment);
 
         tabFragment = new FragmentNaughty();
-        adapter.addFragment(tabFragment, getResources().getString(R.string.tab_title_Naughty));
+        adapter.addFragment(tabFragment, (showIconsOnly ? "" : getResources().getString(R.string.tab_title_naughty)));
         _tabFragments.put(2, tabFragment);
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2); //disables viewpager cache, see http://goo.gl/NuQK2M
+        _tabLayout.setupWithViewPager(_viewPager);
+
+        if (showIconsOnly) displayTabIcons();
     }
 }
