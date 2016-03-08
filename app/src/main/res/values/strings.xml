@@ -5,7 +5,7 @@
     <string name="tab_title_nice">Nice</string>
     <string name="tab_title_naughty">Naughty</string>
 
-    <string name="settings_notification_daily">Daily Notification</string>
+    <string name="settings_notification_daily">Daily notification</string>
     <string name="settings_notification_daily_condensed">Notifications</string>
 
     <!-- Text displayed on multiple contexts -->
@@ -21,6 +21,6 @@
     <string name="dialog_challenge_nice">Ready to be challenged?</string>
     <string name="dialog_challenge_kind">So you\'re feeling… kind?</string>
     <string name="dialog_challenge_naughty">So you\'re feeling… naughty?</string>
-    <string name="dialog_action_sorry">I\'m sorry</string>
+    <string name="dialog_action_sorry">Desculpa</string>
     <string name="dialog_notification_title">This is your challenge</string>
 </resources>

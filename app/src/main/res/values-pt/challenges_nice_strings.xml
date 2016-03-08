@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nice_challenges_actions">
+        <item>Ajuda alguém</item>
+        <item>Mostra o teu afeto</item>
+        <item>Medita</item>
+        <item>Sê sincero(a)</item>
+        <item>Sê tolerante</item>
+        <item>Define um objetivo</item>
+    </string-array>
+    <string-array name="nice_challenges_modifiers">
+        <item>Agora</item>
+        <item>Hoje</item>
+        <item>Duas vezes</item>
+        <item>Genuinamente</item>
+        <item>Sem medos</item>
+        <item>Com paixão</item>
+    </string-array>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="encouragements">
+        <item>Vá lá, não sejas assim…</item>
+        <item>Porque não?</item>
+        <item>Deixa de ser mariquinhas!</item>
+        <item>Qual é o pior que pode acontecer?</item>
+        <item>Tu consegues!</item>
+        <item>\"Se não os tens a tremer…\"</item>
+    </string-array>
+</resources>
