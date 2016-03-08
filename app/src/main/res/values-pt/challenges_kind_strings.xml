@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="kindness_challenges">
+        <item>Diz \"Bom dia\" à pessoa ao teu lado.</item>
+        <item>Paga a portagem do condutor que vem atrás de ti.</item>
+        <item>Oferece mantimentos a um vizinho idoso.</item>
+        <item>Diz "eu adoro-te" a alguém de que realmente gostas.</item>
+        <item>Ajuda a carregar o carrinho de bébé de uma mãe ou segura-lhe a porta.</item>
+        <item>Quando comprares uma nova peça de roupa, doa uma antiga.</item>
+        <item>Traz café para o teu colega.</item>
+        <item>Envia flores para uma amiga. Só podes dizer que foste tu uma semana depois.</item>
+        <item>Nos transportes públicos, oferece o teu lugar a outra pessoa.</item>
+        <item>Telefona ou escreve para um professor que mudou a tua vida.</item>
+        <item>Traz uma caixa de donuts para partilhar com os teus colegas.</item>
+        <item>Perdoa a alguém uma dívida.</item>
+        <item>Presta atenção com todos os seus sentidos.</item>
+        <item>Oferece-te para cuidar do animal de estimação de um amigo enquanto ele está de férias.</item>
+        <item>Ajuda um amigo a fazer as mudanças.</item>
+        <item>Antes de um amigo mudar de país, oferece-lhe uma foto dos dois juntos.</item>
+        <item>Deixa uma gorjeta para um empregado agradável.</item>
+        <item>Elogia um estranho, sinceramente.</item>
+        <item>Escreve uma nota de agradecimento a alguém.</item>
+        <item>Envia uma carta ou cartão personalizado para alguém que gostes.</item>
+        <item>Cola um post-it a desejar \"Bom dia\" na mesa de alguém.</item>
+        <item>Inicia uma conversa com um colega que não conheces muito bem.</item>
+        <item>Doa um brinquedo ou jogo a um hospital.</item>
+        <item>Doa uma peça de roupa a um sem-abrigo.</item>
+        <item>Envia de forma anónima um pequeno presente a um amigo.</item>
+        <item>Doa uma hora de teu tempo.</item>
+        <item>Convida alguém que está sozinho para almoçar ou jantar.</item>
+        <item>Deixa um chocolate na mesa de um colega.</item>
+        <item>Envia pela internet um cartão animado a alguém.</item>
+        <item>Escreve um recado ao chefe de um funcionário a elogiar o seu trabalho.</item>
+        <item>Doa as roupas que já não usas.</item>
+        <item>Traz algo que cozinhaste para os teus colegas.</item>
+        <item>Doa sangue.</item>
+        <item>Ajuda um vizinho, a tirar erva daninha ou a replantar o jardim.</item>
+        <item>Deixa um livro no aeroporto para alguém poder ler enquanto espera.</item>
+        <item>Cozinha uma refeição para uma mãe/pai para que ela/ele poder fazer uma pausa.</item>
+        <item>Doa o teu tempo como voluntário numa organização de caridade.</item>
+        <item>Se alguém na fila tem menos artigos deixa-o passar à frente.</item>
+        <item>Oferece-te como voluntário para ler a crianças na biblioteca.</item>
+        <item>Dá uma volta pelo parque ou área pública e recolhe o lixo.</item>
+        <item>Oferece mantimentos a uma família em dificuldades financeiras.</item>
+    </string-array>
+</resources>

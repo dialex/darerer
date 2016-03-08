@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">DARERER</string>
+
+    <string name="tab_title_kind">Bondade</string>
+    <string name="tab_title_nice">Simpático</string>
+    <string name="tab_title_naughty">Maroto</string>
+
+    <string name="settings_notification_daily">Notificação diária</string>
+    <string name="settings_notification_daily_condensed">Notificações</string>
+
+    <!-- Text displayed on multiple contexts -->
+    <string name="challenge_accepted">DESAFIO ACEITE</string>
+    <string name="challenge_denied">DESAFIO RECUSADO</string>
+    <string name="challenge_considered">a considerar…</string>
+
+    <!-- Text related to actions (nouns and verbs) -->
+    <string name="action_deny">Recusar</string>
+    <string name="action_accept">Aceitar</string>
+
+    <!-- Text displayed during conversations with the user -->
+    <string name="dialog_challenge_nice">Vamos ao desafio?</string>
+    <string name="dialog_challenge_kind">Hoje vai ser… bondade?</string>
+    <string name="dialog_challenge_naughty">Hoje vai ser… malandrice?</string>
+    <string name="dialog_action_sorry">Desculpa</string>
+    <string name="dialog_notification_title">Este é o teu desafio</string>
+</resources>
