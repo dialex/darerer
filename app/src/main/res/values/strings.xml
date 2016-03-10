@@ -22,7 +22,7 @@
     <string name="dialog_challenge_nice">Ready to be challenged?</string>
     <string name="dialog_challenge_kind">So you\'re feeling… kind?</string>
     <string name="dialog_challenge_naughty">So you\'re feeling… naughty?</string>
-    <string name="dialog_action_sorry">Desculpa</string>
+    <string name="dialog_action_sorry">I\'m sorry</string>
     <string name="dialog_notification_title">This is your challenge</string>
 
 </resources>
