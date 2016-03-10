@@ -1,5 +1,6 @@
 package com.diogonunes.darerer.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,7 +13,6 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
@@ -103,8 +103,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickActionShare() {
-        //TODO: handle event
-        Toast.makeText(MainActivity.this, "Show share menu", Toast.LENGTH_SHORT).show();
+        String shareBody = "TODO: dynamically get text to share.";
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.dialog_action_share)));
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
