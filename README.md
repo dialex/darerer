@@ -19,6 +19,10 @@ But at least I finished and learned a lot, so please don't be harsh on my final 
 
 ### TO-DO list
 
+- Publish on Google Play
+    - http://developer.android.com/distribute/tools/launch-checklist.html
+    - https://www.udemy.com/android-marshmallow-java-app-development-course/learn/#/lecture/1837738
+    - http://developer.android.com/distribute/googleplay/start.html
 - [Feel free to pull request more challenges!](https://github.com/dialex/darerer/pulls)
 - About section
 - In-app purchases
