@@ -12,6 +12,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings_notification_daily:
                 onClickSettingsDailyNotifications(item);
                 return true;
+            case R.id.action_share:
+                onClickActionShare();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -96,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentTabFragment instanceof FragmentNaughty) {
             ((FragmentNaughty) currentTabFragment).fabOnClick();
         }
+    }
+
+    private void onClickActionShare() {
+        //TODO: handle event
+        Toast.makeText(MainActivity.this, "Show share menu", Toast.LENGTH_SHORT).show();
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
