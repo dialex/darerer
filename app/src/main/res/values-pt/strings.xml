@@ -22,7 +22,8 @@
     <string name="dialog_challenge_nice">Vamos ao desafio?</string>
     <string name="dialog_challenge_kind">Hoje vai ser… bondade?</string>
     <string name="dialog_challenge_naughty">Hoje vai ser… malandrice?</string>
-    <string name="dialog_action_share">Partilhar via</string>
     <string name="dialog_action_sorry">Desculpa</string>
     <string name="dialog_notification_title">Este é o teu desafio</string>
+    <string name="dialog_share_caption">Partilhar via</string>
+    <string name="dialog_share_unavailable">Precisas de um desafio antes de partilhar.</string>
 </resources>

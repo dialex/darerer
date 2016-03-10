@@ -13,6 +13,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
@@ -103,14 +104,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickActionShare() {
-        String shareBody = "TODO: dynamically get text to share.";
+        String shareBody = getCurrentChallenge();
+        if (shareBody != "") {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, getString(R.string.dialog_share_caption)));
+        } else {
+            Toast.makeText(MainActivity.this, R.string.dialog_share_unavailable, Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+    private String getCurrentChallenge() {
+        //TODO getCurrentChallenge
+        android.app.Fragment currentTabFragment = getFragmentManager().findFragmentById(R.id.viewpager);
+        if (currentTabFragment != null)
+            Toast.makeText(MainActivity.this, "Success, not null", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(MainActivity.this, "Shit, it's null", Toast.LENGTH_SHORT).show();
 
-        startActivity(Intent.createChooser(sharingIntent, getString(R.string.dialog_action_share)));
+//        LinearLayout layoutWithContent = null;
+//        if ((layoutWithContent == null) && (layoutWithContent.getVisibility() != View.VISIBLE))
+//            layoutWithContent = (LinearLayout) findViewById(R.id.layout_kind_challenge_on);
+//        if ((layoutWithContent == null) && (layoutWithContent.getVisibility() != View.VISIBLE))
+//            layoutWithContent = (LinearLayout) findViewById(R.id.layout_nice_challenge_on);
+//        if ((layoutWithContent == null) && (layoutWithContent.getVisibility() != View.VISIBLE))
+//            layoutWithContent = (LinearLayout) findViewById(R.id.layout_naughty_challenge_on);
+
+        // Get current challenge text
+//        if ((layoutWithContent != null) && (layoutWithContent.getVisibility() == View.VISIBLE)) {
+//            switch (layoutWithContent.getId()) {
+//                case
+//
+//            }
+//        }
+//        else
+        return "";
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
