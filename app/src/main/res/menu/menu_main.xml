@@ -1,11 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activities.MainActivity">
 
     <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_white"
+        android:orderInCategory="100"
+        android:title="@string/action_share"
+        android:titleCondensed="@string/action_share"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/settings_notification_daily"
         android:checkable="true"
-        android:orderInCategory="100"
         android:title="@string/settings_notification_daily"
         android:titleCondensed="@string/settings_notification_daily_condensed" />
 

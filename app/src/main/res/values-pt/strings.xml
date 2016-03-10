@@ -16,6 +16,7 @@
     <!-- Text related to actions (nouns and verbs) -->
     <string name="action_deny">Recusar</string>
     <string name="action_accept">Aceitar</string>
+    <string name="action_share">Partilhar</string>
 
     <!-- Text displayed during conversations with the user -->
     <string name="dialog_challenge_nice">Vamos ao desafio?</string>

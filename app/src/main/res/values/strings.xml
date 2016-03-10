@@ -16,6 +16,7 @@
     <!-- Text related to actions (nouns and verbs) -->
     <string name="action_deny">Deny</string>
     <string name="action_accept">Accept</string>
+    <string name="action_share">Share</string>
 
     <!-- Text displayed during conversations with the user -->
     <string name="dialog_challenge_nice">Ready to be challenged?</string>
@@ -23,4 +24,5 @@
     <string name="dialog_challenge_naughty">So you\'re feeling… naughty?</string>
     <string name="dialog_action_sorry">Desculpa</string>
     <string name="dialog_notification_title">This is your challenge</string>
+
 </resources>
