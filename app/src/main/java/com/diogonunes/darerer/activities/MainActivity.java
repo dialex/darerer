@@ -13,6 +13,8 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
@@ -117,30 +119,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getCurrentChallenge() {
-        //TODO getCurrentChallenge
-        android.app.Fragment currentTabFragment = getFragmentManager().findFragmentById(R.id.viewpager);
-        if (currentTabFragment != null)
-            Toast.makeText(MainActivity.this, "Success, not null", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(MainActivity.this, "Shit, it's null", Toast.LENGTH_SHORT).show();
+        //TODO REFACTOR
 
-//        LinearLayout layoutWithContent = null;
-//        if ((layoutWithContent == null) && (layoutWithContent.getVisibility() != View.VISIBLE))
-//            layoutWithContent = (LinearLayout) findViewById(R.id.layout_kind_challenge_on);
-//        if ((layoutWithContent == null) && (layoutWithContent.getVisibility() != View.VISIBLE))
-//            layoutWithContent = (LinearLayout) findViewById(R.id.layout_nice_challenge_on);
-//        if ((layoutWithContent == null) && (layoutWithContent.getVisibility() != View.VISIBLE))
-//            layoutWithContent = (LinearLayout) findViewById(R.id.layout_naughty_challenge_on);
+        String challengeText = "";
+        LinearLayout layoutWithContent;
+        int currentTabIndex = _viewPager.getCurrentItem();
 
-        // Get current challenge text
-//        if ((layoutWithContent != null) && (layoutWithContent.getVisibility() == View.VISIBLE)) {
-//            switch (layoutWithContent.getId()) {
-//                case
-//
-//            }
-//        }
-//        else
-        return "";
+        switch (currentTabIndex) {
+            case 0:
+                layoutWithContent = (LinearLayout) findViewById(R.id.layout_kind_challenge_on);
+                break;
+            case 1:
+                layoutWithContent = (LinearLayout) findViewById(R.id.layout_nice_challenge_on);
+                break;
+            case 2:
+                layoutWithContent = (LinearLayout) findViewById(R.id.layout_naughty_challenge_on);
+                break;
+            default:
+                layoutWithContent = null;
+        }
+
+        if ((layoutWithContent != null) && (layoutWithContent.getVisibility() == View.VISIBLE)) {
+            switch (currentTabIndex) {
+                case 0:
+                    challengeText = (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText();
+                    break;
+                case 1:
+                    challengeText = ""
+                            + ((TextView) findViewById(R.id.card_nice_challenge_action)).getText()
+                            + ((TextView) findViewById(R.id.card_nice_challenge_modifier)).getText();
+                    break;
+                case 2:
+                    challengeText = (String) ((TextView) findViewById(R.id.card_naughty_challenge)).getText();
+                    break;
+            }
+        } else challengeText = "";
+
+        return challengeText;
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
