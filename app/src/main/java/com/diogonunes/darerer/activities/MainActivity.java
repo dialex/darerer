@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
+import com.diogonunes.darerer.Utils;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.events.AlarmReceiver;
 import com.diogonunes.darerer.events.DailyNotificationService;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickActionShare() {
-        String shareBody = getCurrentChallenge();
+        String shareBody = Utils.formatForSharing(getCurrentChallengeText());
         if (shareBody != "") {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String getCurrentChallenge() {
+    private String getCurrentChallengeText() {
         //TODO REFACTOR
 
         String challengeText = "";
@@ -145,12 +146,11 @@ public class MainActivity extends AppCompatActivity {
                     challengeText = (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText();
                     break;
                 case 1:
-                    challengeText = ""
-                            + ((TextView) findViewById(R.id.card_nice_challenge_action)).getText()
-                            + ((TextView) findViewById(R.id.card_nice_challenge_modifier)).getText();
+                    challengeText = ((TextView) findViewById(R.id.card_nice_challenge_action_title)).getText()
+                            + " " + ((TextView) findViewById(R.id.card_nice_challenge_modifier_title)).getText();
                     break;
                 case 2:
-                    challengeText = (String) ((TextView) findViewById(R.id.card_naughty_challenge)).getText();
+                    challengeText = (String) ((TextView) findViewById(R.id.card_naughty_challenge_title)).getText();
                     break;
             }
         } else challengeText = "";
