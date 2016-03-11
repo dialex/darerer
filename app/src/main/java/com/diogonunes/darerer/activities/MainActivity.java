@@ -120,41 +120,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getCurrentChallengeText() {
-        //TODO REFACTOR
-
         String challengeText = "";
-        LinearLayout layoutWithContent;
         int currentTabIndex = _viewPager.getCurrentItem();
 
         switch (currentTabIndex) {
             case 0:
-                layoutWithContent = (LinearLayout) findViewById(R.id.layout_kind_challenge_on);
+                if (Utils.isLayoutVisible((LinearLayout) findViewById(R.id.layout_kind_challenge_on)))
+                    challengeText = (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText();
                 break;
             case 1:
-                layoutWithContent = (LinearLayout) findViewById(R.id.layout_nice_challenge_on);
-                break;
-            case 2:
-                layoutWithContent = (LinearLayout) findViewById(R.id.layout_naughty_challenge_on);
-                break;
-            default:
-                layoutWithContent = null;
-        }
-
-        if ((layoutWithContent != null) && (layoutWithContent.getVisibility() == View.VISIBLE)) {
-            switch (currentTabIndex) {
-                case 0:
-                    challengeText = (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText();
-                    break;
-                case 1:
+                if (Utils.isLayoutVisible((LinearLayout) findViewById(R.id.layout_nice_challenge_on)))
                     challengeText = ((TextView) findViewById(R.id.card_nice_challenge_action_title)).getText()
                             + " " + ((TextView) findViewById(R.id.card_nice_challenge_modifier_title)).getText();
-                    break;
-                case 2:
+                break;
+            case 2:
+                if (Utils.isLayoutVisible((LinearLayout) findViewById(R.id.layout_naughty_challenge_on)))
                     challengeText = (String) ((TextView) findViewById(R.id.card_naughty_challenge_title)).getText();
-                    break;
-            }
-        } else challengeText = "";
-
+                break;
+        }
         return challengeText;
     }
 

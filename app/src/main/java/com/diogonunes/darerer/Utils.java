@@ -1,5 +1,8 @@
 package com.diogonunes.darerer;
 
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.diogonunes.darerer.settings.Constants;
 
 import java.util.Random;
@@ -54,5 +57,13 @@ public class Utils {
             return text;
         else
             return String.format("\"%s\" Try #darerer @ %s", text, Constants.APP_STORE_URL);
+    }
+
+    /**
+     * @param layout
+     * @return True if layout is not null and visible. False otherwise.
+     */
+    public static boolean isLayoutVisible(LinearLayout layout) {
+        return (layout != null) && (layout.getVisibility() == View.VISIBLE);
     }
 }
