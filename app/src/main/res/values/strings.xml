@@ -24,6 +24,6 @@
     <string name="dialog_challenge_naughty">So you\'re feeling… naughty?</string>
     <string name="dialog_action_sorry">I\'m sorry</string>
     <string name="dialog_notification_title">This is your challenge</string>
-    <string name="dialog_share_caption">Share via</string>
+    <string name="dialog_share_caption">Share using:</string>
     <string name="dialog_share_unavailable">You need a challenge to share it.</string>
 </resources>
