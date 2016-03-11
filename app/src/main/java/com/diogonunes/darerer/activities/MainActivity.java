@@ -3,6 +3,7 @@ package com.diogonunes.darerer.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -87,6 +88,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outState.putInt("currentTabIndex", _viewPager.getCurrentItem());
+        switch (_viewPager.getCurrentItem()) {
+            case 0:
+                outState.putBoolean("isChallengeOn", findViewById(R.id.layout_kind_challenge_on).getVisibility() == View.VISIBLE);
+                outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText());
+                outState.putString("challengeModifier", "");
+                break;
+            case 1:
+                outState.putBoolean("isChallengeOn", findViewById(R.id.layout_nice_challenge_on).getVisibility() == View.VISIBLE);
+                outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_nice_challenge_action_title)).getText());
+                outState.putString("challengeModifier", (String) ((TextView) findViewById(R.id.card_nice_challenge_modifier_title)).getText());
+                break;
+            case 2:
+                outState.putBoolean("isChallengeOn", findViewById(R.id.layout_naughty_challenge_on).getVisibility() == View.VISIBLE);
+                outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_naughty_challenge_title)).getText());
+                outState.putString("challengeModifier", "");
+                break;
+        }
     }
 
     // Event Handling
