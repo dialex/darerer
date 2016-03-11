@@ -56,7 +56,7 @@ public class Utils {
         if ((text == null) || (text.isEmpty()))
             return text;
         else
-            return String.format("\"%s\" Try #darerer @ %s", text, Constants.APP_STORE_URL);
+            return String.format("\"%s\" #ChallengeAccepted #DARERER @ %s", text, "", Constants.APP_STORE_URL);
     }
 
     /**
