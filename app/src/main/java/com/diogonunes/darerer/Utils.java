@@ -1,5 +1,10 @@
 package com.diogonunes.darerer;
 
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.diogonunes.darerer.settings.Constants;
+
 import java.util.Random;
 
 public class Utils {
@@ -40,6 +45,25 @@ public class Utils {
         int number = getRandomInteger(1, 100);
         return (number <= truePercentage);
     }
+
+    /**
+     * Formats a text to be shared on social networks.
+     *
+     * @param text
+     * @return
+     */
+    public static String formatForSharing(String text) {
+        if ((text == null) || (text.isEmpty()))
+            return text;
+        else
+            return String.format("\"%s\" #ChallengeAccepted #DARERER @ %s", text, "", Constants.APP_STORE_URL);
+    }
+
+    /**
+     * @param layout
+     * @return True if layout is not null and visible. False otherwise.
+     */
+    public static boolean isLayoutVisible(LinearLayout layout) {
+        return (layout != null) && (layout.getVisibility() == View.VISIBLE);
+    }
 }
-
-

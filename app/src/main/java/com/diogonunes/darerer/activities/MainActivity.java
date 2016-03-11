@@ -1,5 +1,6 @@
 package com.diogonunes.darerer.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,8 +13,12 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
+import com.diogonunes.darerer.Utils;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.events.AlarmReceiver;
 import com.diogonunes.darerer.events.DailyNotificationService;
@@ -65,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings_notification_daily:
                 onClickSettingsDailyNotifications(item);
                 return true;
+            case R.id.action_share:
+                onClickActionShare();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -96,6 +104,41 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentTabFragment instanceof FragmentNaughty) {
             ((FragmentNaughty) currentTabFragment).fabOnClick();
         }
+    }
+
+    private void onClickActionShare() {
+        String shareBody = Utils.formatForSharing(getCurrentChallengeText());
+        if (shareBody != "") {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, getString(R.string.dialog_share_caption)));
+        } else {
+            Toast.makeText(MainActivity.this, R.string.dialog_share_unavailable, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String getCurrentChallengeText() {
+        String challengeText = "";
+        int currentTabIndex = _viewPager.getCurrentItem();
+
+        switch (currentTabIndex) {
+            case 0:
+                if (Utils.isLayoutVisible((LinearLayout) findViewById(R.id.layout_kind_challenge_on)))
+                    challengeText = (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText();
+                break;
+            case 1:
+                if (Utils.isLayoutVisible((LinearLayout) findViewById(R.id.layout_nice_challenge_on)))
+                    challengeText = ((TextView) findViewById(R.id.card_nice_challenge_action_title)).getText()
+                            + " " + ((TextView) findViewById(R.id.card_nice_challenge_modifier_title)).getText();
+                break;
+            case 2:
+                if (Utils.isLayoutVisible((LinearLayout) findViewById(R.id.layout_naughty_challenge_on)))
+                    challengeText = (String) ((TextView) findViewById(R.id.card_naughty_challenge_title)).getText();
+                break;
+        }
+        return challengeText;
     }
 
     private void onClickSettingsDailyNotifications(MenuItem item) {
