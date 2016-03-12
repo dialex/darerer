@@ -48,7 +48,48 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(_toolbar);
         initViewPager(_viewPager);
 
-        _tabLayout.getTabAt(1).select(); //default tab
+        if (savedInstanceState != null) {
+            int savedTabIndex = savedInstanceState.getInt("currentTabIndex");
+            _tabLayout.getTabAt(savedTabIndex).select();
+
+            LinearLayout challengeOff, challengeOn;
+            TextView challengeAction, challengeModifier;
+            switch (savedTabIndex) {
+                case 0:
+                    challengeOff = (LinearLayout) findViewById(R.id.layout_kind_challenge_off);
+                    challengeOn = (LinearLayout) findViewById(R.id.layout_kind_challenge_on);
+                    challengeAction = (TextView) findViewById(R.id.card_kind_challenge_title);
+                    challengeModifier = null;
+                    break;
+                case 1:
+                    challengeOff = (LinearLayout) findViewById(R.id.layout_nice_challenge_off);
+                    challengeOn = (LinearLayout) findViewById(R.id.layout_nice_challenge_on);
+                    challengeAction = (TextView) findViewById(R.id.card_nice_challenge_action_title);
+                    challengeModifier = (TextView) findViewById(R.id.card_nice_challenge_modifier_title);
+                    break;
+                case 2:
+                    challengeOff = (LinearLayout) findViewById(R.id.layout_naughty_challenge_off);
+                    challengeOn = (LinearLayout) findViewById(R.id.layout_naughty_challenge_on);
+                    challengeAction = (TextView) findViewById(R.id.card_naughty_challenge_title);
+                    challengeModifier = null;
+                    break;
+                default:
+                    challengeOff = challengeOn = null;
+                    challengeAction = challengeModifier = null;
+                    break;
+            }
+            if (challengeOn != null)
+                challengeOn.setVisibility(savedInstanceState.getBoolean("isChallengeOn") ? View.VISIBLE : View.GONE);
+            if (challengeOff != null)
+                challengeOff.setVisibility(savedInstanceState.getBoolean("isChallengeOn") ? View.GONE : View.VISIBLE);
+            if (challengeAction != null)
+                challengeAction.setText(savedInstanceState.getString("challengeAction"));
+            if (challengeModifier != null)
+                challengeModifier.setText(savedInstanceState.getString("challengeModifier"));
+        } else {
+            // Load defaults
+            _tabLayout.getTabAt(1).select();
+        }
     }
 
     @Override
@@ -92,8 +133,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        outState.putInt("currentTabIndex", _viewPager.getCurrentItem());
-        switch (_viewPager.getCurrentItem()) {
+        int currentTabIndex = _viewPager.getCurrentItem();
+        outState.putInt("currentTabIndex", currentTabIndex);
+        switch (currentTabIndex) {
             case 0:
                 outState.putBoolean("isChallengeOn", findViewById(R.id.layout_kind_challenge_on).getVisibility() == View.VISIBLE);
                 outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText());
