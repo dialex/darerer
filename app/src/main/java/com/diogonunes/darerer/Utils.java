@@ -1,5 +1,8 @@
 package com.diogonunes.darerer;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -68,12 +71,13 @@ public class Utils {
     }
 
     /**
-     * Checks if there's an internet connection.
-     *
+     * Checks if there's an internet connection. Requires permission.ACCESS_NETWORK_STATE.
+     * @param context
      * @return True if internet is ON. False otherwise.
      */
-    public static boolean isNetworkAvailable() {
-        //TODO
-        return false;
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

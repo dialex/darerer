@@ -107,7 +107,7 @@ public class FragmentKind extends Fragment {
     // Ads
 
     private void showAds() {
-        if (Utils.isNetworkAvailable()) {
+        if (Utils.isNetworkAvailable(getContext())) {
             Log.d(LOG_TAG, "Showing ads because Internet is enabled");
             AdRequest adRequest = new AdRequest.Builder().build();
             _adView.loadAd(adRequest);
