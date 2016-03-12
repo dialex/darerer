@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,16 @@ import android.widget.TextView;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
+import com.diogonunes.darerer.Utils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class FragmentNaughty extends Fragment {
     private static final String LOG_TAG = FragmentNaughty.class.getSimpleName();
     private static StringRoulette _naughtyActsRoulette;
 
     private View _rootView;
+    private AdView _adView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
     private LinearLayout _layoutDefault, _layoutChallenge;
@@ -50,6 +55,7 @@ public class FragmentNaughty extends Fragment {
     public void onStart() {
         super.onStart();
         showWelcomeText();
+        showAd();
     }
 
     @Override
@@ -74,6 +80,20 @@ public class FragmentNaughty extends Fragment {
         showChallengeText();
     }
 
+    // Ads
+
+    private void showAd() {
+        if (Utils.hasInternetConnection(getContext())) {
+            Log.d(LOG_TAG, "Showing ads (Internet: ON)");
+            AdRequest adRequest = new AdRequest.Builder().build();
+            _adView.loadAd(adRequest);
+            _adView.setVisibility(View.VISIBLE);
+        } else {
+            Log.d(LOG_TAG, "Hiding ads (Internet: OFF)");
+            _adView.setVisibility(View.GONE);
+        }
+    }
+
     // Auxiliary
 
     private void initActivity() {
@@ -84,6 +104,7 @@ public class FragmentNaughty extends Fragment {
         _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_naughty_challenge_off);
         _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_naughty_challenge_on);
         _cardChallenge = (CardView) _rootView.findViewById(R.id.card_naughty_challenge);
+        _adView = (AdView) _rootView.findViewById(R.id.adView_banner_footer);
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);
         _naughtyActsRoulette = new StringRoulette(naughtyChallenges);
