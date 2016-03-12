@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class FragmentKind extends Fragment {
     private View _rootView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
-    private TextView _txtDecision;
+    private TextView _txtChallenge, _txtDecision;
     private ImageView _imgDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
@@ -46,6 +47,19 @@ public class FragmentKind extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         _rootView = inflater.inflate(R.layout.fragment_kind, container, false);
         initFragment();
+
+        if ((savedInstanceState != null) && (savedInstanceState.getInt("currentTabIndex") == 0)) {
+            boolean isChallengeOn = savedInstanceState.getBoolean("isChallengeOn");
+            String challengeText = savedInstanceState.getString("challengeAction");
+
+            if (isChallengeOn) {
+                _txtChallenge.setText(challengeText);
+                setDecision(getView(), 0);
+                showChallengeText();
+            } else {
+                showWelcomeText();
+            }
+        }
         return _rootView;
     }
 
@@ -63,15 +77,20 @@ public class FragmentKind extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("currentTabIndex", 0);
+        outState.putBoolean("isChallengeOn", _layoutChallenge.getVisibility() == View.VISIBLE);
+        outState.putString("challengeAction", (String) ((TextView) _rootView.findViewById(R.id.card_kind_challenge_title)).getText());
+        outState.putString("challengeModifier", "");
+    }
+
     // Event Handling
 
     public void fabOnClick() {
-        // Picks a challenge
+        // Picks a challenge & Display it
         String challengeDesc = _kindChallengesRoulette.roll();
-
-        // Displays it
-        TextView cardChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
-        cardChallenge.setText(challengeDesc);
+        _txtChallenge.setText(challengeDesc);
 
         // Allows the user to decide
         setDecision(getView(), 0);
@@ -110,6 +129,7 @@ public class FragmentKind extends Fragment {
         _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_off);
         _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_on);
         _cardChallenge = (CardView) _rootView.findViewById(R.id.card_kind_challenge);
+        _txtChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
         _txtDecision = (TextView) _rootView.findViewById(R.id.txt_kind_challenge_decision);
         _imgDecision = (ImageView) _rootView.findViewById(R.id.img_kind_meme_decision);
 
@@ -174,6 +194,7 @@ public class FragmentKind extends Fragment {
     }
 
     private void setTheme() {
+        Log.d(LOG_TAG, "Updating theme");
         int themeColor = ContextCompat.getColor(getContext(), R.color.colorKindPrimary);
 
         if (_fab != null) {

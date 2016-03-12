@@ -3,7 +3,6 @@ package com.diogonunes.darerer.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -48,48 +47,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(_toolbar);
         initViewPager(_viewPager);
 
-        if (savedInstanceState != null) {
-            int savedTabIndex = savedInstanceState.getInt("currentTabIndex");
-            _tabLayout.getTabAt(savedTabIndex).select();
-
-            LinearLayout challengeOff, challengeOn;
-            TextView challengeAction, challengeModifier;
-            switch (savedTabIndex) {
-                case 0:
-                    challengeOff = (LinearLayout) findViewById(R.id.layout_kind_challenge_off);
-                    challengeOn = (LinearLayout) findViewById(R.id.layout_kind_challenge_on);
-                    challengeAction = (TextView) findViewById(R.id.card_kind_challenge_title);
-                    challengeModifier = null;
-                    break;
-                case 1:
-                    challengeOff = (LinearLayout) findViewById(R.id.layout_nice_challenge_off);
-                    challengeOn = (LinearLayout) findViewById(R.id.layout_nice_challenge_on);
-                    challengeAction = (TextView) findViewById(R.id.card_nice_challenge_action_title);
-                    challengeModifier = (TextView) findViewById(R.id.card_nice_challenge_modifier_title);
-                    break;
-                case 2:
-                    challengeOff = (LinearLayout) findViewById(R.id.layout_naughty_challenge_off);
-                    challengeOn = (LinearLayout) findViewById(R.id.layout_naughty_challenge_on);
-                    challengeAction = (TextView) findViewById(R.id.card_naughty_challenge_title);
-                    challengeModifier = null;
-                    break;
-                default:
-                    challengeOff = challengeOn = null;
-                    challengeAction = challengeModifier = null;
-                    break;
-            }
-            if (challengeOn != null)
-                challengeOn.setVisibility(savedInstanceState.getBoolean("isChallengeOn") ? View.VISIBLE : View.GONE);
-            if (challengeOff != null)
-                challengeOff.setVisibility(savedInstanceState.getBoolean("isChallengeOn") ? View.GONE : View.VISIBLE);
-            if (challengeAction != null)
-                challengeAction.setText(savedInstanceState.getString("challengeAction"));
-            if (challengeModifier != null)
-                challengeModifier.setText(savedInstanceState.getString("challengeModifier"));
-        } else {
-            // Load defaults
+        if (savedInstanceState != null)
+            _tabLayout.getTabAt(savedInstanceState.getInt("currentTabIndex")).select();
+        else
             _tabLayout.getTabAt(1).select();
-        }
+
     }
 
     @Override
@@ -129,29 +91,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        int currentTabIndex = _viewPager.getCurrentItem();
-        outState.putInt("currentTabIndex", currentTabIndex);
-        switch (currentTabIndex) {
-            case 0:
-                outState.putBoolean("isChallengeOn", findViewById(R.id.layout_kind_challenge_on).getVisibility() == View.VISIBLE);
-                outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_kind_challenge_title)).getText());
-                outState.putString("challengeModifier", "");
-                break;
-            case 1:
-                outState.putBoolean("isChallengeOn", findViewById(R.id.layout_nice_challenge_on).getVisibility() == View.VISIBLE);
-                outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_nice_challenge_action_title)).getText());
-                outState.putString("challengeModifier", (String) ((TextView) findViewById(R.id.card_nice_challenge_modifier_title)).getText());
-                break;
-            case 2:
-                outState.putBoolean("isChallengeOn", findViewById(R.id.layout_naughty_challenge_on).getVisibility() == View.VISIBLE);
-                outState.putString("challengeAction", (String) ((TextView) findViewById(R.id.card_naughty_challenge_title)).getText());
-                outState.putString("challengeModifier", "");
-                break;
-        }
     }
 
     // Event Handling
