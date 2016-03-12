@@ -66,4 +66,14 @@ public class Utils {
     public static boolean isLayoutVisible(LinearLayout layout) {
         return (layout != null) && (layout.getVisibility() == View.VISIBLE);
     }
+
+    /**
+     * Checks if there's an internet connection.
+     *
+     * @return True if internet is ON. False otherwise.
+     */
+    public static boolean isNetworkAvailable() {
+        //TODO
+        return false;
+    }
 }

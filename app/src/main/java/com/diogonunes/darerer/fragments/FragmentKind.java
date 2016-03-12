@@ -107,8 +107,15 @@ public class FragmentKind extends Fragment {
     // Ads
 
     private void showAds() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        _adView.loadAd(adRequest);
+        if (Utils.isNetworkAvailable()) {
+            Log.d(LOG_TAG, "Showing ads because Internet is enabled");
+            AdRequest adRequest = new AdRequest.Builder().build();
+            _adView.loadAd(adRequest);
+            _adView.setVisibility(View.VISIBLE);
+        } else {
+            Log.d(LOG_TAG, "Hiding ads because Internet is disabled");
+            _adView.setVisibility(View.GONE);
+        }
     }
 
     // Auxiliary
