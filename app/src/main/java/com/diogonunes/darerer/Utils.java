@@ -75,7 +75,7 @@ public class Utils {
      * @param context
      * @return True if internet is ON. False otherwise.
      */
-    public static boolean isNetworkAvailable(Context context) {
+    public static boolean hasInternetConnection(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
