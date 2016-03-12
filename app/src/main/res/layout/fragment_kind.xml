@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -95,9 +96,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentStart="false"
+                android:layout_above="@+id/adView_banner_footer"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="6dp">
@@ -119,6 +118,16 @@
                     android:textColor="@color/colorSecondaryTextActive" />
 
             </LinearLayout>
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView_banner_footer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id" />
 
         </RelativeLayout>
     </LinearLayout>

@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +22,15 @@ import android.widget.TextView;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.Utils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class FragmentKind extends Fragment {
     private static final String LOG_TAG = FragmentKind.class.getSimpleName();
     private static StringRoulette _kindChallengesRoulette, _encouragementsRoulette;
 
     private View _rootView;
+    private AdView _adView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
     private TextView _txtDecision;
@@ -53,6 +58,7 @@ public class FragmentKind extends Fragment {
     public void onStart() {
         super.onStart();
         showWelcomeText();
+        showAds();
     }
 
     @Override
@@ -98,26 +104,43 @@ public class FragmentKind extends Fragment {
         }
     }
 
+    // Ads
+
+    private void showAds() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        _adView.loadAd(adRequest);
+    }
+
     // Auxiliary
 
     private void initActivity() {
-        _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            _fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        } else
+            Log.w(LOG_TAG, "initActivity: getActivity() returned null");
     }
 
     private void initFragment() {
+        if (_rootView != null) {
+            _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_off);
+            _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_on);
+            _cardChallenge = (CardView) _rootView.findViewById(R.id.card_kind_challenge);
+            _txtDecision = (TextView) _rootView.findViewById(R.id.txt_kind_challenge_decision);
+            _imgDecision = (ImageView) _rootView.findViewById(R.id.img_kind_meme_decision);
+            _adView = (AdView) _rootView.findViewById(R.id.adView_banner_footer);
+        } else
+            Log.d(LOG_TAG, "initFragment: _rootView returned null");
+
         Resources resourcesRoot = getResources();
+        if (resourcesRoot != null) {
+            String[] kindChallenges = resourcesRoot.getStringArray(R.array.kindness_challenges);
+            _kindChallengesRoulette = new StringRoulette(kindChallenges);
 
-        _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_off);
-        _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_on);
-        _cardChallenge = (CardView) _rootView.findViewById(R.id.card_kind_challenge);
-        _txtDecision = (TextView) _rootView.findViewById(R.id.txt_kind_challenge_decision);
-        _imgDecision = (ImageView) _rootView.findViewById(R.id.img_kind_meme_decision);
-
-        String[] kindChallenges = resourcesRoot.getStringArray(R.array.kindness_challenges);
-        _kindChallengesRoulette = new StringRoulette(kindChallenges);
-
-        String[] encouragements = resourcesRoot.getStringArray(R.array.encouragements);
-        _encouragementsRoulette = new StringRoulette(encouragements);
+            String[] encouragements = resourcesRoot.getStringArray(R.array.encouragements);
+            _encouragementsRoulette = new StringRoulette(encouragements);
+        } else
+            Log.d(LOG_TAG, "initFragment: getResources() returned null");
 
         initButtonHandlers();
     }
