@@ -58,7 +58,7 @@ public class FragmentKind extends Fragment {
     public void onStart() {
         super.onStart();
         showWelcomeText();
-        showAds();
+        showAd();
     }
 
     @Override
@@ -106,7 +106,7 @@ public class FragmentKind extends Fragment {
 
     // Ads
 
-    private void showAds() {
+    private void showAd() {
         if (Utils.hasInternetConnection(getContext())) {
             Log.d(LOG_TAG, "Showing ads (Internet: ON)");
             AdRequest adRequest = new AdRequest.Builder().build();
