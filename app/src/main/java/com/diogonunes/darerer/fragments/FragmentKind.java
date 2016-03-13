@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.Utils;
+import com.diogonunes.darerer.settings.Constants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -109,7 +110,7 @@ public class FragmentKind extends Fragment {
     private void showAd() {
         if (Utils.hasInternetConnection(getContext())) {
             Log.d(LOG_TAG, "Showing ads (Internet: ON)");
-            AdRequest adRequest = new AdRequest.Builder().build();
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.TESTING_DEVICE_ID).build();
             _adView.loadAd(adRequest);
             _adView.setVisibility(View.VISIBLE);
         } else {
