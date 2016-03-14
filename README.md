@@ -15,6 +15,7 @@ This was my first adventure in the Android world. Even though the app's concept 
 - Publish to Play Store
 
 There were several :anger: and :sob: moments, more than I expected or desired.
+
 But at least I finished and learned a lot, so please don't be harsh on my final product :innocent:
 
 ### TO-DO list
