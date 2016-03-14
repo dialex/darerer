@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.ViewPagerAdapter;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Answers());
+        Fabric.with(this, new Answers(), new Crashlytics());
         setContentView(R.layout.activity_main);
 
         initActivity();
