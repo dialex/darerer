@@ -14,13 +14,12 @@ This was my first adventure in the Android world. Even though the app's concept 
 - App Analytics (Fabric.io)
 - Publish to Play Store
 
-There were several :anger: and :sob: moments, more than I expected or desired.
-
+There were several :anger: and :sob: moments, more than I expected or desired.<br/>
 But at least I finished and learned a lot, so please don't be harsh on my final product :innocent:
 
 ### TO-DO list
 
-- Feel free to pull request more challenges!
+- [Feel free to pull request more challenges!](https://github.com/dialex/darerer/pulls)
 - About section
 - In-app purchases
 - Implement BootCompletedReceiver
