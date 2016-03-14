@@ -19,13 +19,13 @@ import android.widget.Toast;
 
 import com.crashlytics.android.answers.Answers;
 import com.diogonunes.darerer.R;
-import com.diogonunes.darerer.Utils;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.events.AlarmReceiver;
 import com.diogonunes.darerer.events.DailyNotificationService;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
+import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Setting;
 import com.diogonunes.darerer.settings.SettingsManager;
 

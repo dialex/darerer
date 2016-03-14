@@ -21,7 +21,7 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
-import com.diogonunes.darerer.Utils;
+import com.diogonunes.darerer.helpers.Utils;
 
 public class FragmentNice extends Fragment {
     private static final String LOG_TAG = FragmentNice.class.getSimpleName();

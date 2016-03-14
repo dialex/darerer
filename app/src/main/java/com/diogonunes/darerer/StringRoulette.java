@@ -1,5 +1,7 @@
 package com.diogonunes.darerer;
 
+import com.diogonunes.darerer.helpers.Utils;
+
 public class StringRoulette {
     private String[] _possibleOutcomes;
 

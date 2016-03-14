@@ -17,7 +17,7 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
-import com.diogonunes.darerer.Utils;
+import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Constants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
