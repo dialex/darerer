@@ -19,7 +19,8 @@ import android.widget.TextView;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
-import com.diogonunes.darerer.Utils;
+import com.diogonunes.darerer.helpers.Analytics;
+import com.diogonunes.darerer.helpers.Utils;
 
 public class FragmentNice extends Fragment {
     private static final String LOG_TAG = FragmentNice.class.getSimpleName();
@@ -67,6 +68,8 @@ public class FragmentNice extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
+        Analytics.logEvent("Challenge Nice", "Button", R.id.fab);
+
         // Picks a challenge
         String actionText = _niceActionsRoulette.roll();
         String modifierText = _niceModifiersRoulette.roll();
@@ -83,10 +86,12 @@ public class FragmentNice extends Fragment {
     }
 
     public void onClickAcceptChallenge(View view) {
+        Analytics.logEvent("Accept Challenge Kind", "Button", R.id.btn_nice_challenge_yes);
         setDecision(view, R.id.btn_nice_challenge_yes);
     }
 
     public void onClickDenyChallenge(View view) {
+        Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_nice_challenge_no);
         setDecision(view, R.id.btn_nice_challenge_no);
 
         if (Utils.getRandomBool(30)) {

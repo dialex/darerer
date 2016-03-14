@@ -17,16 +17,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 import com.diogonunes.darerer.R;
-import com.diogonunes.darerer.Utils;
 import com.diogonunes.darerer.ViewPagerAdapter;
 import com.diogonunes.darerer.events.AlarmReceiver;
 import com.diogonunes.darerer.events.DailyNotificationService;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
+import com.diogonunes.darerer.helpers.Analytics;
+import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Setting;
 import com.diogonunes.darerer.settings.SettingsManager;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Answers(), new Crashlytics());
         setContentView(R.layout.activity_main);
 
         initActivity();
@@ -107,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickActionShare() {
+        Analytics.logEvent("Click Share Challenge", "Button", R.id.action_share);
+
         String shareBody = Utils.formatForSharing(getCurrentChallengeText());
         if (shareBody != "") {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);

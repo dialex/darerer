@@ -21,7 +21,8 @@ import android.widget.TextView;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
-import com.diogonunes.darerer.Utils;
+import com.diogonunes.darerer.helpers.Analytics;
+import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Constants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -73,10 +74,10 @@ public class FragmentKind extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
-        // Picks a challenge
-        String challengeDesc = _kindChallengesRoulette.roll();
+        Analytics.logEvent("Challenge Kind", "Button", R.id.fab);
 
-        // Displays it
+        // Displays a challenge
+        String challengeDesc = _kindChallengesRoulette.roll();
         TextView cardChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
         cardChallenge.setText(challengeDesc);
 
@@ -86,10 +87,12 @@ public class FragmentKind extends Fragment {
     }
 
     public void onClickAcceptChallenge(View view) {
+        Analytics.logEvent("Accept Challenge Kind", "Button", R.id.btn_kind_challenge_yes);
         setDecision(view, R.id.btn_kind_challenge_yes);
     }
 
     public void onClickDenyChallenge(View view) {
+        Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_kind_challenge_no);
         setDecision(view, R.id.btn_kind_challenge_no);
 
         if (Utils.getRandomBool(30)) {

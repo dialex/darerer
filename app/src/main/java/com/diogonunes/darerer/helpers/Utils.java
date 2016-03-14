@@ -1,4 +1,4 @@
-package com.diogonunes.darerer;
+package com.diogonunes.darerer.helpers;
 
 import android.app.Activity;
 import android.content.Context;
