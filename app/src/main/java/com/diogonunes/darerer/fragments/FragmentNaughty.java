@@ -29,6 +29,7 @@ public class FragmentNaughty extends Fragment {
     private AdView _adView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
+    private TextView _txtChallenge;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
     public FragmentNaughty() {
@@ -75,8 +76,7 @@ public class FragmentNaughty extends Fragment {
 
         // Displays a challenge
         String challengeDesc = _naughtyActsRoulette.roll();
-        TextView cardChallengeText = (TextView) _rootView.findViewById(R.id.card_naughty_challenge_title);
-        cardChallengeText.setText(challengeDesc);
+        _txtChallenge.setText(challengeDesc);
 
         // Allows the user to decide
         showChallengeText();
@@ -106,6 +106,7 @@ public class FragmentNaughty extends Fragment {
         _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_naughty_challenge_off);
         _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_naughty_challenge_on);
         _cardChallenge = (CardView) _rootView.findViewById(R.id.card_naughty_challenge);
+        _txtChallenge = (TextView) _rootView.findViewById(R.id.card_naughty_challenge_title);
         _adView = (AdView) _rootView.findViewById(R.id.adView_banner_footer);
 
         String[] naughtyChallenges = getResources().getStringArray(R.array.naughty_challenges);

@@ -29,7 +29,7 @@ public class FragmentNice extends Fragment {
     private View _rootView;
     private FloatingActionButton _fab;
     private CardView _cardChallengeAction, _cardChallengeModifier;
-    private TextView _txtDecision;
+    private TextView _txtActionText, _txtModifierText, _txtDecision;
     private ImageView _imgDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
@@ -70,15 +70,11 @@ public class FragmentNice extends Fragment {
     public void fabOnClick() {
         Analytics.logEvent("Challenge Nice", "Button", R.id.fab);
 
-        // Picks a challenge
+        // Displays a challenge
         String actionText = _niceActionsRoulette.roll();
         String modifierText = _niceModifiersRoulette.roll();
-
-        // Displays it
-        TextView cardActionText = (TextView) _rootView.findViewById(R.id.card_nice_challenge_action_title);
-        TextView cardModifierText = (TextView) _rootView.findViewById(R.id.card_nice_challenge_modifier_title);
-        cardActionText.setText(actionText.toUpperCase());
-        cardModifierText.setText(modifierText.toUpperCase());
+        _txtActionText.setText(actionText.toUpperCase());
+        _txtModifierText.setText(modifierText.toUpperCase());
 
         // Allows the user to decide
         setDecision(_rootView, 0);
@@ -119,6 +115,8 @@ public class FragmentNice extends Fragment {
         _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_nice_challenge_off);
         _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_nice_challenge_on);
         _txtDecision = (TextView) _rootView.findViewById(R.id.txt_nice_challenge_decision);
+        _txtActionText = (TextView) _rootView.findViewById(R.id.card_nice_challenge_action_title);
+        _txtModifierText = (TextView) _rootView.findViewById(R.id.card_nice_challenge_modifier_title);
         _imgDecision = (ImageView) _rootView.findViewById(R.id.img_nice_meme_decision);
         _cardChallengeAction = (CardView) _rootView.findViewById(R.id.card_nice_challenge_action);
         _cardChallengeModifier = (CardView) _rootView.findViewById(R.id.card_nice_challenge_modifier);

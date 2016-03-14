@@ -35,7 +35,7 @@ public class FragmentKind extends Fragment {
     private AdView _adView;
     private FloatingActionButton _fab;
     private CardView _cardChallenge;
-    private TextView _txtDecision;
+    private TextView _txtChallenge, _txtDecision;
     private ImageView _imgDecision;
     private LinearLayout _layoutDefault, _layoutChallenge;
 
@@ -78,8 +78,7 @@ public class FragmentKind extends Fragment {
 
         // Displays a challenge
         String challengeDesc = _kindChallengesRoulette.roll();
-        TextView cardChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
-        cardChallenge.setText(challengeDesc);
+        _txtChallenge.setText(challengeDesc);
 
         // Allows the user to decide
         setDecision(getView(), 0);
@@ -137,6 +136,7 @@ public class FragmentKind extends Fragment {
             _layoutDefault = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_off);
             _layoutChallenge = (LinearLayout) _rootView.findViewById(R.id.layout_kind_challenge_on);
             _cardChallenge = (CardView) _rootView.findViewById(R.id.card_kind_challenge);
+            _txtChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
             _txtDecision = (TextView) _rootView.findViewById(R.id.txt_kind_challenge_decision);
             _imgDecision = (ImageView) _rootView.findViewById(R.id.img_kind_meme_decision);
             _adView = (AdView) _rootView.findViewById(R.id.adView_banner_footer);
