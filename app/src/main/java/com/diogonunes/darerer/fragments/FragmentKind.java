@@ -19,10 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
+import com.diogonunes.darerer.helpers.Analytics;
 import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Constants;
 import com.google.android.gms.ads.AdRequest;
@@ -75,6 +74,8 @@ public class FragmentKind extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
+        Analytics.logEvent("Challenge Kind", "Button", R.id.fab);
+
         // Displays a challenge
         String challengeDesc = _kindChallengesRoulette.roll();
         TextView cardChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
@@ -83,19 +84,15 @@ public class FragmentKind extends Fragment {
         // Allows the user to decide
         setDecision(getView(), 0);
         showChallengeText();
-
-        // Analytics
-        Answers.getInstance().logContentView(new ContentViewEvent()
-                .putContentName("Click Kind Challenge")
-                .putContentType("Button")
-                .putContentId(Integer.toString(R.id.fab)));
     }
 
     public void onClickAcceptChallenge(View view) {
+        Analytics.logEvent("Accept Challenge Kind", "Button", R.id.btn_kind_challenge_yes);
         setDecision(view, R.id.btn_kind_challenge_yes);
     }
 
     public void onClickDenyChallenge(View view) {
+        Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_kind_challenge_no);
         setDecision(view, R.id.btn_kind_challenge_no);
 
         if (Utils.getRandomBool(30)) {

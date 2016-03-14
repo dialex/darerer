@@ -13,10 +13,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
+import com.diogonunes.darerer.helpers.Analytics;
 import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Constants;
 import com.google.android.gms.ads.AdRequest;
@@ -72,21 +71,15 @@ public class FragmentNaughty extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
-        // Picks a challenge
-        String challengeDesc = _naughtyActsRoulette.roll();
+        Analytics.logEvent("Naughty Challenge", "Button", R.id.fab);
 
-        // Displays it
+        // Displays a challenge
+        String challengeDesc = _naughtyActsRoulette.roll();
         TextView cardChallengeText = (TextView) _rootView.findViewById(R.id.card_naughty_challenge_title);
         cardChallengeText.setText(challengeDesc);
 
         // Allows the user to decide
         showChallengeText();
-
-        // Analytics
-        Answers.getInstance().logContentView(new ContentViewEvent()
-                .putContentName("Click Naughty Challenge")
-                .putContentType("Button")
-                .putContentId(Integer.toString(R.id.fab)));
     }
 
     // Ads

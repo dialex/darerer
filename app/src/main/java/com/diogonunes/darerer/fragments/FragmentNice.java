@@ -17,10 +17,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
+import com.diogonunes.darerer.helpers.Analytics;
 import com.diogonunes.darerer.helpers.Utils;
 
 public class FragmentNice extends Fragment {
@@ -69,6 +68,8 @@ public class FragmentNice extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
+        Analytics.logEvent("Challenge Nice", "Button", R.id.fab);
+
         // Picks a challenge
         String actionText = _niceActionsRoulette.roll();
         String modifierText = _niceModifiersRoulette.roll();
@@ -82,19 +83,15 @@ public class FragmentNice extends Fragment {
         // Allows the user to decide
         setDecision(_rootView, 0);
         showChallengeText();
-
-        // Analytics
-        Answers.getInstance().logContentView(new ContentViewEvent()
-                .putContentName("Click Nice Challenge")
-                .putContentType("Button")
-                .putContentId(Integer.toString(R.id.fab)));
     }
 
     public void onClickAcceptChallenge(View view) {
+        Analytics.logEvent("Accept Challenge Kind", "Button", R.id.btn_nice_challenge_yes);
         setDecision(view, R.id.btn_nice_challenge_yes);
     }
 
     public void onClickDenyChallenge(View view) {
+        Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_nice_challenge_no);
         setDecision(view, R.id.btn_nice_challenge_no);
 
         if (Utils.getRandomBool(30)) {

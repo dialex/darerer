@@ -25,6 +25,7 @@ import com.diogonunes.darerer.events.DailyNotificationService;
 import com.diogonunes.darerer.fragments.FragmentKind;
 import com.diogonunes.darerer.fragments.FragmentNaughty;
 import com.diogonunes.darerer.fragments.FragmentNice;
+import com.diogonunes.darerer.helpers.Analytics;
 import com.diogonunes.darerer.helpers.Utils;
 import com.diogonunes.darerer.settings.Setting;
 import com.diogonunes.darerer.settings.SettingsManager;
@@ -111,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickActionShare() {
+        Analytics.logEvent("Click Share Challenge", "Button", R.id.action_share);
+
         String shareBody = Utils.formatForSharing(getCurrentChallengeText());
         if (shareBody != "") {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
