@@ -3,11 +3,11 @@
     package="com.diogonunes.darerer">
 
     <uses-permission android:name="android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
 
     <application
         android:allowBackup="true"
@@ -35,13 +35,13 @@
         <receiver
             android:name=".events.AlarmReceiver"
             android:enabled="true" />
-        <receiver
-            android:name=".events.BootCompletedReceiver"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-            </intent-filter>
-        </receiver>
+        <!--<receiver-->
+        <!--android:name=".events.BootCompletedReceiver"-->
+        <!--android:enabled="false">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.BOOT_COMPLETED"></action>-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
 
         <meta-data
             android:name="io.fabric.ApiKey"
