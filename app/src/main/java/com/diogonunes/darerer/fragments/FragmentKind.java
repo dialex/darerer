@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.Utils;
@@ -73,16 +75,20 @@ public class FragmentKind extends Fragment {
     // Event Handling
 
     public void fabOnClick() {
-        // Picks a challenge
+        // Displays a challenge
         String challengeDesc = _kindChallengesRoulette.roll();
-
-        // Displays it
         TextView cardChallenge = (TextView) _rootView.findViewById(R.id.card_kind_challenge_title);
         cardChallenge.setText(challengeDesc);
 
         // Allows the user to decide
         setDecision(getView(), 0);
         showChallengeText();
+
+        // Analytics
+        Answers.getInstance().logContentView(new ContentViewEvent()
+                .putContentName("Click Kind Challenge")
+                .putContentType("Button")
+                .putContentId(Integer.toString(R.id.fab)));
     }
 
     public void onClickAcceptChallenge(View view) {

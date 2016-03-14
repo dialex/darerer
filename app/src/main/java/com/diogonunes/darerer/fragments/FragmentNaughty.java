@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.Utils;
@@ -79,6 +81,12 @@ public class FragmentNaughty extends Fragment {
 
         // Allows the user to decide
         showChallengeText();
+
+        // Analytics
+        Answers.getInstance().logContentView(new ContentViewEvent()
+                .putContentName("Click Naughty Challenge")
+                .putContentType("Button")
+                .putContentId(Integer.toString(R.id.fab)));
     }
 
     // Ads

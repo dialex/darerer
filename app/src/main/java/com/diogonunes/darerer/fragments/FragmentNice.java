@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
 import com.diogonunes.darerer.Utils;
@@ -80,6 +82,12 @@ public class FragmentNice extends Fragment {
         // Allows the user to decide
         setDecision(_rootView, 0);
         showChallengeText();
+
+        // Analytics
+        Answers.getInstance().logContentView(new ContentViewEvent()
+                .putContentName("Click Nice Challenge")
+                .putContentType("Button")
+                .putContentId(Integer.toString(R.id.fab)));
     }
 
     public void onClickAcceptChallenge(View view) {
