@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -80,7 +81,7 @@
                 android:id="@+id/txt_kind_challenge_decision"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/linearLayout"
+                android:layout_above="@+id/adView_banner_footer"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
@@ -90,6 +91,14 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView_banner_footer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linearLayout"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/ad_banner_footer_kind" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
