@@ -26,4 +26,6 @@ But at least I finished and learned a lot, so please don't be harsh on my final 
 - [Feel free to pull request more challenges!](https://github.com/dialex/darerer/pulls)
 - About section
 - In-app purchases
+
 - Implement BootCompletedReceiver
+- Deprecate 'org.apache.http.legacy' and use 'HttpURLConnection' instead
