@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.diogonunes.darerer">
+    package="com.diogonunes.darerer"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -12,6 +18,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:installLocation="preferExternal"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
