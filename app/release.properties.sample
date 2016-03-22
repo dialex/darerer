@@ -1,0 +1,7 @@
+keyStore=release.keystore
+
+keyStorePassword=Secret_Passw0rd
+
+keyAlias=MyAppKey
+
+keyAliasPassword=Secret_Passw0rd

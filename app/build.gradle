@@ -17,12 +17,7 @@ repositories {
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'DarererKey'
-            keyPassword 'XXX'
-            storeFile file('C:/Some/Path/To/android-keystore.jks')
-            storePassword 'YYY'
-        }
+        release
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -41,8 +36,9 @@ android {
         }
         release {
             minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -63,3 +59,11 @@ dependencies {
         transitive = true;
     }
 }
+
+def props = new Properties()
+props.load(new FileInputStream(project.file("release.properties")))
+
+android.signingConfigs.release.storeFile project.file(props.keyStore)
+android.signingConfigs.release.storePassword props.keyStorePassword
+android.signingConfigs.release.keyAlias props.keyAlias
+android.signingConfigs.release.keyPassword props.keyAliasPassword
