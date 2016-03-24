@@ -1,12 +1,14 @@
 package com.diogonunes.darerer;
 
-import com.diogonunes.darerer.helpers.Utils;
+import com.diogonunes.darerer.helpers.UniqueRandom;
 
 public class StringRoulette {
     private String[] _possibleOutcomes;
+    private UniqueRandom _randGenerator;
 
     public StringRoulette(String[] possibleOutcomes) {
         setPossibleOutcomes(possibleOutcomes);
+        _randGenerator = new UniqueRandom(0, possibleOutcomes.length - 1);
     }
 
     /**
@@ -24,7 +26,7 @@ public class StringRoulette {
      * @return String.
      */
     public String roll() {
-        int index = Utils.getRandomInteger(0, _possibleOutcomes.length - 1);
+        int index = (int) _randGenerator.getUniqueRandom();
         return _possibleOutcomes[index];
     }
 }
