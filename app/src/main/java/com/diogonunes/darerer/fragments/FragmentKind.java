@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
@@ -76,13 +77,16 @@ public class FragmentKind extends Fragment {
     public void fabOnClick() {
         Analytics.logEvent("Challenge Kind", "Button", R.id.fab);
 
-        // Displays a challenge
-        String challengeDesc = _kindChallengesRoulette.roll();
-        _txtChallenge.setText(challengeDesc);
-
-        // Allows the user to decide
-        setDecision(getView(), 0);
-        showChallengeText();
+        if (canHaveNewChallenge()) {
+            // Displays a new challenge
+            String challengeDesc = _kindChallengesRoulette.roll();
+            _txtChallenge.setText(challengeDesc);
+            // Allows the user to decide
+            setDecision(_rootView, 0);
+            showChallengeText();
+        } else {
+            Toast.makeText(getContext(), getResources().getString(R.string.dialog_warning_pendingDecision), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onClickAcceptChallenge(View view) {
@@ -122,6 +126,11 @@ public class FragmentKind extends Fragment {
     }
 
     // Auxiliary
+
+    private boolean canHaveNewChallenge() {
+        return (_layoutChallenge.getVisibility() != View.VISIBLE) ||
+                ((_txtDecision != null) && (_txtDecision.getText() != getString(R.string.challenge_considered)));
+    }
 
     private void initActivity() {
         FragmentActivity activity = getActivity();
