@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
@@ -70,15 +71,18 @@ public class FragmentNice extends Fragment {
     public void fabOnClick() {
         Analytics.logEvent("Challenge Nice", "Button", R.id.fab);
 
-        // Displays a challenge
-        String actionText = _niceActionsRoulette.roll();
-        String modifierText = _niceModifiersRoulette.roll();
-        _txtActionText.setText(actionText.toUpperCase());
-        _txtModifierText.setText(modifierText.toUpperCase());
-
-        // Allows the user to decide
-        setDecision(_rootView, 0);
-        showChallengeText();
+        if (canHaveNewChallenge()) {
+            // Displays a challenge
+            String actionText = _niceActionsRoulette.roll();
+            String modifierText = _niceModifiersRoulette.roll();
+            _txtActionText.setText(actionText.toUpperCase());
+            _txtModifierText.setText(modifierText.toUpperCase());
+            // Allows the user to decide
+            setDecision(_rootView, 0);
+            showChallengeText();
+        } else {
+            Toast.makeText(getContext(), getResources().getString(R.string.dialog_warning_pendingDecision), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onClickAcceptChallenge(View view) {
@@ -104,6 +108,11 @@ public class FragmentNice extends Fragment {
     }
 
     // Auxiliary
+
+    private boolean canHaveNewChallenge() {
+        return (_layoutChallenge.getVisibility() != View.VISIBLE) ||
+                ((_txtDecision != null) && (_txtDecision.getText() != getString(R.string.challenge_considered)));
+    }
 
     private void initActivity() {
         _fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);

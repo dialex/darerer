@@ -26,4 +26,5 @@
     <string name="dialog_notification_title">This is your challenge</string>
     <string name="dialog_share_caption">Share using</string>
     <string name="dialog_share_unavailable">You need a challenge to share it.</string>
+    <string name="dialog_warning_pendingDecision">You haven\'t made a decision yet.</string>
 </resources>
