@@ -14,7 +14,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -150,7 +149,7 @@ public class FragmentNice extends Fragment {
     }
 
     private void initButtonHandlers() {
-        Button btnYes = (Button) _rootView.findViewById(R.id.btn_nice_challenge_yes);
+        FloatingActionButton btnYes = (FloatingActionButton) _rootView.findViewById(R.id.btn_nice_challenge_yes);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -158,7 +157,7 @@ public class FragmentNice extends Fragment {
             }
         });
 
-        Button btnNo = (Button) _rootView.findViewById(R.id.btn_nice_challenge_no);
+        FloatingActionButton btnNo = (FloatingActionButton) _rootView.findViewById(R.id.btn_nice_challenge_no);
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

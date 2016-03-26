@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -173,7 +172,7 @@ public class FragmentKind extends Fragment {
     }
 
     private void initButtonHandlers() {
-        ImageButton btnYes = (ImageButton) _rootView.findViewById(R.id.btn_kind_challenge_yes);
+        FloatingActionButton btnYes = (FloatingActionButton) _rootView.findViewById(R.id.btn_kind_challenge_yes);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -181,7 +180,7 @@ public class FragmentKind extends Fragment {
             }
         });
 
-        ImageButton btnNo = (ImageButton) _rootView.findViewById(R.id.btn_kind_challenge_no);
+        FloatingActionButton btnNo = (FloatingActionButton) _rootView.findViewById(R.id.btn_kind_challenge_no);
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
