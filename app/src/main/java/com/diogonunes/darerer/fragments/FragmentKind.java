@@ -96,7 +96,7 @@ public class FragmentKind extends Fragment {
         setDecision(view, R.id.btn_kind_challenge_yes);
 
         Context rootContext = getContext();
-        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_star_white, R.color.colorBackgroundPrimary);
+        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_face_white, R.color.colorBackgroundPrimary);
         Utils.showNotification(rootContext, dare);
         Toast.makeText(rootContext, R.string.dialog_warning_challengeAccepted, Toast.LENGTH_SHORT).show();
     }
@@ -105,15 +105,17 @@ public class FragmentKind extends Fragment {
         Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_kind_challenge_no);
         setDecision(view, R.id.btn_kind_challenge_no);
 
-        Snackbar snackbar = Snackbar
-                .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        fabOnClick();
-                    }
-                });
-        snackbar.show();
+        if (Utils.getRandomBool(30)) {
+            Snackbar snackbar = Snackbar
+                    .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // close itself
+                        }
+                    });
+            snackbar.show();
+        }
     }
 
     // Ads

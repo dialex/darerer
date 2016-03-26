@@ -101,15 +101,17 @@ public class FragmentNice extends Fragment {
         Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_nice_challenge_no);
         setDecision(view, R.id.btn_nice_challenge_no);
 
-        Snackbar snackbar = Snackbar
-                .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        fabOnClick();
-                    }
-                });
-        snackbar.show();
+        if (Utils.getRandomBool(30)) {
+            Snackbar snackbar = Snackbar
+                    .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // close itself
+                        }
+                    });
+            snackbar.show();
+        }
     }
 
     // Auxiliary
