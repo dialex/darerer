@@ -96,7 +96,7 @@ public class FragmentKind extends Fragment {
         setDecision(view, R.id.btn_kind_challenge_yes);
 
         Context rootContext = getContext();
-        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_face_white, R.color.colorBackgroundPrimary);
+        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_star_white, R.color.colorBackgroundPrimary);
         Utils.showNotification(rootContext, dare);
         Toast.makeText(rootContext, R.string.dialog_warning_challengeAccepted, Toast.LENGTH_SHORT).show();
     }
