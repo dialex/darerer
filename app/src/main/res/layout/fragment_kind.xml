@@ -74,42 +74,31 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/txt_kind_challenge_decision"
                 android:contentDescription="Meme"
-                android:paddingTop="22dp"
+                android:paddingTop="10dp"
                 android:src="@drawable/img_meme_maybe" />
 
             <TextView
                 android:id="@+id/txt_kind_challenge_decision"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/adView_banner_footer"
+                android:layout_above="@+id/layout_kind_buttons"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="@string/challenge_considered"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView_banner_footer"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/linearLayout"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/ad_banner_footer_kind" />
-
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/layout_kind_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentStart="false"
+                android:layout_above="@+id/layout_kind_ad"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="6dp">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_kind_challenge_no"
@@ -126,7 +115,22 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/action_accept"
                     android:textColor="@color/colorSecondaryTextActive" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/layout_kind_ad"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:paddingTop="6dp">
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView_banner_footer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/ad_banner_footer_kind" />
             </LinearLayout>
 
         </RelativeLayout>
