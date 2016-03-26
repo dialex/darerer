@@ -1,7 +1,6 @@
 package com.diogonunes.darerer.events;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -64,16 +63,16 @@ public class DailyNotificationService extends Service {
     }
 
     public void showNotification() {
-        Log.d(LOG_TAG, "Generate notification attributes.");
-        Resources rootResources = getApplicationContext().getResources();
+        Context rootContext = getApplicationContext();
+        Resources rootResources = rootContext.getResources();
+
+        Log.d(LOG_TAG, "Create and show daily notification to user.");
         StringRoulette niceActions = new StringRoulette(rootResources.getStringArray(R.array.nice_challenges_actions));
         StringRoulette niceModifiers = new StringRoulette(rootResources.getStringArray(R.array.nice_challenges_modifiers));
         String challengeText = niceActions.roll() + " » " + niceModifiers.roll();
         String title = rootResources.getString(R.string.dialog_notification_title);
 
-        Log.d(LOG_TAG, "Display notification to the user.");
-        Notification dailyNotif = Utils.createNotification(getApplicationContext(), title, challengeText, R.drawable.ic_face_white, R.color.colorNicePrimary);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, dailyNotif);
+        Notification dailyNotif = Utils.createNotification(rootContext, title, challengeText, R.drawable.ic_face_white, R.color.colorNicePrimary);
+        Utils.showNotification(rootContext, dailyNotif);
     }
 }

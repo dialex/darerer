@@ -2,6 +2,7 @@ package com.diogonunes.darerer.helpers;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -149,5 +150,14 @@ public class Utils {
         notifBuilder.setContentText(description);
 
         return notifBuilder.build();
+    }
+
+    public static void showNotification(Context context, Notification notification) {
+        showNotification(context, notification, 0);
+    }
+
+    public static void showNotification(Context context, Notification notification, int notificationId) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(notificationId, notification);
     }
 }
