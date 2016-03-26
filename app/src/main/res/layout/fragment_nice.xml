@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -133,22 +134,23 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btn_nice_challenge_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/action_deny"
-                    android:textColor="@color/colorSecondaryTextActive" />
+                    android:layout_margin="@dimen/fab_margin"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_clear_white"
+                    app:backgroundTint="@color/md_red_500" />
 
-                <Button
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btn_nice_challenge_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/action_accept"
-                    android:textColor="@color/colorSecondaryTextActive" />
-
+                    android:layout_margin="@dimen/fab_margin"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_done_white"
+                    app:backgroundTint="@color/md_green_500" />
             </LinearLayout>
 
         </RelativeLayout>
