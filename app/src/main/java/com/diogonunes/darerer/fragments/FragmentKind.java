@@ -98,7 +98,7 @@ public class FragmentKind extends Fragment {
         Context rootContext = getContext();
         Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_face_white, R.color.colorBackgroundPrimary);
         Utils.showNotification(rootContext, dare);
-        Toast.makeText(rootContext, "A notification was created as a reminder.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(rootContext, R.string.dialog_warning_challengeAccepted, Toast.LENGTH_SHORT).show();
     }
 
     public void onClickDenyChallenge(View view) {
