@@ -1,5 +1,7 @@
 package com.diogonunes.darerer.fragments;
 
+import android.app.Notification;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -88,23 +90,26 @@ public class FragmentNice extends Fragment {
     public void onClickAcceptChallenge(View view) {
         Analytics.logEvent("Accept Challenge Kind", "Button", R.id.btn_nice_challenge_yes);
         setDecision(view, R.id.btn_nice_challenge_yes);
+
+        Context rootContext = getContext();
+        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), _txtActionText.getText() + " " + _txtModifierText.getText(), R.drawable.ic_face_white, R.color.colorBackgroundPrimary);
+        Utils.showNotification(rootContext, dare);
+        Toast.makeText(rootContext, R.string.dialog_warning_challengeAccepted, Toast.LENGTH_SHORT).show();
     }
 
     public void onClickDenyChallenge(View view) {
         Analytics.logEvent("Deny Challenge Kind", "Button", R.id.btn_nice_challenge_no);
         setDecision(view, R.id.btn_nice_challenge_no);
 
-        if (Utils.getRandomBool(30)) {
-            Snackbar snackbar = Snackbar
-                    .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // close self
-                        }
-                    });
-            snackbar.show();
-        }
+        Snackbar snackbar = Snackbar
+                .make(view, _encouragementsRoulette.roll(), Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.dialog_action_sorry, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        fabOnClick();
+                    }
+                });
+        snackbar.show();
     }
 
     // Auxiliary
