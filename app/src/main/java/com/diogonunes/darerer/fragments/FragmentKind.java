@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -96,7 +96,7 @@ public class FragmentKind extends Fragment {
         setDecision(view, R.id.btn_kind_challenge_yes);
 
         Context rootContext = getContext();
-        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_face_white, R.color.colorKindPrimary);
+        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), (String) _txtChallenge.getText(), R.drawable.ic_star_white, R.color.colorKindPrimary);
         Utils.showNotification(rootContext, dare);
         Toast.makeText(rootContext, R.string.dialog_warning_challengeAccepted, Toast.LENGTH_SHORT).show();
     }
@@ -173,7 +173,7 @@ public class FragmentKind extends Fragment {
     }
 
     private void initButtonHandlers() {
-        Button btnYes = (Button) _rootView.findViewById(R.id.btn_kind_challenge_yes);
+        ImageButton btnYes = (ImageButton) _rootView.findViewById(R.id.btn_kind_challenge_yes);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -181,7 +181,7 @@ public class FragmentKind extends Fragment {
             }
         });
 
-        Button btnNo = (Button) _rootView.findViewById(R.id.btn_kind_challenge_no);
+        ImageButton btnNo = (ImageButton) _rootView.findViewById(R.id.btn_kind_challenge_no);
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
