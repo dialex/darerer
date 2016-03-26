@@ -111,17 +111,6 @@
                     android:src="@drawable/ic_clear_white"
                     app:backgroundTint="@color/md_red_500" />
 
-                <!--<ImageButton-->
-                <!--android:id="@+id/btn_kind_challenge_no"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:text="@string/action_deny"-->
-                <!--android:src="@drawable/ic_emoji_no"-->
-                <!--android:textColor="@color/colorSecondaryTextActive"-->
-                <!--android:scaleType="fitCenter"-->
-                <!--android:background="@android:color/transparent" />-->
-
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btn_kind_challenge_yes"
                     android:layout_width="wrap_content"
@@ -130,17 +119,6 @@
                     android:scaleType="center"
                     android:src="@drawable/ic_done_white"
                     app:backgroundTint="@color/md_green_500" />
-
-                <!--<ImageButton-->
-                <!--android:id="@+id/btn_kind_challenge_yes"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:text="@string/action_accept"-->
-                <!--android:src="@drawable/ic_emoji_yes"-->
-                <!--android:textColor="@color/colorSecondaryTextActive"-->
-                <!--android:scaleType="fitCenter"-->
-                <!--android:background="@android:color/transparent" />-->
             </LinearLayout>
 
             <LinearLayout
