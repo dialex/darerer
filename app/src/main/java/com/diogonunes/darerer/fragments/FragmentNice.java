@@ -92,7 +92,7 @@ public class FragmentNice extends Fragment {
         setDecision(view, R.id.btn_nice_challenge_yes);
 
         Context rootContext = getContext();
-        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), _txtActionText.getText() + " " + _txtModifierText.getText(), R.drawable.ic_face_white, R.color.colorBackgroundPrimary);
+        Notification dare = Utils.createNotification(rootContext, (String) _txtDecision.getText(), _txtActionText.getText() + " " + _txtModifierText.getText(), R.drawable.ic_face_white, R.color.colorNicePrimary);
         Utils.showNotification(rootContext, dare);
         Toast.makeText(rootContext, R.string.dialog_warning_challengeAccepted, Toast.LENGTH_SHORT).show();
     }
