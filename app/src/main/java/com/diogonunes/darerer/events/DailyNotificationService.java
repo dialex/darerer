@@ -1,18 +1,16 @@
 package com.diogonunes.darerer.events;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.IBinder;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.diogonunes.darerer.R;
 import com.diogonunes.darerer.StringRoulette;
+import com.diogonunes.darerer.helpers.Utils;
 
 public class DailyNotificationService extends Service {
     private static final String LOG_TAG = DailyNotificationService.class.getSimpleName();
@@ -65,27 +63,16 @@ public class DailyNotificationService extends Service {
     }
 
     public void showNotification() {
-        Log.d(LOG_TAG, "Create notification and display it to the user.");
-        Notification dailyNotif = createNotification(getApplicationContext());
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, dailyNotif);
-    }
+        Context rootContext = getApplicationContext();
+        Resources rootResources = rootContext.getResources();
 
-    private Notification createNotification(Context context) {
-        Resources rootResources = context.getResources();
-
-        // Get text
+        Log.d(LOG_TAG, "Create and show daily notification to user.");
         StringRoulette niceActions = new StringRoulette(rootResources.getStringArray(R.array.nice_challenges_actions));
         StringRoulette niceModifiers = new StringRoulette(rootResources.getStringArray(R.array.nice_challenges_modifiers));
         String challengeText = niceActions.roll() + " » " + niceModifiers.roll();
+        String title = rootResources.getString(R.string.dialog_notification_title);
 
-        // Get notification
-        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(context);
-        notifBuilder.setColor(ContextCompat.getColor(context, R.color.colorNicePrimary));
-        notifBuilder.setSmallIcon(R.drawable.ic_face_white);
-        notifBuilder.setContentTitle(rootResources.getString(R.string.dialog_notification_title));
-        notifBuilder.setContentText(challengeText);
-
-        return notifBuilder.build();
+        Notification dailyNotif = Utils.createNotification(rootContext, title, challengeText, R.drawable.ic_face_white, R.color.colorNicePrimary);
+        Utils.showNotification(rootContext, dailyNotif);
     }
 }

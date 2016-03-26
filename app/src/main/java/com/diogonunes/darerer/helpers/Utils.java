@@ -1,10 +1,14 @@
 package com.diogonunes.darerer.helpers;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -135,5 +139,25 @@ public class Utils {
      */
     public static String getDeviceIdMD5(Activity activity) {
         return md5(getDeviceId(activity)).toUpperCase();
+    }
+
+    public static Notification createNotification(Context context, String title, String description, int iconId, int iconBkgColorId) {
+        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(context);
+
+        notifBuilder.setColor(ContextCompat.getColor(context, iconBkgColorId));
+        notifBuilder.setSmallIcon(iconId);
+        notifBuilder.setContentTitle(title);
+        notifBuilder.setContentText(description);
+
+        return notifBuilder.build();
+    }
+
+    public static void showNotification(Context context, Notification notification) {
+        showNotification(context, notification, 0);
+    }
+
+    public static void showNotification(Context context, Notification notification, int notificationId) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(notificationId, notification);
     }
 }

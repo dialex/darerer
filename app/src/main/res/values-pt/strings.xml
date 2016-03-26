@@ -27,4 +27,5 @@
     <string name="dialog_share_caption">Partilhar via</string>
     <string name="dialog_share_unavailable">Precisas de um desafio antes de partilhar.</string>
     <string name="dialog_warning_pendingDecision">Ainda não tomaste uma decisão.</string>
+    <string name="dialog_warning_challengeAccepted">Foi criada uma notificação como lembrete.</string>
 </resources>

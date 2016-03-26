@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,9 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            card_view:cardUseCompatPadding="true"
             card_view:cardBackgroundColor="@color/colorBackgroundPrimary"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            card_view:cardUseCompatPadding="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -54,13 +55,13 @@
                     android:id="@+id/card_nice_challenge_action_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:maxLines="4"
                     android:padding="8dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true" />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -71,9 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            card_view:cardUseCompatPadding="true"
             card_view:cardBackgroundColor="@color/colorBackgroundPrimary"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            card_view:cardUseCompatPadding="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -84,13 +85,13 @@
                     android:id="@+id/card_nice_challenge_modifier_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:maxLines="4"
                     android:padding="8dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true" />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -105,7 +106,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/txt_nice_challenge_decision"
                 android:contentDescription="Meme"
-                android:paddingTop="22dp"
+                android:paddingTop="10dp"
                 android:src="@drawable/img_meme_maybe" />
 
             <TextView
@@ -116,8 +117,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="@string/challenge_considered"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="20sp"
@@ -131,25 +132,27 @@
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentStart="false"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="6dp">
+                android:orientation="horizontal">
 
-                <Button
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btn_nice_challenge_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/action_deny"
-                    android:textColor="@color/colorSecondaryTextActive" />
+                    android:layout_margin="@dimen/fab_margin"
+                    android:contentDescription="@string/action_deny"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_clear_white"
+                    app:backgroundTint="@color/md_red_500" />
 
-                <Button
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btn_nice_challenge_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/action_accept"
-                    android:textColor="@color/colorSecondaryTextActive" />
-
+                    android:layout_margin="@dimen/fab_margin"
+                    android:contentDescription="@string/action_accept"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_done_white"
+                    app:backgroundTint="@color/md_green_500" />
             </LinearLayout>
 
         </RelativeLayout>
