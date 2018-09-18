@@ -4,7 +4,7 @@ This Privacy Policy covers which data is collected when you use the app [Darerer
 
 ### td;dr
 
-The app doesn't collect, store or manipulate any data from you. We have ads from Google though.
+The app doesn't collect, store or manipulate any data from you. We have ads from Google's [AdMob](https://www.google.com/admob/) though.
 
 ### What information is collected about you
 
