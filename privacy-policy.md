@@ -1,6 +1,6 @@
 # Privacy Policy
 
-This Privacy Policy covers which data is collected when you use the app and how that data is stored and manipulated. This was a requirement from Google.
+This Privacy Policy covers which data is collected when you use the app [Darerer](https://play.google.com/store/apps/details?id=com.diogonunes.darerer) and how that data is stored and manipulated. This was a requirement from Google.
 
 ### td;dr
 
